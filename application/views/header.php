@@ -94,7 +94,7 @@
     <div class="container">
       <ul class="mainnav">
         <li><a href="<?php echo base_url(); ?>"><i class="icon-dashboard"></i><span>Dashboard</span> </a> </li>
-        <li><a href="<?php echo base_url(); ?>welcome/reports"><i class="icon-list-alt"></i><span>Reports</span> </a> </li>
+        <li><a href="<?php echo base_url(); ?>proyek/index"><i class="icon-list-alt"></i><span>Proyek</span> </a> </li>
         <li><a href="<?php echo base_url(); ?>welcome/documents"><i class="icon-facetime-video"></i><span>Documents</span> </a></li>
         <li><a href="<?php echo base_url(); ?>diskusi"><i class="icon-th-large"></i><span>Diskusi</span> </a></li>
         <li><a href="<?php echo base_url(); ?>welcome/charts"><i class="icon-bar-chart"></i><span>Charts</span> </a> </li>

@@ -31,7 +31,7 @@ background-color: grey;
                             <div class="widget-header">
                                 <i class="shortcut-icon icon-user"></i>
                                 <h3>
-                                    List Karyawan</h3> <button class="thumbnail" onclick="location.href='<?php echo base_url();?>proyek/add_proyek'">Add</button>
+                                    List Proyek</h3> <button class="thumbnail" onclick="location.href='<?php echo base_url();?>proyek/add_proyek'">Add</button>
 					
                             </div>
                             <!-- /widget-header -->
