@@ -30,7 +30,7 @@ class Model_karyawan extends CI_Model {
 		$data = array(
 		'nik' => $nik,
 		'email' => $email,
-		'password' => $password,
+		'password' => MD5($password),
 		'nama_karyawan' => $nama_karyawan,
 		'jabatan' => $jabatan,
 		'status' => $status

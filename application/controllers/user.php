@@ -37,7 +37,7 @@ class User extends CI_Controller {
             array(
                 'field' => 'nik',
                 'label' => 'NIK',
-                'rules' => 'trim|required||min_length[3]is_unique[karyawan.nik]'
+                'rules' => 'trim|required|min_length[3]|is_unique[karyawan.nik]'
             ),
 			
 			array(
