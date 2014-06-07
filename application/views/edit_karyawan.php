@@ -57,8 +57,8 @@
 				
 				<div class="field">
 					<label for="nama">STATUS:</label>
-					<?php echo form_radio('status', 'Active', TRUE); ?><?php echo form_label('Aktif', 'status');?> 
-					<?php echo form_radio('status', 'Inactive', FALSE); ?><?php echo form_label('Tidak Aktif', 'status');?>
+					<?php echo form_radio('status', '1', TRUE); ?><?php echo form_label('Aktif', 'status');?> 
+					<?php echo form_radio('status', '0', FALSE); ?><?php echo form_label('Tidak Aktif', 'status');?>
 				</div> <!-- /field -->
 				
 			</div> <!-- /login-fields -->

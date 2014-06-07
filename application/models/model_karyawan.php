@@ -5,7 +5,8 @@ class Model_karyawan extends CI_Model {
 	public function check_login($email,$password)
 	{
 		$this->db->where(array('email'=>$email,
-								'password'=>$password));
+								'password'=>$password,
+								'status'=>'1'));
 		$query=$this->db->get('karyawan');
 		if($query->num_rows()>0) return true;
 		else return false;

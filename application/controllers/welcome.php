@@ -45,7 +45,8 @@ class Welcome extends CI_Controller {
 		$this->load->model('model_karyawan');
 		$email=$this->input->post("email");
 		$password=md5($this->input->post("password", TRUE));
-		if ($this->model_karyawan->check_login($email,$password))
+		$status=$this->input->post("status");
+		if ($this->model_karyawan->check_login($email,$password,$status))
 		{
 			$this->session->set_userdata('login_valid', TRUE);
 			$this->session->set_userdata('email',$email);

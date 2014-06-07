@@ -54,7 +54,9 @@ background-color: grey;
 								<td><?php echo $row['email']?></td>
 								<td><?php echo $row['nama_karyawan']?></td>
 								<td><?php echo $row['jabatan']?></td>
-								<td><?php echo $row['status']?></td>
+								<td><?php if($row['status']==1) {echo "Active" ;
+								} else { echo "Inactive" ;
+								}?></td>
 								<td><?php echo anchor("user/delete_karyawan/".$row['nik'], 'Delete', 'title="Delete a User"') . " | " . anchor(
 														"user/edit_karyawan/".$row['nik'], 'Edit', 'title="Edit a User"'); ?>
 								</td>
