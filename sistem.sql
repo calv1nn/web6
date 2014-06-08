@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2014 at 09:19 PM
+-- Generation Time: Jun 08, 2014 at 10:54 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -112,8 +112,8 @@ INSERT INTO `karyawan` (`nik`, `email`, `password`, `nama_karyawan`, `jabatan`, 
 (7, 'dian@cahyo.com', '12345', 'Dian', 'Tim Teknis', 1),
 (23, 'web@mail.com', '1234', 'Saya', 'Bussiness Project Manager', 0),
 (232, 'fine_day@rocketmail.com', '123', 'aaa', 'Project Manager', 1),
-(234, 'admin@test.com', '1231231232', 'Udin', 'BO', 0),
-(2333, 'saya@sadsd.cpom', '3424324324', 'sayasusussuus', '', 1),
+(234, 'admin@test.com', 'ffe8a19caa725494a5c4dfb163961a05', 'Calvin', 'BO', 0),
+(512, 'bintang.psari@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'Bintang', 'Bussiness Project Manager', 1),
 (3333, 'test@admin.com', '827ccb0eea8a706c4c34a16891f84e7b', 'Saya', 'Project Manager', 1),
 (3434, 'calvin.bahal@gmail.com', '123', 'abab', 'Bussiness Development Man', 1),
 (4444, 'sds@sdad', '3424324324', 'rrrrr', 'ewfewfew', 1);
@@ -152,14 +152,26 @@ CREATE TABLE IF NOT EXISTS `load_pekerjaan` (
 --
 
 CREATE TABLE IF NOT EXISTS `proyek` (
-  `kode_proyek` int(11) NOT NULL,
+  `kode_proyek` int(11) NOT NULL AUTO_INCREMENT,
   `nama_proyek` varchar(25) NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   `client` varchar(25) NOT NULL,
-  `status` int(11) NOT NULL,
+  `progress` int(11) NOT NULL,
   PRIMARY KEY (`kode_proyek`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1008 ;
+
+--
+-- Dumping data for table `proyek`
+--
+
+INSERT INTO `proyek` (`kode_proyek`, `nama_proyek`, `start_date`, `end_date`, `client`, `progress`) VALUES
+(1, 'KEMHAN', '2014-05-14', '2014-06-28', 'KEMHAN', 80),
+(2, 'KEMHAN', '2014-06-02', '2014-06-27', 'KEMHAN', 80),
+(1004, 'KEMENTRIAN', '0000-00-00', '0000-00-00', 'KEMENTRIAN', 0),
+(1005, 'KEMENTRIAN', '0000-00-00', '0000-00-00', 'KEMENTRIAN', 0),
+(1006, 'KEMENTRIAN', '2014-06-26', '0000-00-00', 'KEMENTRIAN', 0),
+(1007, 'KEMENTRIAN', '2014-06-03', '2014-06-29', 'KEMENTRIAN', 0);
 
 -- --------------------------------------------------------
 
