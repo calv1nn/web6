@@ -26,7 +26,19 @@ class Proyek extends CI_Controller {
                 'label' => 'Nama proyek',
                 'rules' => 'required'
             ),
-           
+			
+           array(
+                'field' => 'start_date',
+                'label' => 'Start Date',
+                'rules' => 'required'
+            ),
+			
+			array(
+                'field' => 'end_date',
+                'label' => 'End Date',
+                'rules' => 'required|greater_than[start_date]'
+            ),
+			
             array(
                 'field' => 'client',
                 'label' => 'Client Name',

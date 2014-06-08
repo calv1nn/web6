@@ -22,7 +22,7 @@
 					
 					<div class="widget-content">
 					
-				<?php echo validation_errors(); ?>
+				
 				<?php echo form_open("proyek/add_proyek"); ?>
 							
 				<div class="field">
@@ -31,11 +31,13 @@
 				
 				<div class="field">
 					<label for="nama_proyek">Nama Proyek:</label>	
+					<?php echo form_error('nama_proyek'); ?>
 					<?php echo form_input("nama_proyek",""); ?>
 				</div> <!-- /field -->
 				
 				<div class="field">
 					<label for="start_date">Start Date:</label>
+					<?php echo form_error('start_date'); ?>
 					<a href="javascript:NewCssCal('start_date','yyyymmdd')"><input type="text" name="start_date" class="tgl1" id="start_date" size="20" /> 
 					<img src="<?php echo base_url(); ?>assets/datepicker/images/cal.gif" width="16" height="16" alt="Pilih tanggal" />
 					</a>
@@ -43,6 +45,7 @@
 				
 				<div class="field">
 					<label for="end_date">End Date:</label>
+					<?php echo form_error('end_date'); ?>
 					<a href="javascript:NewCssCal('end_date','yyyymmdd')"><input type="text" name="end_date" class="tgl1" id="end_date" size="20" /> 
 					<img src="<?php echo base_url(); ?>assets/datepicker/images/cal.gif" width="16" height="16" alt="Pilih tanggal" />
 					</a>
@@ -50,6 +53,7 @@
 				
 				<div class="field">
 					<label for="client">CLIENT:</label>
+					<?php echo form_error('client'); ?>
 					<?php echo form_input("client",""); ?>
 				</div> <!-- /field -->
 				
