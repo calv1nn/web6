@@ -51,8 +51,8 @@ background-color: grey;
 							<tr>
 								<td><?php echo $row['kode_proyek']?></td>
 								<td><?php echo $row['nama_proyek']?></td>
-								<td><?php echo $row['start_date']?></td>
-								<td><?php echo $row['end_date']?></td>
+								<td><?php echo date('d-M-Y',strtotime("$row[start_date]"));?></td>
+								<td><?php echo date('d-M-Y',strtotime("$row[end_date]"));?></td>
 								<td><?php echo $row['progress']?></td>
 								
 								</td>
