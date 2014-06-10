@@ -82,8 +82,6 @@ class User extends CI_Controller {
 		redirect("user/karyawan");
 	   }
 		
-		
-	
 	}
 
 	public function edit_karyawan($nik)

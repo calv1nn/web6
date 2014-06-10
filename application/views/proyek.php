@@ -38,24 +38,24 @@ background-color: grey;
                             <div class="widget-content">
                                 <table border="10" style="width:10000px">
 							<tr>
-								<th>Kode Proyek</th>
 								<th>Nama Proyek</th>
 								<th>Start Date</th>
 								<th>End Date</th>
 								<th>Progress</th>
+								<th>Action</th>
 							</tr>
 						<?php
 							foreach ($proyek as $row)
 								{
+								//print_r($row['kode_proyek']);die;
 						?>
 							<tr>
-								<td><?php echo $row['kode_proyek']?></td>
-								<td><?php echo $row['nama_proyek']?></td>
+								<td><a href='<?php echo base_url();?>detail_proyek/view_detail_proyek/<?php echo $row['kode_proyek'];?>';><?php echo $row['nama_proyek'];?></a></td>
 								<td><?php echo date('d-M-Y',strtotime("$row[start_date]"));?></td>
 								<td><?php echo date('d-M-Y',strtotime("$row[end_date]"));?></td>
 								<td><?php echo $row['progress']?></td>
-								
-								</td>
+								<td><?php echo anchor(
+														"proyek/edit_proyek/".$row['kode_proyek'], 'Edit', 'title="Edit a User"'); ?></td>
 							</tr>			
 						<?php 
 								}
@@ -74,8 +74,7 @@ background-color: grey;
                             </div>
                             <!-- /widget-header -->
                             <div class="widget-content">
-                                <canvas id="pie-chart" class="chart-holder" width="538" height="250">
-                                </canvas>
+                                <img src="<?php echo base_url();?>proyek/gantt_proyek"/>
                                 <!-- /pie-chart -->
                             </div>
                             <!-- /widget-content -->
