@@ -35,7 +35,8 @@ background-color: grey;
 								{
 									$nama_proyek = $row2['nama_proyek'];
 								}?>
-								List Proyek <?php echo $row2['nama_proyek'];?> </h3> <button class="thumbnail" onclick="location.href='<?php echo base_url();?>proyek/add_proyek'">Add</button>
+								List Proyek <?php echo $row2['nama_proyek'];?> </h3> 
+								<button class="thumbnail" onclick="location.href='<?php echo base_url();?>detail_proyek/add_detail_proyek/<?php echo $row2['kode_proyek'];?>'">Add</button>
                             </div>
                             <!-- /widget-header -->
                             <div class="widget-content">
@@ -44,10 +45,8 @@ background-color: grey;
 							if ($detail_proyek == null) {
 						?>
 							<tr>
-								<th>ID</th>
-								<th>Kode Proyek</th>
-								<th>NIK</th>
 								<th>Nama Pekerjaan</th>
+								<th>Penanggung Jawab</th>
 								<th>Start Date</th>
 								<th>End Date</th>
 								<th>Progress</th>
@@ -58,14 +57,13 @@ background-color: grey;
 							{
 							?>
 							<tr>
-								<th>ID</th>
-								<th>Kode Proyek</th>
-								<th>NIK</th>
 								<th>Nama Pekerjaan</th>
+								<th>Penanggung Jawab</th>
 								<th>Start Date</th>
 								<th>End Date</th>
 								<th>Progress</th>
 								<th>Kategori</th>
+								<th>Action</th>
 							</tr>
 						<?php
 							//foreach ($detail_proyek as $row)
@@ -74,15 +72,13 @@ background-color: grey;
 							//	print_r($row);die;
 						?>
 							<tr>
-								<td><?php echo $row['id_pekerjaan']?></td>
-								<td><?php echo $row['kode_proyek']?></td>
-								<td><?php echo $row['nik']?></td>
 								<td><?php echo $row['nama_pekerjaan']?></td>
+								<td><?php echo $row['nama_karyawan']?></td>
 								<td><?php echo date('d-M-Y',strtotime("$row[start_date]"));?></td>
 								<td><?php echo date('d-M-Y',strtotime("$row[end_date]"));?></td>
 								<td><?php echo $row['progress']?></td>
 								<td><?php echo $row['kategori']?></td>
-							
+								<td>upload laporan</td>
 							</tr>			
 						<?php 
 								}
@@ -101,7 +97,7 @@ background-color: grey;
                                 <i class="icon-bar-chart"></i>
                                 <h3>
 								
-                                    Pie Chart</h3>
+                                    Gantt Chart</h3>
                             </div>
                             <!-- /widget-header -->
                             <div class="widget-content">

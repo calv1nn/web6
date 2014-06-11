@@ -25,6 +25,7 @@ class Detail_proyek extends CI_Controller {
 		$this->load->model('model_detail_proyek');
 		$data['detail_proyek']=$this->model_detail_proyek->view_detail_proyek($id_pekerjaan);
 		$data['nama_proyek']=$this->model_detail_proyek->get_nama_proyek($id_pekerjaan);
+		//print_r($data['detail_proyek']);die;
 		$data['edit_detail_proyek']="";
 		$this->load->view('detail_proyek',$data);
 		}
@@ -34,7 +35,7 @@ class Detail_proyek extends CI_Controller {
 		}
 	}
 	
-	public function add_proyek()
+	public function add_detail_proyek($kode_proyek)
 	{
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
@@ -67,21 +68,26 @@ class Detail_proyek extends CI_Controller {
         );
         $this->form_validation->set_rules($rules);
         if ($this->form_validation->run() == FALSE)
-        {
-            $this->load->view('add_proyek');
+        {	
+			$this->load->model('model_detail_proyek');
+			$nik['kode_proyek'] = $kode_proyek;
+			$nik['dropdown'] = $this->model_detail_proyek->get_nik();
+			$this->load->view('add_detail_proyek',$nik);
+			
         }
         else
         {
-        $this->load->model('model_proyek');
+        $this->load->model('model_detail_proyek');
+		$id_pekerjaan=$this->input->post("id_pekerjaan");
 		$kode_proyek=$this->input->post("kode_proyek");
-		$nama_proyek=$this->input->post("nama_proyek");
+		$nama_pekerjaan=$this->input->post("nama_pekerjaan");
 		$start_date=$this->input->post("start_date");
 		$end_date=$this->input->post("end_date");
-		$client=$this->input->post("client");
 		$progress=$this->input->post("progress");
+		$kategori=$this->input->post("kategori");
 		
-		$this->model_proyek->insert_proyek($kode_proyek,$nama_proyek,$start_date,$end_date,$client,$progress);
-		redirect("proyek/index");
+		$this->model_detail_proyek->insert_detail_proyek($id_pekerjaan,$kode_proyek,$nik,$nama_pekerjaan,$start_date,$end_date,$progress,$kategori);
+		redirect("detail_proyek/view_detail_proyek");
 	   }
 	}
 	
