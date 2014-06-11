@@ -23,9 +23,10 @@ class Model_detail_proyek extends CI_Model {
 		return $query->result_array();
 	}
 	
-	public function insert_proyek($kode_proyek,$nama_proyek,$start_date,$end_date,$client,$progress)
+	public function insert_proyek($id_pekerjaan,$kode_proyek,$nama_proyek,$start_date,$end_date,$client,$progress)
 	{
 		$data = array(
+		'id_pekerjaan' => $id_pekerjaan,
 		'kode_proyek' => $kode_proyek,
 		'nama_proyek' => $nama_proyek,
 		'start_date' => $start_date,
@@ -67,9 +68,9 @@ class Model_detail_proyek extends CI_Model {
 		return $return;
 	}
 	
-	public function show($table){
+	public function show($laporan){
 		$this->db->select('*');
-		$data = $this->db->get($table);
+		$data = $this->db->get($laporan);
 		if($data->num_rows() > 0){
 		return $data->result_array();
 		}else
@@ -78,8 +79,8 @@ class Model_detail_proyek extends CI_Model {
 		}
 	}
  
-	public function insert($data,$table){
-		$this->db->insert($table, $data);
+	public function insert($data,$laporan){
+		$this->db->insert($laporan, $data);
 		}
  
 	

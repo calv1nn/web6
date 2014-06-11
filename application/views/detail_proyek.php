@@ -78,7 +78,7 @@ background-color: grey;
 								<td><?php echo date('d-M-Y',strtotime("$row[end_date]"));?></td>
 								<td><?php echo $row['progress']?></td>
 								<td><?php echo $row['kategori']?></td>
-								<td>upload laporan</td>
+								<td>upload</td>
 							</tr>			
 						<?php 
 								}
