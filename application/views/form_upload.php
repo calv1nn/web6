@@ -22,7 +22,12 @@
 					
 					<div class="widget-content">
 					
-				<?php echo form_open_multipart('upload_file/do_upload'); ?>
+				<?php echo form_open_multipart('detail_proyek/do_upload'); ?>
+				
+				<div class="field">
+					<?php echo form_input("id_pekerjaan", $id_pekerjaan,'readonly'); ?>
+				</div> <!-- /field -->
+				
 				<input type="file" name="file_upload" />
 				<input type="submit" name="upload" value="upload" />
 				<?php echo form_close(); ?>

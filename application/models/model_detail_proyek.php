@@ -23,18 +23,19 @@ class Model_detail_proyek extends CI_Model {
 		return $query->result_array();
 	}
 	
-	public function insert_proyek($id_pekerjaan,$kode_proyek,$nama_proyek,$start_date,$end_date,$client,$progress)
+	public function insert_detail_proyek($id_pekerjaan,$kode_proyek,$nik,$nama_pekerjaan,$start_date,$end_date,$progress,$kategori)
 	{
 		$data = array(
 		'id_pekerjaan' => $id_pekerjaan,
 		'kode_proyek' => $kode_proyek,
-		'nama_proyek' => $nama_proyek,
+		'nik' => $nik,
+		'nama_pekerjaan' => $nama_pekerjaan,
 		'start_date' => $start_date,
 		'end_date' => $end_date,
-		'client' => $client,
-		'progress' => $progress
+		'progress' => $progress,
+		'kategori' => $kategori
 		);
-		$this->db->insert('proyek', $data);
+		$this->db->insert('proyek_detail', $data);
 	}
 	
 		public function get_nama_proyek($id_pekerjaan)
@@ -66,6 +67,14 @@ class Model_detail_proyek extends CI_Model {
 		}
 	
 		return $return;
+	}
+	
+		public function get_id_pekerjaan($id_pekerjaan)
+	{	
+		$this->db->select('id_pekerjaan');
+		$this->db->where("id_pekerjaan",$id_pekerjaan);
+		$query=$this->db->get('proyek_detail');
+		return $query->result_array();
 	}
 	
 	public function show($laporan){
