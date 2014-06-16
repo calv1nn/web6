@@ -78,7 +78,10 @@ background-color: grey;
 								<td><?php echo date('d-M-Y',strtotime("$row[end_date]"));?></td>
 								<td><?php echo $row['progress']?></td>
 								<td><?php echo $row['kategori']?></td>
-								<td>upload</td>
+								<td><?php echo anchor(
+								"detail_proyek/upload/".$row['id_pekerjaan'], 'Upload', 'title="Upload Laporan"'); ?> | <?php echo anchor(
+								"detail_proyek/download/".$row['id_pekerjaan'], 'Dwonload', 'title="Upload Laporan"'); ?>
+								</td>
 							</tr>			
 						<?php 
 								}

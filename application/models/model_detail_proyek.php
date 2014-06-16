@@ -77,6 +77,14 @@ class Model_detail_proyek extends CI_Model {
 		return $query->result_array();
 	}
 	
+		public function get_id_laporan($id_laporan)
+	{	
+		$this->db->select('id_laporan');
+		$this->db->where("id_laporan",$id_laporan);
+		$query=$this->db->get('id_laporan');
+		return $query->result_array();
+	}
+	
 	public function show($laporan){
 		$this->db->select('*');
 		$data = $this->db->get($laporan);
@@ -92,5 +100,19 @@ class Model_detail_proyek extends CI_Model {
 		$this->db->insert($laporan, $data);
 		}
  
+	function getDownload()
+    {
+    //    $requested_file = $this->uri->segment(x);
+        $this->load->helper('download');
+        $this->db->select('*');
+        $this->db->where('id_laporan',$id_laporan);
+        $query =  $this->db->get('laporan');
+        foreach ($query->result() as $row)
+       {
+    $file_data = file_get_contents(base_url()."assets/upload".$nama_field);
+    $file_name = $$nama_field;
+    }
+    force_download($file_name, $file_data);
+   }
 	
 }

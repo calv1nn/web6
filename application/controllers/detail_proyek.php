@@ -104,4 +104,15 @@ class Detail_proyek extends CI_Controller {
  $this->load->view('view_upload',$data);
  }
 	
+	public  function Download($id_laporan)
+ {
+		$this->load->model('model_detail_proyek');
+		$this->model_detail_proyek->getDownload($id_laporan);
+				
+		$this->load->helper('download');
+		$data = file_get_contents(base_url()."folder/".$nama_field);
+		$name = $nama_field;
+		force_download($name,$data);
+	}
+	
 }
