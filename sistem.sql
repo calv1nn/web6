@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2014 at 10:54 AM
+-- Generation Time: Jun 19, 2014 at 09:02 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -109,11 +109,11 @@ CREATE TABLE IF NOT EXISTS `karyawan` (
 --
 
 INSERT INTO `karyawan` (`nik`, `email`, `password`, `nama_karyawan`, `jabatan`, `status`) VALUES
-(7, 'dian@cahyo.com', '12345', 'Dian', 'Tim Teknis', 1),
+(7, '', '12345', 'Dian', 'Tim Teknis', 1),
 (23, 'web@mail.com', '1234', 'Saya', 'Bussiness Project Manager', 0),
 (232, 'fine_day@rocketmail.com', '123', 'aaa', 'Project Manager', 1),
-(234, 'admin@test.com', 'ffe8a19caa725494a5c4dfb163961a05', 'Calvin', 'BO', 0),
-(512, 'bintang.psari@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'Bintang', 'Bussiness Project Manager', 1),
+(234, 'admin@test.com', 'ffe8a19caa725494a5c4dfb163961a05', 'Calvin', 'BO', 1),
+(512, 'bintang.psari@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'Bintang', 'Bussiness Project Manager', 0),
 (3333, 'test@admin.com', '827ccb0eea8a706c4c34a16891f84e7b', 'Saya', 'Project Manager', 1),
 (3434, 'calvin.bahal@gmail.com', '123', 'abab', 'Bussiness Development Man', 1),
 (4444, 'sds@sdad', '3424324324', 'rrrrr', 'ewfewfew', 1);
@@ -125,11 +125,20 @@ INSERT INTO `karyawan` (`nik`, `email`, `password`, `nama_karyawan`, `jabatan`, 
 --
 
 CREATE TABLE IF NOT EXISTS `laporan` (
-  `id_laporan` int(11) NOT NULL,
-  `kode_proyek` int(11) NOT NULL,
+  `id_laporan` int(11) NOT NULL AUTO_INCREMENT,
+  `id_pekerjaan` int(11) NOT NULL,
   `nama_file` varchar(30) NOT NULL,
+  `status` int(1) NOT NULL,
   PRIMARY KEY (`id_laporan`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `laporan`
+--
+
+INSERT INTO `laporan` (`id_laporan`, `id_pekerjaan`, `nama_file`, `status`) VALUES
+(1, 1, 'class.png', 0),
+(2, 1, 'ER.png', 0);
 
 -- --------------------------------------------------------
 
@@ -168,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `proyek` (
 INSERT INTO `proyek` (`kode_proyek`, `nama_proyek`, `start_date`, `end_date`, `client`, `progress`) VALUES
 (1, 'KEMHAN', '2014-05-14', '2014-06-28', 'KEMHAN', 80),
 (2, 'KEMHAN', '2014-06-02', '2014-06-27', 'KEMHAN', 80),
-(1004, 'KEMENTRIAN', '0000-00-00', '0000-00-00', 'KEMENTRIAN', 0),
+(1004, 'KEMENTRIAN Luar Dalam', '2014-06-15', '2014-06-22', 'KEMENTRIAN', 0),
 (1005, 'KEMENTRIAN', '0000-00-00', '0000-00-00', 'KEMENTRIAN', 0),
 (1006, 'KEMENTRIAN', '2014-06-26', '0000-00-00', 'KEMENTRIAN', 0),
 (1007, 'KEMENTRIAN', '2014-06-03', '2014-06-29', 'KEMENTRIAN', 0);
@@ -180,7 +189,7 @@ INSERT INTO `proyek` (`kode_proyek`, `nama_proyek`, `start_date`, `end_date`, `c
 --
 
 CREATE TABLE IF NOT EXISTS `proyek_detail` (
-  `id_pekerjaan` int(11) NOT NULL,
+  `id_pekerjaan` int(11) NOT NULL AUTO_INCREMENT,
   `kode_proyek` int(11) NOT NULL,
   `nik` int(11) NOT NULL,
   `nama_pekerjaan` varchar(30) NOT NULL,
@@ -188,8 +197,20 @@ CREATE TABLE IF NOT EXISTS `proyek_detail` (
   `end_date` date NOT NULL,
   `progress` int(20) NOT NULL,
   `status` varchar(20) NOT NULL,
+  `kategori` varchar(25) NOT NULL,
   PRIMARY KEY (`id_pekerjaan`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `proyek_detail`
+--
+
+INSERT INTO `proyek_detail` (`id_pekerjaan`, `kode_proyek`, `nik`, `nama_pekerjaan`, `start_date`, `end_date`, `progress`, `status`, `kategori`) VALUES
+(1, 1004, 234, 'Install server baru', '2014-06-02', '2014-06-19', 0, '', 'install'),
+(2, 1004, 3333, 'Konfigur web server', '2014-06-05', '2014-06-25', 0, '', 'konfigur'),
+(3, 1004, 4444, 'konfigur mail server', '2014-06-07', '2014-06-17', 0, '', 'konfigur'),
+(4, 1004, 3434, 'masang rack', '2014-06-01', '2014-06-03', 0, '', 'masang'),
+(7, 1004, 4444, 'install apa kek', '0000-00-00', '0000-00-00', 0, '', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
