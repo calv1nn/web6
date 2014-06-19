@@ -119,7 +119,25 @@ class Model_detail_proyek extends CI_Model {
 		return $query->result_array();
 	}
 	
-	
+	public function update_status_laporan2($id_laporan)
+      {
+              $data = array (
+              
+              'status_laporan' => 2
+              );
+              $this->db->where('id_laporan',$id_laporan);
+              $this->db->update('laporan',$data);
+      }
+      
+      public function update_status_laporan($id_laporan)
+      {
+              $data = array (
+              
+              'status_laporan' => 1
+              );
+              $this->db->where('id_laporan',$id_laporan);
+              $this->db->update('laporan',$data);
+      }
 	
 	
 }

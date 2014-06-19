@@ -36,10 +36,11 @@ textarea {
 }
 
 .table td {
-	vertical-align: middle;
+	vertical-align: center;
 }
 
 .table-bordered th {
+	text-align: center;
 	background: #E9E9E9;
 	background:-moz-linear-gradient(top, #FAFAFA 0%, #E9E9E9 100%); /* FF3.6+ */
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#FAFAFA), color-stop(100%,#E9E9E9)); /* Chrome,Safari4+ */

@@ -91,7 +91,8 @@ class Detail_proyek extends CI_Controller {
 		else{
 			$data = array(
 			'id_pekerjaan'=>$this->input->post("id_pekerjaan"),
-			'nama_file'=>$this->upload->file_name
+			'nama_file'=>$this->upload->file_name,
+			'tanggal_upload' => date('Y-m-d', now())
 			);
 			$this->crud->insert($data,'laporan');
 			//redirect('upload_file/view');
@@ -118,6 +119,26 @@ class Detail_proyek extends CI_Controller {
 		{
 			redirect("welcome/login");
 		}
+	}
+	
+	public function update_status_laporan()
+	{
+		if ($this->input->post() == TRUE) { 
+		$this->load->model('model_detail_proyek');
+		$this->model_detail_proyek->update_status_laporan($this->input->post(id_laporan));
+		redirect("proyek");
+		}	
+
+	}
+	
+	public function update_status_laporan2()
+	{
+		if ($this->input->post() == TRUE) { 
+		$this->load->model('model_detail_proyek');
+		$this->model_detail_proyek->update_status_laporan2($this->input->post(id_laporan));
+		redirect("proyek");
+		}	
+
 	}
 	
 	public function download($id_laporan)

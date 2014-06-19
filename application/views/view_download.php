@@ -1,23 +1,16 @@
 <?php include('header.php'); ?>
 
 <style>
-table, td, th
-{
-border:1px solid green;
-}
-th
-{
-background-color:grey;
-color:white;
-}
-
-.thumbnail 
-{
-float:right;
-font-size:100%;
-padding:13px 30px;
-color:white;
-background-color: grey; 
+.thumbnail  {
+	
+	background-color:#5B74A8;
+	border:1px solid #29447E;
+	font-family:'Lucida Grande',Tahoma,Verdana,Arial,sans-serif;
+	font-size:12px;
+	font-weight:700;
+	padding:2px 10px;
+	height:18px;
+	color:#fff;
 }
 </style>
 
@@ -32,29 +25,59 @@ background-color: grey;
                                 <i class="shortcut-icon icon-user"></i>
                                 <h3>
 								
-								List Proyek </div>
+								List Laporan </div>
                             <!-- /widget-header -->
                             <div class="widget-content">
-                                <table border="10" style="width:10000px">
+                                <table class="table table-striped table-bordered">
 						
 							<tr>
 								<th>Nama File</th>
-								<th>Action</th>
+								<th>Tanggal Upload</th>
+								<th>Status</th>
+								<th colspan="3">Action</th>
 								
 							</tr>
 						<?php
-							//foreach ($detail_proyek as $row)
 							foreach ($detail_proyek as $row)
 								{
-							//	print_r($row);die;
 						?>
-							<tr>
-								<td><?php echo $row['nama_file']?></td>
-								<td> <a href="<?php echo site_url('detail_proyek/download/'.$row['id_laporan']); ?>">Download</a></td>
-							</tr>			
+			<?php echo  form_open('detail_proyek/update_status_laporan'); ?>
+			<?php echo form_hidden('id_laporan', $row['id_laporan']); ?>
+			<tr>
+				<td style="display:none"><?php echo $row['id_laporan']?></td>
+                <td><?php echo $row['nama_file']?></td>
+                <td><?php echo $row['tanggal_upload']?></td>
+                <td><?php if ( $row['status_laporan']== 0) { echo "On Going"; }
+								elseif  
+									( $row['status_laporan']== 1) { echo "Approved"; }
+								else
+								{
+										echo "Rejected" ;
+								}
+									
+                ?> </td>
+				<td><a href="<?php echo site_url('detail_proyek/download/'.$row['id_laporan']); ?>"><button class="thumbnail">Download</button></a> </td>
+				<td><?php
+				echo form_submit('mysubmit', 'Approve','class="thumbnail"');
+				echo form_close();?> <?php echo form_close();?>	</td>
+				
+			<?php echo form_open('detail_proyek/update_status_laporan2'); ?>
+			<?php echo form_hidden('id_laporan', $row['id_laporan']); ?>
+			
+				<td style="display:none"><?php echo $row['id_laporan']?></td>
+                <td style="display:none"><?php echo $row['nama_file']?></td>
+                <td style="display:none"><?php echo $row['status_laporan']?> </td>
+			<td>
+				<?php
+				echo form_submit('mysubmit', 'Reject','class="thumbnail"');
+				echo form_close();?> <?php echo form_close();?>	
+			</td>
+					
 						<?php 
 								}
 						?>
+						
+						
 								</table>
                                 <!-- /line-chart -->
                             </div>
