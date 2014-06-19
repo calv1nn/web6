@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.6
+-- version 3.5.4
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 19, 2014 at 09:02 AM
--- Server version: 5.6.16
--- PHP Version: 5.5.9
+-- Host: localhost
+-- Generation Time: Jun 19, 2014 at 08:16 PM
+-- Server version: 5.5.29
+-- PHP Version: 5.3.20
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -128,7 +128,8 @@ CREATE TABLE IF NOT EXISTS `laporan` (
   `id_laporan` int(11) NOT NULL AUTO_INCREMENT,
   `id_pekerjaan` int(11) NOT NULL,
   `nama_file` varchar(30) NOT NULL,
-  `status` int(1) NOT NULL,
+  `tanggal_upload` date NOT NULL,
+  `status_laporan` int(1) NOT NULL,
   PRIMARY KEY (`id_laporan`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
@@ -136,9 +137,9 @@ CREATE TABLE IF NOT EXISTS `laporan` (
 -- Dumping data for table `laporan`
 --
 
-INSERT INTO `laporan` (`id_laporan`, `id_pekerjaan`, `nama_file`, `status`) VALUES
-(1, 1, 'class.png', 0),
-(2, 1, 'ER.png', 0);
+INSERT INTO `laporan` (`id_laporan`, `id_pekerjaan`, `nama_file`, `tanggal_upload`, `status_laporan`) VALUES
+(1, 1, 'class.png', '2014-06-02', 0),
+(2, 1, 'ER.png', '2014-06-03', 1);
 
 -- --------------------------------------------------------
 
