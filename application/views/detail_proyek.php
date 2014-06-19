@@ -80,7 +80,7 @@ background-color: grey;
 								<td><?php echo $row['kategori']?></td>
 								<td><?php echo anchor(
 								"detail_proyek/upload/".$row['id_pekerjaan'], 'Upload', 'title="Upload Laporan"'); ?> | <?php echo anchor(
-								"detail_proyek/download/".$row['id_pekerjaan'], 'Dwonload', 'title="Upload Laporan"'); ?>
+								"detail_proyek/view_download/".$row['id_pekerjaan'], 'Download', 'title="Upload Laporan"'); ?>
 								</td>
 							</tr>			
 						<?php 

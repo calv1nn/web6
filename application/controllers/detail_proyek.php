@@ -103,16 +103,34 @@ class Detail_proyek extends CI_Controller {
  $data['laporan'] = $this->crud->show('laporan');
  $this->load->view('view_upload',$data);
  }
-	
-	public  function Download($id_laporan)
- {
+ 
+	public function view_download($id_laporan)
+	{
+		if ($this->session->userdata('login_valid')){
+		
 		$this->load->model('model_detail_proyek');
-		$this->model_detail_proyek->getDownload($id_laporan);
-				
-		$this->load->helper('download');
-		$data = file_get_contents(base_url()."folder/".$nama_field);
-		$name = $nama_field;
-		force_download($name,$data);
+		$data['detail_proyek']=$this->model_detail_proyek->view_download($id_laporan);
+		//print_r($data['detail_proyek']);die;
+		$data['edit_detail_proyek']="";
+		$this->load->view('view_download',$data);
+		}
+		else
+		{
+			redirect("welcome/login");
+		}
 	}
 	
+	public function download($id_laporan)
+	{
+		$this->load->helper('download'); //jika sudah diaktifkan di autoload, maka tidak perlu di tulis kembali
+		$this->load->model('model_detail_proyek');
+		$name=$this->model_detail_proyek->get_nama_file($id_laporan);
+		//$name = $nama_file;
+		//print_r($name[0]['nama_file']); die();
+		$nama=$name[0]['nama_file'];
+		$data = file_get_contents(base_url()."assets/upload/".$name[0]['nama_file']); // letak file pada aplikasi kita
+		//print_r($nama); die();
+		force_download($nama,$data);
+
+	}
 }

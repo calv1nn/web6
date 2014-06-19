@@ -69,7 +69,7 @@ class Model_detail_proyek extends CI_Model {
 		return $return;
 	}
 	
-		public function get_id_pekerjaan($id_pekerjaan)
+	public function get_id_pekerjaan($id_pekerjaan)
 	{	
 		$this->db->select('id_pekerjaan');
 		$this->db->where("id_pekerjaan",$id_pekerjaan);
@@ -77,11 +77,19 @@ class Model_detail_proyek extends CI_Model {
 		return $query->result_array();
 	}
 	
-		public function get_id_laporan($id_laporan)
+	public function get_id_laporan($id_laporan)
 	{	
 		$this->db->select('id_laporan');
 		$this->db->where("id_laporan",$id_laporan);
 		$query=$this->db->get('id_laporan');
+		return $query->result_array();
+	}
+	
+	public function get_nama_file($id_laporan)
+	{	
+		$this->db->select('nama_file');
+		$this->db->where("id_laporan",$id_laporan);
+		$query=$this->db->get('laporan');
 		return $query->result_array();
 	}
 	
@@ -100,19 +108,18 @@ class Model_detail_proyek extends CI_Model {
 		$this->db->insert($laporan, $data);
 		}
  
-	function getDownload()
-    {
-    //    $requested_file = $this->uri->segment(x);
-        $this->load->helper('download');
-        $this->db->select('*');
-        $this->db->where('id_laporan',$id_laporan);
-        $query =  $this->db->get('laporan');
-        foreach ($query->result() as $row)
-       {
-    $file_data = file_get_contents(base_url()."assets/upload".$nama_field);
-    $file_name = $$nama_field;
-    }
-    force_download($file_name, $file_data);
-   }
+	public function view_download($id_laporan)
+	{
+		$this->db->select('*');
+		$this->db->from('laporan');
+		$this->db->join('proyek_detail','laporan.id_pekerjaan=proyek_detail.id_pekerjaan');
+		$this->db->where('proyek_detail.id_pekerjaan',$id_laporan);
+		$query = $this->db->get();
+		//return $query;
+		return $query->result_array();
+	}
+	
+	
+	
 	
 }
