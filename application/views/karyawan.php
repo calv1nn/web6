@@ -17,7 +17,7 @@ float:right;
 font-size:100%;
 padding:13px 30px;
 color:white;
-background-color: grey; 
+background-color: grey;
 }
 </style>
 
@@ -43,7 +43,7 @@ background-color: grey;
 								<th>Nama</th>
 								<th>Jabatan</th>
 								<th>Status</th>
-								<th>Aksi</th>
+								<th>Action</th>
 							</tr>
 						<?php
 							foreach ($karyawan as $row)
@@ -57,8 +57,8 @@ background-color: grey;
 								<td><?php if($row['status']==1) {echo "Active" ;
 								} else { echo "Inactive" ;
 								}?></td>
-								<td><?php echo anchor("user/delete_karyawan/".$row['nik'], 'Delete', 'title="Delete a User"') . " | " . anchor(
-														"user/edit_karyawan/".$row['nik'], 'Edit', 'title="Edit a User"'); ?>
+								<td><a href="<?php echo site_url ('user/delete_karyawan/'.$row['nik']) ?> "><button class="btn btn-danger">Delete</button> </a>
+									<a href="<?php echo site_url ('user/edit_karyawan/'.$row['nik']) ?> "><button class="btn">Edit</button> </a>
 								</td>
 							</tr>			
 						<?php 

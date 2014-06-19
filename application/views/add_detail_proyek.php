@@ -22,7 +22,14 @@
 					
 					<div class="widget-content">
 					
-				
+				<?php	
+				$kategori = array(
+              ''  => 'Choose option...',
+              'Perakitan'  => 'Perakitan',
+              'Instalasi'    => 'Instalasi',
+              'Konfigurasi' => 'Konfigurasi'
+            );
+            ?>
 				<?php echo form_open("detail_proyek/add_detail_proyek"); ?>
 							
 				<div class="field">
@@ -69,7 +76,7 @@
 				
 				<div class="field">
 					<label for="nama">Kategori:</label>
-					<?php echo form_input("kategori",""); ?>
+					<?php echo form_dropdown('kategori', $kategori); ?>
 				</div> <!-- /field -->
 				<?php
 			echo form_submit('mysubmit', 'ADD');

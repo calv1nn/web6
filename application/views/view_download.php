@@ -56,9 +56,9 @@
 								}
 									
                 ?> </td>
-				<td><a href="<?php echo site_url('detail_proyek/download/'.$row['id_laporan']); ?>"><button class="thumbnail">Download</button></a> </td>
+				<td><a href="<?php echo site_url('detail_proyek/download/'.$row['id_laporan']); ?>"><button class="btn btn-info">Download</button></a> </td>
 				<td><?php
-				echo form_submit('mysubmit', 'Approve','class="thumbnail"');
+				echo form_submit('mysubmit', 'Approve','class="btn btn-success"');
 				echo form_close();?> <?php echo form_close();?>	</td>
 				
 			<?php echo form_open('detail_proyek/update_status_laporan2'); ?>
@@ -69,7 +69,7 @@
                 <td style="display:none"><?php echo $row['status_laporan']?> </td>
 			<td>
 				<?php
-				echo form_submit('mysubmit', 'Reject','class="thumbnail"');
+				echo form_submit('mysubmit', 'Reject','class="btn btn-danger"');
 				echo form_close();?> <?php echo form_close();?>	
 			</td>
 					

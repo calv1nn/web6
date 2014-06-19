@@ -89,7 +89,7 @@
 			
 			<div class="login-actions">
 			<?php
-				echo form_submit('mysubmit', 'Sign In');
+				echo form_submit('mysubmit', 'Sign In','class="button btn btn-success btn-large"');
 				echo form_close();
 			?>
 			</div> <!-- .actions -->

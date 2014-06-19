@@ -135,7 +135,7 @@
 										<a href="javascript:;" class="shortcut"><i
                                             class="shortcut-icon icon-bookmark"></i><span class="shortcut-label">Bookmarks</span> </a>
 											<a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-signal"></i> <span class="shortcut-label">Reports</span> </a>
-											<a href="javascript:;" class="shortcut"> <i class="shortcut-icon icon-comment"></i><span class="shortcut-label">Comments</span> </a>
+											<a href="<?php echo base_url(); ?>diskusi/index"" class="shortcut"> <i class="shortcut-icon icon-comment"></i><span class="shortcut-label">Diskusi</span> </a>
 											<a href="<?php echo base_url(); ?>user/karyawan" class="shortcut"><i class="shortcut-icon icon-user"></i><span class="shortcut-label">Users</span> </a>
 												<a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-file"></i><span class="shortcut-label">Notes</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-picture"></i> <span class="shortcut-label">Photos</span> 
 													</a><a href="javascript:;" class="shortcut"> <i class="shortcut-icon icon-tag"></i><span class="shortcut-label">Tags</span> </a> </div>
