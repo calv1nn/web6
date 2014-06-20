@@ -49,7 +49,7 @@
 				
 				<div class="field">
 					<label for="nik">Penanggung Jawab:</label>	
-				<?php echo form_dropdown('nama', $dropdown);?> 
+				<?php echo form_dropdown('nik', $dropdown);?> 
 				
 				</div> <!-- /field -->
 				

@@ -65,7 +65,6 @@ class Model_detail_proyek extends CI_Model {
 				$return[$row['nik']] = $row['nama_karyawan'];
 			}
 		}
-	
 		return $return;
 	}
 	

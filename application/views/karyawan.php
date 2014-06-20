@@ -21,6 +21,17 @@ background-color: grey;
 }
 </style>
 
+<script>
+function doconfirm()
+{
+    job=confirm("Are you sure to delete permanently?");
+    if(job!=true)
+    {
+        return false;
+    }
+}
+</script>
+
     <div class="main">
         <div class="main-inner">
             <div class="container">
@@ -57,8 +68,8 @@ background-color: grey;
 								<td><?php if($row['status']==1) {echo "Active" ;
 								} else { echo "Inactive" ;
 								}?></td>
-								<td><a href="<?php echo site_url ('user/delete_karyawan/'.$row['nik']) ?> "><button class="btn btn-danger">Delete</button> </a>
-									<a href="<?php echo site_url ('user/edit_karyawan/'.$row['nik']) ?> "><button class="btn">Edit</button> </a>
+								<td><a href="<?php echo site_url ('user/delete_karyawan/'.$row['nik']) ?> " onClick="return doconfirm();" ><button class="btn btn-danger">Delete</button> </a>
+									<a href="<?php echo site_url ('user/edit_karyawan/'.$row['nik']) ?> " ><button class="btn">Edit</button> </a>
 								</td>
 							</tr>			
 						<?php 

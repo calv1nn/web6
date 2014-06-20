@@ -1,17 +1,7 @@
 <?php include('header.php'); ?>
 
 <style>
-.thumbnail  {
-	
-	background-color:#5B74A8;
-	border:1px solid #29447E;
-	font-family:'Lucida Grande',Tahoma,Verdana,Arial,sans-serif;
-	font-size:12px;
-	font-weight:700;
-	padding:2px 10px;
-	height:18px;
-	color:#fff;
-}
+
 </style>
 
     <div class="main">

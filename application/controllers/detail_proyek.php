@@ -92,7 +92,7 @@ class Detail_proyek extends CI_Controller {
 			$data = array(
 			'id_pekerjaan'=>$this->input->post("id_pekerjaan"),
 			'nama_file'=>$this->upload->file_name,
-			'tanggal_upload' => date('Y-m-d', now())
+			'tanggal_upload' => date('Y-m-d')
 			);
 			$this->crud->insert($data,'laporan');
 			//redirect('upload_file/view');
