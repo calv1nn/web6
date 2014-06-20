@@ -17,6 +17,7 @@ class Model_detail_proyek extends CI_Model {
 		$this->db->from('proyek');
 		$this->db->join('proyek_detail','proyek_detail.kode_proyek=proyek.kode_proyek');
 		$this->db->join('karyawan','proyek_detail.nik=karyawan.nik');
+		//$this->db->join('laporan','proyek_detail.id_pekerjaan=laporan.status_laporan');
 		$this->db->where('proyek.kode_proyek',$id_pekerjaan);
 		$query = $this->db->get();
 		//return $query;
@@ -52,6 +53,16 @@ class Model_detail_proyek extends CI_Model {
 		$this->db->where("kode_proyek",$kode_proyek);
 		$query=$this->db->get('proyek');
 		return $query->result_array();
+	}
+	
+	public function get_progress($id_pekerjaan)
+	{
+		$this->db->select('*');
+		$this->db->from('laporan');
+		$this->db->join('proyek_detail','laporan.id_pekerjaan=proyek_detail.id_pekerjaan');
+		$this->db->where('id_pekerjaan',$id_pekerjaan);
+		$query = $this->db->get();
+		return $query;
 	}
 	
 	function get_nik()

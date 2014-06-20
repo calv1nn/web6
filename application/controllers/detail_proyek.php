@@ -42,6 +42,22 @@ class Detail_proyek extends CI_Controller {
 		}
 	}
 	
+	public function view_detail_proyek2($id_pekerjaan)
+	{
+		if ($this->session->userdata('login_valid')){
+		
+		$this->load->model('model_detail_proyek');
+		$data['status']=$this->model_detail_proyek->get_progress($id_pekerjaan);
+		//print_r($data['detail_proyek']);die;
+		$data['edit_detail_proyek']="";
+		$this->load->view('detail_proyek',$data);
+		}
+		else
+		{
+			redirect("welcome/login");
+		}
+	}
+	
 	public function add_detail_proyek($kode_proyek)
 	{
 		if ($this->input->post() != TRUE)

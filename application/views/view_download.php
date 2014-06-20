@@ -1,7 +1,18 @@
 <?php include('header.php'); ?>
 
 <style>
-
+.btn-info2 {
+	background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(78, 178, 213, 0)), color-stop(100%, rgba(7, 23, 29, 0.1)));
+  background-image: -webkit-linear-gradient(rgba(78, 178, 213, 0), rgba(7, 23, 29, 0.1));
+  background-image: -moz-linear-gradient(rgba(78, 178, 213, 0), rgba(7, 23, 29, 0.1));
+  background-image: -o-linear-gradient(rgba(78, 178, 213, 0), rgba(7, 23, 29, 0.1));
+  background-image: linear-gradient(rgba(78, 178, 213, 0), rgba(7, 23, 29, 0.1));
+  background-color: #4eb2d5;
+  border-color: #35a7cf #35a7cf #237795;
+  border-color: rgba(0, 0, 0, 0.05) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.15);
+  color: white;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.15);
+  *background-color: #35a7cf;
 </style>
 
     <div class="main">
@@ -46,7 +57,9 @@
 								}
 									
                 ?> </td>
-				<td><a href="<?php echo site_url('detail_proyek/download/'.$row['id_laporan']); ?>"><button class="btn btn-info">Download</button></a> </td>
+				<td><a href="<?php echo site_url('detail_proyek/download/'.$row['id_laporan']); ?>">
+				<input type="button" value="Download" class="btn-info2"/> </a>
+				</td>
 				<td><?php
 				echo form_submit('mysubmit', 'Approve','class="btn btn-success"');
 				echo form_close();?> <?php echo form_close();?>	</td>

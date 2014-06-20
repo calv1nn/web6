@@ -77,6 +77,9 @@ background-color: grey;
 								<td><?php echo date('d-M-Y',strtotime("$row[start_date]"));?></td>
 								<td><?php echo date('d-M-Y',strtotime("$row[end_date]"));?></td>
 								<td><?php echo $row['progress']?></td>
+<!--
+								<td><?php echo $row['status_laporan']?></td>
+-->
 								<td><?php echo $row['kategori']?></td>
 								<td><?php echo anchor(
 								"detail_proyek/upload/".$row['id_pekerjaan'], 'Upload', 'title="Upload Laporan"'); ?> | <?php echo anchor(
@@ -120,6 +123,30 @@ background-color: grey;
                                 <i class="icon-bar-chart"></i>
                                 <h3>
                                     A Chart</h3>
+                                    <?php
+							//foreach ($detail_proyek as $row)
+							foreach ($status as $row)
+								{
+							//	print_r($row);die;
+						?>
+							<tr>
+								<td><?php echo $row['nama_pekerjaan']?></td>
+								<td><?php echo $row['nama_karyawan']?></td>
+								<td><?php echo date('d-M-Y',strtotime("$row[start_date]"));?></td>
+								<td><?php echo date('d-M-Y',strtotime("$row[end_date]"));?></td>
+								<td><?php echo $row['progress']?></td>
+<!--
+								<td><?php echo $row['status_laporan']?></td>
+-->
+								<td><?php echo $row['kategori']?></td>
+								<td><?php echo anchor(
+								"detail_proyek/upload/".$row['id_pekerjaan'], 'Upload', 'title="Upload Laporan"'); ?> | <?php echo anchor(
+								"detail_proyek/view_download/".$row['id_pekerjaan'], 'Laporan', 'title="Upload Laporan"'); ?>
+								</td>
+							</tr>			
+						<?php 
+								}
+								?>
                             </div>
                             <!-- /widget-header -->
                             <div class="widget-content">

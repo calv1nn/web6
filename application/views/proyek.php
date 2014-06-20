@@ -36,9 +36,10 @@ background-color: grey;
                             </div>
                             <!-- /widget-header -->
                             <div class="widget-content">
-                                <table border="10" style="width:10000px">
+                                <table class="table table-striped table-bordered">
 							<tr>
 								<th>Nama Proyek</th>
+								<th>Nama Client</th>
 								<th>Start Date</th>
 								<th>End Date</th>
 								<th>Progress</th>
@@ -51,9 +52,10 @@ background-color: grey;
 						?>
 							<tr>
 								<td><a href='<?php echo base_url();?>detail_proyek/view_detail_proyek/<?php echo $row['kode_proyek'];?>';><?php echo $row['nama_proyek'];?></a></td>
+								<td><?php echo $row['client']?></td>
 								<td><?php echo date('d-M-Y',strtotime("$row[start_date]"));?></td>
 								<td><?php echo date('d-M-Y',strtotime("$row[end_date]"));?></td>
-								<td><?php echo $row['progress']?></td>
+								<td><?php echo $row['progress']?>%</td>
 								<td><?php echo anchor(
 														"proyek/edit_proyek/".$row['kode_proyek'], 'Edit', 'title="Edit a User"'); ?></td>
 							</tr>			
