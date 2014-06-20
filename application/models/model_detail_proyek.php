@@ -17,12 +17,29 @@ class Model_detail_proyek extends CI_Model {
 		$this->db->from('proyek');
 		$this->db->join('proyek_detail','proyek_detail.kode_proyek=proyek.kode_proyek');
 		$this->db->join('karyawan','proyek_detail.nik=karyawan.nik');
-		//$this->db->join('laporan','proyek_detail.id_pekerjaan=laporan.status_laporan');
+		//$this->db->join('laporan','proyek_detail.id_pekerjaan=laporan.id_pekerjaan');
 		$this->db->where('proyek.kode_proyek',$id_pekerjaan);
 		$query = $this->db->get();
 		//return $query;
 		return $query->result_array();
 	}
+	
+	/*public function view_detail_proyek2($id_pekerjaan)
+	{
+		//$this->load->database();
+		//$this->db->order_by("id_pekerjaan", "asc");
+	//	$query = $this->db->get('proyek_detail');
+		//return $query->result_array();
+		
+		$this->db->select('*');
+		$this->db->from('proyek');
+		$this->db->join('proyek_detail','proyek_detail.kode_proyek=proyek.kode_proyek');
+		$this->db->join('laporan','proyek_detail.id_pekerjaan=laporan.id_pekerjaan');
+		$this->db->where('proyek.kode_proyek',$id_pekerjaan);
+		$query = $this->db->get();
+		//return $query;
+		return $query->result_array();
+	}*/
 	
 	public function insert_detail_proyek($id_pekerjaan,$kode_proyek,$nik,$nama_pekerjaan,$start_date,$end_date,$progress,$kategori)
 	{
@@ -114,9 +131,48 @@ class Model_detail_proyek extends CI_Model {
 		}
 	}
  
-	public function insert($data,$laporan){
+	public function insert($data,$laporan)
+	{
 		$this->db->insert($laporan, $data);
+			
+		$this->db->select('*');
+		$this->db->from('proyek_detail');
+		$this->db->join('laporan','proyek_detail.id_pekerjaan=laporan.id_pekerjaan');
+		$this->db->where('proyek_detail.id_pekerjaan',$data['id_pekerjaan']);
+		$this->db->where('laporan.status_laporan',1);
+		$query = $this->db->get();
+		if($query->num_rows() > 0){
+			$i = 0;
+			
+			foreach($query->result() as $cek) {
+				$end = explode('-', $cek->end_date);
+				$end_date = $end[2];
+				$end_date1= $end[1];
+				$end_date2= $end[0];
+				
+				$start = explode('-', $cek->start_date);
+				$start_date = $start[2];
+				$start_date1= $start[1];
+				$start_date2= $start[0];
+
+				$jd1 = GregorianToJD($end_date1, $end_date, $end_date2);
+				$jd2 = GregorianToJD($start_date1, $start_date, $start_date2);
+				
+				$date_sel = $jd1 - $jd2 + 1;
+				
+				$i++;
+			}
+			
+			$progres = $i / $date_sel * 100;
+			
+			$data1 = array (
+              
+              'progress' => $progres
+              );
+              $this->db->where('id_pekerjaan',$data['id_pekerjaan']);
+              $this->db->update('proyek_detail',$data1);
 		}
+	}
  
 	public function view_download($id_laporan)
 	{

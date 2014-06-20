@@ -31,8 +31,9 @@ class Detail_proyek extends CI_Controller {
 		
 		$this->load->model('model_detail_proyek');
 		$data['detail_proyek']=$this->model_detail_proyek->view_detail_proyek($id_pekerjaan);
+	//	$data['laporan']=$this->model_detail_proyek->view_detail_proyek2($id_pekerjaan);
 		$data['nama_proyek']=$this->model_detail_proyek->get_nama_proyek($id_pekerjaan);
-		//print_r($data['detail_proyek']);die;
+		//print_r($data['laporan']);die;
 		$data['edit_detail_proyek']="";
 		$this->load->view('detail_proyek',$data);
 		}
@@ -42,7 +43,7 @@ class Detail_proyek extends CI_Controller {
 		}
 	}
 	
-	public function view_detail_proyek2($id_pekerjaan)
+	/* public function view_detail_proyek2($id_pekerjaan)
 	{
 		if ($this->session->userdata('login_valid')){
 		
@@ -56,7 +57,7 @@ class Detail_proyek extends CI_Controller {
 		{
 			redirect("welcome/login");
 		}
-	}
+	} */
 	
 	public function add_detail_proyek($kode_proyek)
 	{
@@ -168,6 +169,8 @@ class Detail_proyek extends CI_Controller {
 		$data = file_get_contents(base_url()."assets/upload/".$name[0]['nama_file']); // letak file pada aplikasi kita
 		//print_r($nama); die();
 		force_download($nama,$data);
-
 	}
+
+	
+	
 }
