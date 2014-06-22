@@ -66,6 +66,7 @@
 				
 			<?php echo form_open('detail_proyek/update_status_laporan2'); ?>
 			<?php echo form_hidden('id_laporan', $row['id_laporan']); ?>
+			<?php echo form_hidden('id_pekerjaan', $row['id_pekerjaan']); ?>
 			
 				<td style="display:none"><?php echo $row['id_laporan']?></td>
                 <td style="display:none"><?php echo $row['nama_file']?></td>

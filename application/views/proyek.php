@@ -57,7 +57,8 @@ background-color: grey;
 								<td><?php echo date('d-M-Y',strtotime("$row[end_date]"));?></td>
 								<td><?php echo $row['progress']?>%</td>
 								<td><?php echo anchor(
-														"proyek/edit_proyek/".$row['kode_proyek'], 'Edit', 'title="Edit a User"'); ?></td>
+														"proyek/edit_proyek/".$row['kode_proyek'], 'Edit', 'title="Edit a User"');  ?> | <?php echo anchor(
+								"load_pekerjaan/view_load_pekerjaan/".$row['kode_proyek'], 'View Pekerja', 'title="View Pekerja"'); ?></td>
 							</tr>			
 						<?php 
 								}
