@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.4
+-- version 4.1.6
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jun 19, 2014 at 08:16 PM
--- Server version: 5.5.29
--- PHP Version: 5.3.20
+-- Host: 127.0.0.1
+-- Generation Time: Jun 23, 2014 at 09:36 PM
+-- Server version: 5.6.16
+-- PHP Version: 5.5.9
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -78,19 +78,6 @@ INSERT INTO `diskusi` (`id`, `judul`, `penulis`, `isi`, `tanggal`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dokumentasi`
---
-
-CREATE TABLE IF NOT EXISTS `dokumentasi` (
-  `id` int(11) NOT NULL,
-  `kode_proyek` int(11) NOT NULL,
-  `nama_dokumentasi` varchar(30) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `karyawan`
 --
 
@@ -113,10 +100,10 @@ INSERT INTO `karyawan` (`nik`, `email`, `password`, `nama_karyawan`, `jabatan`, 
 (23, 'web@mail.com', '1234', 'Saya', 'Bussiness Project Manager', 0),
 (232, 'fine_day@rocketmail.com', '123', 'aaa', 'Project Manager', 1),
 (234, 'admin@test.com', 'ffe8a19caa725494a5c4dfb163961a05', 'Calvin', 'BO', 1),
+(412, 'saya@mail.co,id', '12345', 'aaabb', 'Project Manager', 1),
 (512, 'bintang.psari@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'Bintang', 'Bussiness Project Manager', 0),
 (3333, 'test@admin.com', '827ccb0eea8a706c4c34a16891f84e7b', 'Saya', 'Project Manager', 1),
-(3434, 'calvin.bahal@gmail.com', '123', 'abab', 'Bussiness Development Man', 1),
-(4444, 'sds@sdad', '3424324324', 'rrrrr', 'ewfewfew', 1);
+(3434, 'calvin.bahal@gmail.com', '123', 'abab', 'Bussiness Development Man', 1);
 
 -- --------------------------------------------------------
 
@@ -131,15 +118,20 @@ CREATE TABLE IF NOT EXISTS `laporan` (
   `tanggal_upload` date NOT NULL,
   `status_laporan` int(1) NOT NULL,
   PRIMARY KEY (`id_laporan`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
 
 --
 -- Dumping data for table `laporan`
 --
 
 INSERT INTO `laporan` (`id_laporan`, `id_pekerjaan`, `nama_file`, `tanggal_upload`, `status_laporan`) VALUES
-(1, 1, 'class.png', '2014-06-02', 0),
-(2, 1, 'ER.png', '2014-06-03', 1);
+(1, 1, 'class.png', '2014-06-02', 1),
+(2, 1, 'ER.png', '2014-06-03', 2),
+(5, 2, 'test.png', '2014-06-20', 1),
+(22, 2, 'CURRICULUM_VITAE38.pdf', '2014-06-20', 1),
+(27, 4, 'CURRICULUM_VITAE43.pdf', '2014-06-21', 2),
+(30, 2, 'CURRICULUM_VITAE46.pdf', '2014-06-21', 1),
+(31, 4, 'CURRICULUM_VITAE47.pdf', '2014-06-22', 1);
 
 -- --------------------------------------------------------
 
@@ -148,12 +140,22 @@ INSERT INTO `laporan` (`id_laporan`, `id_pekerjaan`, `nama_file`, `tanggal_uploa
 --
 
 CREATE TABLE IF NOT EXISTS `load_pekerjaan` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
   `kode_proyek` int(11) NOT NULL,
   `nik` int(11) NOT NULL,
-  `progress_per_proyek` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  PRIMARY KEY (`kode_proyek`,`nik`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `load_pekerjaan`
+--
+
+INSERT INTO `load_pekerjaan` (`kode_proyek`, `nik`) VALUES
+(1004, 7),
+(1004, 232),
+(1004, 412),
+(1004, 3333),
+(1005, 7),
+(1005, 23);
 
 -- --------------------------------------------------------
 
@@ -197,21 +199,24 @@ CREATE TABLE IF NOT EXISTS `proyek_detail` (
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   `progress` int(20) NOT NULL,
-  `status` varchar(20) NOT NULL,
   `kategori` varchar(25) NOT NULL,
   PRIMARY KEY (`id_pekerjaan`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `proyek_detail`
 --
 
-INSERT INTO `proyek_detail` (`id_pekerjaan`, `kode_proyek`, `nik`, `nama_pekerjaan`, `start_date`, `end_date`, `progress`, `status`, `kategori`) VALUES
-(1, 1004, 234, 'Install server baru', '2014-06-02', '2014-06-19', 0, '', 'install'),
-(2, 1004, 3333, 'Konfigur web server', '2014-06-05', '2014-06-25', 0, '', 'konfigur'),
-(3, 1004, 4444, 'konfigur mail server', '2014-06-07', '2014-06-17', 0, '', 'konfigur'),
-(4, 1004, 3434, 'masang rack', '2014-06-01', '2014-06-03', 0, '', 'masang'),
-(7, 1004, 4444, 'install apa kek', '0000-00-00', '0000-00-00', 0, '', '');
+INSERT INTO `proyek_detail` (`id_pekerjaan`, `kode_proyek`, `nik`, `nama_pekerjaan`, `start_date`, `end_date`, `progress`, `kategori`) VALUES
+(1, 1004, 234, 'Install server baru', '2014-06-02', '2014-06-19', 6, 'install'),
+(2, 1004, 3333, 'Konfigur web server', '2014-06-05', '2014-06-25', 14, 'konfigur'),
+(3, 1004, 4444, 'konfigur mail server', '2014-06-07', '2014-06-17', 0, 'konfigur'),
+(4, 1004, 3434, 'masang rack', '2014-06-01', '2014-06-03', 33, 'masang'),
+(7, 1004, 4444, 'install apa kek', '0000-00-00', '0000-00-00', 0, ''),
+(8, 1005, 3434, 'install apa kek', '2014-06-21', '2014-06-28', 0, 'Instalasi'),
+(9, 1005, 4444, 'Rakit Server', '2014-06-26', '2014-06-29', 0, 'Instalasi'),
+(10, 1005, 232, 'Rakit Server kek', '2014-06-22', '2014-06-30', 0, 'Konfigurasi'),
+(11, 1005, 234, 'install apa kek2', '2014-06-24', '2014-06-29', 0, 'Instalasi');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
