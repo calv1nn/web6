@@ -36,7 +36,7 @@ class Proyek extends CI_Controller {
 			array(
                 'field' => 'end_date',
                 'label' => 'End Date',
-                'rules' => 'required|greater_than[start_date]'
+                'rules' => 'required'
             ),
 			
             array(
@@ -63,7 +63,7 @@ class Proyek extends CI_Controller {
 		$progress=$this->input->post("progress");
 		
 		$this->model_proyek->insert_proyek($kode_proyek,$nama_proyek,$start_date,$end_date,$client,$progress);
-		redirect("proyek/index");
+		redirect("proyek");
 	   }
 	   
 	}

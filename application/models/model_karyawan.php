@@ -12,6 +12,39 @@ class Model_karyawan extends CI_Model {
 		else return false;
 	}
 	
+	public function check_login_bpm($email,$password)
+	{
+		$this->db->where(array('email'=>$email,
+								'password'=>$password,
+								'jabatan'=>'Bussiness Project Manager',
+								'status'=>'1'));
+		$query=$this->db->get('karyawan');
+		if($query->num_rows()>0) return true;
+		else return false;
+	}
+	
+	public function check_login_timteknis($email,$password)
+	{
+		$this->db->where(array('email'=>$email,
+								'password'=>$password,
+								'jabatan'=>'Tim Teknis',
+								'status'=>'1'));
+		$query=$this->db->get('karyawan');
+		if($query->num_rows()>0) return true;
+		else return false;
+	}
+	
+	public function check_login_pm($email,$password)
+	{
+		$this->db->where(array('email'=>$email,
+								'password'=>$password,
+								'jabatan'=>'Project Manager',
+								'status'=>'1'));
+		$query=$this->db->get('karyawan');
+		if($query->num_rows()>0) return true;
+		else return false;
+	}
+	
 	public function view_karyawan()
 	{
 		//$this->load->database();

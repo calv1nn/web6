@@ -10,7 +10,7 @@ class User extends CI_Controller {
 	
 	public function karyawan()
 	{
-		if ($this->session->userdata('login_valid')){
+		if ($this->session->userdata('bpm')){
 		$this->load->model('model_karyawan');
 		$data['karyawan']=$this->model_karyawan->view_karyawan();
 		$data['edit_karyawan']="";
