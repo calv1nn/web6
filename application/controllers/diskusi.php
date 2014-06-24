@@ -4,7 +4,7 @@ class Diskusi extends CI_Controller {
 
 	public function index()
 	{
-		if ($this->session->userdata('login_valid')){
+		if ($this->session->userdata('email')){
 		$this->load->model('model_diskusi');
 		$data['daftarartikel']=$this->model_diskusi->daftar(6,0);
 		$this->load->library('pagination');
@@ -27,11 +27,17 @@ class Diskusi extends CI_Controller {
 
 	public function tambah()
 	{
+		if ($this->session->userdata('email')){
 		$this->load->helper('xinha_helper');
 		$dati['xinha_java']= javascript_xinha(array('isi'));
 		$dati['edit_diskusi']='';
 		// this line for the xinha
 		$this->load->view('add_diskusi', $dati);
+		}
+		else
+		{
+		redirect("welcome/login");
+		}
 	}
 	
 	public function view_diskusi($id)

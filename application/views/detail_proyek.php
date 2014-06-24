@@ -36,8 +36,10 @@ background-color: grey;
 									$nama_proyek = $row2['nama_proyek'];
 								}?>
 								List Proyek <?php echo $row2['nama_proyek'];?> </h3> 
+								<?php if($this->session->userdata('pm',TRUE)) { ?>
 								<button class="thumbnail" onclick="location.href='<?php echo base_url();?>detail_proyek/add_detail_proyek/<?php echo $row2['kode_proyek'];?>'">Add</button>
-                            </div>
+								<?php }?>
+							</div>
                             <!-- /widget-header -->
                             <div class="widget-content">
                                 <table class="CSSTableG">
@@ -81,8 +83,10 @@ background-color: grey;
 								<td><?php echo $row['status_laporan']?></td>
 -->
 								<td><?php echo $row['kategori']?></td>
-								<td><?php echo anchor(
-								"detail_proyek/upload/".$row['id_pekerjaan'], 'Upload', 'title="Upload Laporan"'); ?> | <?php echo anchor(
+								<td>
+								<?php if($this->session->userdata('email',TRUE)) { ?>
+								<?php echo anchor(
+								"detail_proyek/upload/".$row['id_pekerjaan'], 'Upload', 'title="Upload Laporan"'); ?> |<?php }?> <?php echo anchor(
 								"detail_proyek/view_download/".$row['id_pekerjaan'], 'Laporan', 'title="Upload Laporan"'); ?>
 								</td>
 							</tr>			

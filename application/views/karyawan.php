@@ -42,7 +42,7 @@ function doconfirm()
                             <div class="widget-header">
                                 <i class="shortcut-icon icon-user"></i>
                                 <h3>
-                                    List Karyawan</h3> <button class="thumbnail" onclick="location.href='<?php echo base_url();?>user/add_karyawan'">Add</button>
+                                    List Karyawan</h3> <?php if($this->session->userdata('bpm',TRUE)) { ?> <button class="thumbnail" onclick="location.href='<?php echo base_url();?>user/add_karyawan'">Add</button> <?php } ?>
 					
                             </div>
                             <!-- /widget-header -->
@@ -54,7 +54,9 @@ function doconfirm()
 								<th>Nama</th>
 								<th>Jabatan</th>
 								<th>Status</th>
+								<?php if($this->session->userdata('bpm',TRUE)) { ?>
 								<th>Action</th>
+								<?php }?>
 							</tr>
 						<?php
 							foreach ($karyawan as $row)
@@ -68,9 +70,11 @@ function doconfirm()
 								<td><?php if($row['status']==1) {echo "Active" ;
 								} else { echo "Inactive" ;
 								}?></td>
+								<?php if($this->session->userdata('bpm',TRUE)) { ?>
 								<td><a href="<?php echo site_url ('user/delete_karyawan/'.$row['nik']) ?> " onClick="return doconfirm();" ><button class="btn btn-danger">Delete</button> </a>
 									<a href="<?php echo site_url ('user/edit_karyawan/'.$row['nik']) ?> " ><button class="btn">Edit</button> </a>
 								</td>
+								<?php }?>
 							</tr>			
 						<?php 
 								}

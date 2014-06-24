@@ -4,7 +4,7 @@ class Load_pekerjaan extends CI_Controller {
 
 	public function view_load_pekerjaan($kode_proyek)
 	{
-		if ($this->session->userdata('login_valid')){
+		if ($this->session->userdata('email')){
 		
 		$this->load->model('model_load_pekerjaan');
 		$data['load_pekerjaan']=$this->model_load_pekerjaan->view_load_pekerjaan($kode_proyek);

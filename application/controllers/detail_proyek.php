@@ -27,7 +27,7 @@ class Detail_proyek extends CI_Controller {
 	
 	public function view_detail_proyek($id_pekerjaan)
 	{
-		if ($this->session->userdata('login_valid')){
+		if ($this->session->userdata('email')){
 		
 		$this->load->model('model_detail_proyek');
 		$data['detail_proyek']=$this->model_detail_proyek->view_detail_proyek($id_pekerjaan);
@@ -88,8 +88,25 @@ class Detail_proyek extends CI_Controller {
 	public function upload($id_pekerjaan)
 	{
 		$this->load->model('model_detail_proyek');
+		$nik=$this->session->userdata('nik');
+	//	$this->model_detail_proyek->get_nik2($nik,$id_pekerjaan);
+		$data['nik'] = $this->model_detail_proyek->get_nik2($nik,$id_pekerjaan);
 		$data['id_pekerjaan'] = $id_pekerjaan;
-		$this->load->view('form_upload',$data); //menampilkan halaman upload
+		
+		foreach ($data['nik'] as $row) {
+			$nik12=$row['nik'];
+		}
+		
+		if($nik == $nik12){
+			$this->load->view('form_upload',$data); //menampilkan halaman upload
+	
+			}
+		else{
+			echo "<script> alert('You do not have an access to upload');
+					document.location='http://localhost/web6/proyek/index';
+					</script>";
+		}
+		
 	}
 	
 	public function do_upload()
@@ -123,7 +140,7 @@ class Detail_proyek extends CI_Controller {
  
 	public function view_download($id_laporan)
 	{
-		if ($this->session->userdata('login_valid')){
+		if ($this->session->userdata('email')){
 		
 		$this->load->model('model_detail_proyek');
 		$data['detail_proyek']=$this->model_detail_proyek->view_download($id_laporan);

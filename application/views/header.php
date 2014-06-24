@@ -93,7 +93,7 @@
         <li><a href="<?php echo base_url(); ?>diskusi"><i class="icon-th-large"></i><span>Diskusi</span> </a></li>
         <li><a href="<?php echo base_url(); ?>welcome/charts"><i class="icon-bar-chart"></i><span>Charts</span> </a> </li>
         <li><a href="<?php echo base_url(); ?>user/karyawan"><i class="shortcut-icon icon-user"></i><span>Users Info</span> </a> </li>
-       
+		
       </ul>
     </div>
     <!-- /container --> 

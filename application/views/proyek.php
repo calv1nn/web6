@@ -31,7 +31,7 @@ background-color: grey;
                             <div class="widget-header">
                                 <i class="shortcut-icon icon-user"></i>
                                 <h3>
-                                    List Proyek</h3> <button class="thumbnail" onclick="location.href='<?php echo base_url();?>proyek/add_proyek'">Add</button>
+                                    List Proyek</h3> <?php if($this->session->userdata('pm',TRUE)) { ?> <button class="thumbnail" onclick="location.href='<?php echo base_url();?>proyek/add_proyek'">Add</button> <?php }?>
 					
                             </div>
                             <!-- /widget-header -->
@@ -56,8 +56,10 @@ background-color: grey;
 								<td><?php echo date('d-M-Y',strtotime("$row[start_date]"));?></td>
 								<td><?php echo date('d-M-Y',strtotime("$row[end_date]"));?></td>
 								<td><?php echo $row['progress']?>%</td>
-								<td><?php echo anchor(
-														"proyek/edit_proyek/".$row['kode_proyek'], 'Edit', 'title="Edit a User"');  ?> | <?php echo anchor(
+								<td>
+								<?php if($this->session->userdata('pm',TRUE)) { ?>
+								<?php echo anchor(
+														"proyek/edit_proyek/".$row['kode_proyek'], 'Edit', 'title="Edit a User"');  ?> | <?php }?> <?php echo anchor(
 								"load_pekerjaan/view_load_pekerjaan/".$row['kode_proyek'], 'View Pekerja', 'title="View Pekerja"'); ?></td>
 							</tr>			
 						<?php 

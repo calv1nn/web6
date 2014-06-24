@@ -96,6 +96,16 @@ class Model_detail_proyek extends CI_Model {
 		return $return;
 	}
 	
+	function get_nik2($nik,$id_pekerjaan)
+	{
+		$this->db->select('*');
+		$this->db->from('proyek_detail');
+		//$this->db->where("nik",$nik);
+		$this->db->where("id_pekerjaan",$id_pekerjaan);
+		$result = $this->db->get();
+		return $result->result_array();
+	}
+	
 	public function get_id_pekerjaan($id_pekerjaan)
 	{	
 		$this->db->select('id_pekerjaan');

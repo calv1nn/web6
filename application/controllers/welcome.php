@@ -24,7 +24,7 @@ class Welcome extends CI_Controller {
 	
 	public function index()
 	{
-		if ($this->session->userdata('check_login')){
+		if ($this->session->userdata('email')){
 		$this->load->model('model_karyawan');
 		$data['karyawan']=$this->model_karyawan->view_karyawan();
 		$this->load->view('index',$data);
@@ -45,75 +45,38 @@ class Welcome extends CI_Controller {
 		$this->load->model('model_karyawan');
 		$email=$this->input->post("email");
 		$password=md5($this->input->post("password", TRUE));
-		$status=$this->input->post("jabatan");
+		$jabatan=$this->input->post("jabatan");
+		//print_r($jabatan);die;
 		$status=$this->input->post("status");
-		if ($this->model_karyawan->check_login($email,$password,$jabatan,$status))
-		{
-			$this->session->set_userdata('login_valid', TRUE);
-			$this->session->set_userdata('email',$email);
-			redirect("welcome/index");
+		
+		$data['array']=$this->model_karyawan->check_login($email,$password);
+		
+		//print_r($data['array']);die;
+		foreach ($data['array'] as $row) {
+			$jabatan=$row['jabatan'];
+			$nik=$row['nik'];
 		}
-		else
-		echo "<script> alert('Username & Password do not match');
-					document.location='welcome/login';
-					</script>";
-	}
-	
-	public function check_login_bpm()
-	{
-		$this->load->model('model_karyawan');
-		$email=$this->input->post("email");
-		$password=md5($this->input->post("password", TRUE));
-		$status=$this->input->post("jabatan");
-		$status=$this->input->post("status");
-		if ($this->model_karyawan->check_login($email,$password,$jabatan,$status))
-		{
+		
+			if($jabatan == 'Bussiness Project Manager'){
 			$this->session->set_userdata('bpm', TRUE);
-			$this->session->set_userdata('email',$email);
-			redirect("welcome/index");
-		}
-		else
-		echo "<script> alert('Username & Password do not match');
-					document.location='welcome/login';
-					</script>";
-	}
-	
-	public function check_login_timteknis()
-	{
-		$this->load->model('model_karyawan');
-		$email=$this->input->post("email");
-		$password=md5($this->input->post("password", TRUE));
-		$status=$this->input->post("jabatan");
-		$status=$this->input->post("status");
-		if ($this->model_karyawan->check_login($email,$password,$jabatan,$status))
-		{
+			}
+			elseif($jabatan == 'Tim Teknis'){
 			$this->session->set_userdata('timteknis', TRUE);
-			$this->session->set_userdata('email',$email);
-			redirect("welcome/index");
-		}
-		else
-		echo "<script> alert('Username & Password do not match');
-					document.location='welcome/login';
-					</script>";
-	}
-	
-	public function check_login_pm()
-	{
-		$this->load->model('model_karyawan');
-		$email=$this->input->post("email");
-		$password=md5($this->input->post("password", TRUE));
-		$status=$this->input->post("jabatan");
-		$status=$this->input->post("status");
-		if ($this->model_karyawan->check_login($email,$password,$jabatan,$status))
-		{
+			}
+			elseif($jabatan == 'Project Manager'){
 			$this->session->set_userdata('pm', TRUE);
-			$this->session->set_userdata('email',$email);
-			redirect("welcome/index");
-		}
-		else
-		echo "<script> alert('Username & Password do not match');
+			}
+			else{
+			echo "<script> alert('Username & Password do not match');
 					document.location='welcome/login';
 					</script>";
+			}
+			$this->session->set_userdata('email',$email);
+			$this->session->set_userdata('nik',$nik);
+			redirect("welcome/index");
+		
+		
+		
 	}
 	
 	public function logout()

@@ -4,7 +4,7 @@ class Proyek extends CI_Controller {
 	 
 	public function index()
 	{
-		if ($this->session->userdata('login_valid')){
+		if ($this->session->userdata('email')){
 		$this->load->model('model_proyek');
 		$data['proyek']=$this->model_proyek->view_proyek();
 		$data['edit_proyek']="";
