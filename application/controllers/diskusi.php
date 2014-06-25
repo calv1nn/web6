@@ -24,6 +24,29 @@ class Diskusi extends CI_Controller {
 		}
 		
 	}
+	
+	public function index2()
+	{
+		if ($this->session->userdata('email')){
+		$this->load->model('model_diskusi');
+		$data['daftarartikel']=$this->model_diskusi->daftar(6,0);
+		$this->load->library('pagination');
+		$config['base_url']	=	base_url().'index.php/diskusi/index/';
+		$config['total_rows']= $this->db->count_all('diskusi');
+		$config['per_page']=5;
+		$config['num_link']=20;
+		
+		$this->pagination->initialize($config);
+		$data['hasil'] = $this->db->get('diskusi',$config['per_page'], $this->uri->segment(3));
+		
+		$this->load->view('index',$data);
+		}
+		else
+		{
+		redirect("welcome/login");
+		}
+		
+	}
 
 	public function tambah()
 	{
