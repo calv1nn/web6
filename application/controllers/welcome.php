@@ -20,12 +20,16 @@ class Welcome extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		session_start();
+		$this->load->helper('text');
 		}
 	
 	public function index()
 	{
 		if ($this->session->userdata('email')){
 		$this->load->model('model_karyawan');
+		$this->load->model('model_diskusi');
+		$data['hasil'] = $this->db->get('diskusi',5,0);
+		
 		$data['karyawan']=$this->model_karyawan->view_karyawan();
 		$this->load->view('index',$data);
 		}

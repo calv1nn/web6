@@ -298,7 +298,32 @@ class Model_detail_proyek extends CI_Model {
               );
               $this->db->where('id_pekerjaan',$data['id_pekerjaan']);
               $this->db->update('proyek_detail',$data1);
-		} 
+		
+			//PRoyek
+			
+			
+			$this->db->select('*, sum(progress) as total, count(progress) as jumlah');
+			$this->db->from('proyek_detail');
+			$this->db->where('kode_proyek',$cek->kode_proyek);
+			$query = $this->db->get();
+	
+			if($query->num_rows() > 0){
+			foreach($query->result() as $cek) {
+				}
+			
+			$progres_p = $cek->total / $cek->jumlah ;
+			
+			
+			$data3 = array (
+              
+              'progress' => $progres_p
+              );
+			  //print_r($data3);die();
+			  //print_r($cek->kode_proyek);die;
+              $this->db->where('kode_proyek',$cek->kode_proyek);
+			  $this->db->update('proyek',$data3);
+		}
+		}
       }
 	
 }
