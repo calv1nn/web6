@@ -72,9 +72,9 @@
 			</div>
 		</div>
 		
-        <form class="navbar-search pull-right">
+       <!--  <form class="navbar-search pull-right">
           <input type="text" class="search-query" placeholder="Search">
-        </form>
+        </form> -->
       </div>
       <!--/.nav-collapse --> 
     </div>

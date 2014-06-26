@@ -28,9 +28,11 @@ class Welcome extends CI_Controller {
 		if ($this->session->userdata('email')){
 		$this->load->model('model_karyawan');
 		$this->load->model('model_diskusi');
-		$data['hasil'] = $this->db->get('diskusi',5,0);
+		$this->load->model('model_proyek');
 		
+		$data['hasil'] = $this->model_diskusi->daftar(5,0);
 		$data['karyawan']=$this->model_karyawan->view_karyawan();
+		$data['proyek']=$this->model_proyek->view_proyek();
 		$this->load->view('index',$data);
 		}
 		else

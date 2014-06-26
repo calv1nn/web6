@@ -9,10 +9,13 @@ class Model_diskusi extends CI_Model {
 	public function daftar($limit,$offset)
 	{
 		$this->db->select('judul,isi,id,tanggal');
+		$this->db->order_by("id", "desc");
 		$this->db->from('diskusi');
 		$this->db->limit($limit,$offset);
 		$query = $this->db->get();
+		//print_r($query);die;
 		return $query;
+		
 	}
 	
 	public function view_diskusi()

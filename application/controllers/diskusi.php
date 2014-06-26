@@ -14,8 +14,9 @@ class Diskusi extends CI_Controller {
 		$config['num_link']=20;
 		
 		$this->pagination->initialize($config);
-		$data['hasil'] = $this->db->get('diskusi',$config['per_page'], $this->uri->segment(3));
-		
+		//$data['hasil'] = $this->db->get('diskusi',$config['per_page'], $this->uri->segment(3));
+		$data['hasil'] = $this->model_diskusi->daftar(6,0);
+		//print_r($data['hasil']);die;
 		$this->load->view('list_diskusi',$data);
 		}
 		else

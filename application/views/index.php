@@ -13,19 +13,48 @@
               <div class="widget big-stats-container">
                 <div class="widget-content">
                   <h6 class="bigstats">These are some dummy lines to fill the area.</h6>
-                  <div id="big_stats" class="cf">
-                    <div class="stat"> <i class="icon-anchor"></i> <span class="value">851</span> </div>
-                    <!-- .stat -->
-                    
-                    <div class="stat"> <i class="icon-thumbs-up-alt"></i> <span class="value">423</span> </div>
-                    <!-- .stat -->
-                    
-                    <div class="stat"> <i class="icon-twitter-sign"></i> <span class="value">922</span> </div>
-                    <!-- .stat -->
-                    
-                    <div class="stat"> <i class="icon-bullhorn"></i> <span class="value">25%</span> </div>
-                    <!-- .stat --> 
+                  <?php
+							foreach ($proyek as $row)
+								{
+								//print_r($row['kode_proyek']);die;
+						?>
+				  <?php
+
+				foreach($proyek as $cek) {
+				$end = explode('-', $cek['end_date']);
+				$end_date = $end[2];
+				$end_date1= $end[1];
+				$end_date2= $end[0];
+				
+				date('Y-m-d');
+				$start = explode('-',date('Y-m-d'));
+				$start_date = $start[2];
+				$start_date1= $start[1];
+				$start_date2= $start[0];
+				//print_r(date('Y-m-d'));die;
+				$jd1 = GregorianToJD($end_date1, $end_date, $end_date2);
+				$jd2 = GregorianToJD($start_date1, $start_date, $start_date2);
+				
+				$date_sel = $jd1 - $jd2;
+				//print_r($date_sel);die;
+
+			}
+				?>
+				
+				<div >
+				<?php if (($date_sel <= 3) and ($row['progress']<=80)){ ?>
+                <ul>   
+				<li><a href="#">
+				<?php 
+					echo "Proyek " .(" "). $row['nama_proyek']. (" "). "berakhir dalam 3 hari";
+					}
+				?>
+				   </a></li>
+                          </ul>
                   </div>
+				  <?php 
+								}
+						?>
                 </div>
                 <!-- /widget-content --> 
                 
@@ -132,13 +161,11 @@
             <div class="widget-content">
               <div class="shortcuts"> <a href="<?php echo base_url(); ?>proyek/index" class="shortcut"><i class="shortcut-icon icon-list-alt"></i><span
                                         class="shortcut-label">List Proyek</span> </a>
-										<a href="javascript:;" class="shortcut"><i
-                                            class="shortcut-icon icon-bookmark"></i><span class="shortcut-label">Bookmarks</span> </a>
+										
 											<a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-signal"></i> <span class="shortcut-label">Reports</span> </a>
 											<a href="<?php echo base_url(); ?>diskusi/index"" class="shortcut"> <i class="shortcut-icon icon-comment"></i><span class="shortcut-label">Diskusi</span> </a>
 											<a href="<?php echo base_url(); ?>user/karyawan" class="shortcut"><i class="shortcut-icon icon-user"></i><span class="shortcut-label">Users</span> </a>
-												<a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-file"></i><span class="shortcut-label">Notes</span> </a><a href="javascript:;" class="shortcut"><i class="shortcut-icon icon-picture"></i> <span class="shortcut-label">Photos</span> 
-													</a><a href="javascript:;" class="shortcut"> <i class="shortcut-icon icon-tag"></i><span class="shortcut-label">Tags</span> </a> </div>
+												 </div>
               <!-- /shortcuts --> 
             </div>
             <!-- /widget-content --> 
@@ -157,15 +184,14 @@
               <ul class="news-items">
 			  <?php
 						foreach ($hasil->result() as $row) 
-						
 								{
 								$isi = $row->isi;
-						$row->isi = substr($isi, 0, 50);
+								$row->isi = substr($isi, 0, 50);
 						//print_r($row->isi);die;
 					?>
                 <li>
                   
-                  <div class="news-item-date"> <span class="news-item-day">29</span> <span class="news-item-month">Aug</span> </div>
+                  <div class="news-item-date"> <span class="news-item-day"><?php echo date('d',strtotime($row->tanggal)); ?></span> <span class="news-item-month"><?php echo date('M',strtotime($row->tanggal));?> - <?php echo date('y',strtotime($row->tanggal));?></span> </div>
                   <div class="news-item-detail"> <a href='<?php echo base_url();?>diskusi/view_diskusi/<?php echo $row->id;?>'; > 
 					<?php echo ($row->judul); ?> </a>
                     <p class="news-item-preview"><?php echo ($row->isi); ?> </p>
@@ -228,7 +254,7 @@
             <!-- /widget-content --> 
           </div>
           <!-- /widget --> 
-          ssss
+          
             <!-- /widget-content --> 
           </div>
           <!-- /widget -->
