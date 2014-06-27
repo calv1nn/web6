@@ -21,6 +21,7 @@ background-color: grey;
 }
 </style>
 
+
     <div class="main">
         <div class="main-inner">
             <div class="container">
@@ -32,7 +33,7 @@ background-color: grey;
                                 <i class="shortcut-icon icon-user"></i>
                                 <h3>
                                     List Proyek</h3> <?php if($this->session->userdata('pm',TRUE)) { ?> <button class="thumbnail" onclick="location.href='<?php echo base_url();?>proyek/add_proyek'">Add</button> <?php }?>
-					
+				
                             </div>
                             <!-- /widget-header -->
                             <div class="widget-content">
@@ -55,7 +56,11 @@ background-color: grey;
 								<td><?php echo $row['client']?></td>
 								<td><?php echo date('d-M-Y',strtotime("$row[start_date]"));?></td>
 								<td><?php echo date('d-M-Y',strtotime("$row[end_date]"));?></td>
-								<td><?php echo $row['progress']?>%</td>
+								<td>
+										<div class="progress progress-striped">
+											<div class="bar" style="width: <?php echo $row['progress']?>%;"></div>
+                                        </div> <?php echo $row['progress']?> %
+								</td>
 								<td>
 								<?php if($this->session->userdata('pm',TRUE)) { ?>
 								<?php echo anchor(

@@ -85,6 +85,46 @@ class Welcome extends CI_Controller {
 		
 	}
 	
+	
+	public function changepwd(){
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('opassword','Old Password','required|trim|xss_clean|callback_change');
+		$this->form_validation->set_rules('npassword','New Password','required|trim');
+		$this->form_validation->set_rules('cpassword','Confirm Password','required|trim|matches[npassword]');
+
+		if($this->form_validation->run()!= true)
+		{
+		$this->load->view('change_password');
+
+		}
+		}
+		public function change() // we will load models here to check with database
+		{
+		$sql = $this->db->select("*")->from("karyawan")->where("email",$this->session->userdata('email'))->get();
+
+		foreach ($sql->result() as $my_info) {
+
+		$db_password = $my_info->password;
+		$db_nik = $my_info->nik;
+
+		}
+
+		if(md5($this->input->post("opassword")) == $db_password){
+
+		$fixed_pw = mysql_real_escape_string(md5($this->input->post("npassword")));
+		$update = $this->db->query("Update `karyawan` SET `password`='$fixed_pw' WHERE `nik`='$db_nik'")or die(mysql_error());
+		$this->form_validation->set_message('change','<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert">&times;</a>
+		<strong>Password Updated!</strong></div>');
+		return false;
+
+		}else
+		$this->form_validation->set_message('change','<div class="alert alert-error"><a href="#" class="close" data-dismiss="alert">&times;</a>
+		<strong>Wrong Old Password!</strong> </div>');
+
+		return false;
+
+	}
+	
 	public function logout()
 	{
 		$this->session->sess_destroy();

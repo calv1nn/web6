@@ -6,13 +6,13 @@
         <div class="span6">
           <div class="widget widget-nopad">
             <div class="widget-header"> <i class="icon-list-alt"></i>
-              <h3> Today's Stats</h3>
+              <h3> NOTIFICATIONS</h3>
             </div>
             <!-- /widget-header -->
             <div class="widget-content">
               <div class="widget big-stats-container">
                 <div class="widget-content">
-                  <h6 class="bigstats">These are some dummy lines to fill the area.</h6>
+                 
                   <?php
 							foreach ($proyek as $row)
 								{
@@ -41,16 +41,16 @@
 			}
 				?>
 				
-				<div >
+				
 				<?php if (($date_sel <= 3) and ($row['progress']<=80)){ ?>
-                <ul>   
-				<li><a href="#">
-				<?php 
-					echo "Proyek " .(" "). $row['nama_proyek']. (" "). "berakhir dalam 3 hari";
+                <div class="alert">  
+				<a href="#">
+					 <h6 class=""><?php 
+					echo "Warning Proyek " .(" "). $row['nama_proyek']. (" "). "berakhir dalam 3 hari";
 					}
-				?>
-				   </a></li>
-                          </ul>
+				?><button class="close" data-dismiss="alert" type="button">×</button></h6>
+				
+				   </a>
                   </div>
 				  <?php 
 								}

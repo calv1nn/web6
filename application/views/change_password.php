@@ -1,62 +1,67 @@
-<?php include('header.php'); ?>
+<?php include ('header.php'); ?>
 
 
-    <div class="main">
-        <div class="main-inner">
-            <div class="container">
-                <div class="row">
-                    <div class="span6">
-                        <!-- /widget -->
-                        <div class="widget">
-                            <div class="widget-header">
-                                <i class="icon-bar-chart"></i>
-                                <h3>
-                                    Ganti Password</h3>
-                            </div>
-                            <!-- /widget-header -->
-                            <div class="widget-content">
-                                <div class="widget-content">
-                                <div class="login-fields">
-				
-				<p></p>		
-				<div class="field">
-					<label for="email">Old Password:</label>
-					<input type="text" id="password" name="password" value="" placeholder="password" class="login"/>
-				</div> <!-- /field -->
-				
-				<div class="field">
-					<label for="password">Password:</label>
-					<input type="password" id="password" name="password" value="" placeholder="Password" class="login"/>
-				</div> <!-- /field -->
-				
-				<div class="field">
-					<label for="confirm_password">Confirm Password:</label>
-					<input type="password" id="confirm_password" name="confirm_password" value="" placeholder="Confirm Password" class="login"/>
-				</div> <!-- /field -->
-				
-			</div> <!-- /login-fields -->
+<div class="account-container register">
+	
+	<div class="content clearfix">
+		
+		<form action="#" method="post">
+		
+			<h1>Change Your Password</h1>			
 			
-			<div class="login-actions">
+			<div class="login-fields">
 				
-			
-									
-				<button class="button btn btn-primary btn-large">Ganti</button>
 				
-			</div> <!-- .actions -->
-                                <!-- /bar-chart -->
-                            </div>
-                                <!-- /line-chart -->
-                            </div>
-                            <!-- /widget-content -->
-                        </div>
-                        <!-- /widget -->
-                      
-                <!-- /row -->
-            </div>
-            <!-- /container -->
-        </div>
-        <!-- /main-inner -->
-    </div>
-    <!-- /main -->
+				<?php
 
-	<?php include('footer.php'); ?>
+					echo form_open('welcome/changepwd');
+					echo validation_errors();
+
+					?>
+					<table class="table table-bordered">
+
+					<tbody>
+
+					<tr>
+					<td><small><?php echo "Old Password:";?></small></td>
+					<td><?php echo form_password('opassword');?></td>
+
+					</tr>
+					<tr>
+					<td><small><?php echo "New Password:";?></small></td>
+					<td><?php echo form_password('npassword');?></td>
+
+					</tr>
+					<tr>
+					<td><small><?php echo "Confirm Password:";?></small></td>
+					<td><?php echo form_password('cpassword');?></td>
+
+					</tr>
+					</tbody>
+					</table>
+					<button type="submit" class="btn btn-primary" ><i class=" icon-ok-sign icon-white"></i>&nbsp;Submit</button>
+
+					<?php
+
+					echo form_close();
+
+					?> <!-- .actions -->
+			
+		</form>
+		
+	</div> <!-- /content -->
+	
+</div> <!-- /account-container -->
+
+
+<!-- Text Under Box -->
+<div class="login-extra">
+</div> <!-- /login-extra -->
+
+
+<script src="js/jquery-1.7.2.min.js"></script>
+<script src="js/bootstrap.js"></script>
+
+<script src="js/signin.js"></script>
+
+<?php include ('footer.php'); ?>
