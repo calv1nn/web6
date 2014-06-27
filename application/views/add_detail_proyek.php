@@ -70,11 +70,6 @@
 				</div> 
 				
 				<div class="field">
-					<label for="client">progress:</label>
-					<?php echo form_input("progress",""); ?>
-				</div> <!-- /field -->
-				
-				<div class="field">
 					<label for="nama">Kategori:</label>
 					<?php echo form_dropdown('kategori', $kategori); ?>
 				</div> <!-- /field -->

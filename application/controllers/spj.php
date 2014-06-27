@@ -52,7 +52,7 @@ $data = array(
     array(2,array("Report","12 days","1 Mar '02","13 Mar '02"),
           "2002-03-01","2002-03-13",FF_ARIAL,FS_NORMAL,8)
 );
-    
+    print_r($data);die;
 // Create the bars and add them to the gantt chart
 for($i=0; $i<count($data); ++$i) {
     $bar = new GanttBar($data[$i][0],$data[$i][1],$data[$i][2],$data[$i][3],"[50%]",10);

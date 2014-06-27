@@ -36,7 +36,7 @@ background-color: grey;
 									$nama_proyek = $row2['nama_proyek'];
 								}?>
 								View Proyek <?php echo $row2['nama_proyek'];?> </h3> 
-								<?php if ($this->session->userdata('pm')){ ?>
+								<?php if ($this->session->userdata('pm') or $this->session->userdata('admin',TRUE)){ ?>
 								<button class="thumbnail" onclick="location.href='<?php echo base_url();?>load_pekerjaan/add_load_pekerjaan/<?php echo $row2['kode_proyek'];?>'">Tambah Pekerja</button>
 								<?php }?>
 							</div>

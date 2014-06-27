@@ -57,10 +57,6 @@
 					<?php echo form_input("client",""); ?>
 				</div> <!-- /field -->
 				
-				<div class="field">
-					<label for="nama">STATUS:</label>
-					<?php echo form_input("status",""); ?>
-				</div> <!-- /field -->
 				<?php
 			echo form_submit('mysubmit', 'ADD');
 			echo form_close();	
@@ -80,22 +76,7 @@
 		    </div> <!-- /span6 -->
 	      	
 	      	
-	      	<div class="span6">
-	      		
-	      		<div class="widget">
-							
-					<div class="widget-header">
-						<i class="icon-list-alt"></i>
-						<h3>Another Chart</h3>
-					</div> <!-- /widget-header -->
-					
-					<div class="widget-content">
-						<canvas id="bar-chart" class="chart-holder" height="250" width="538"></canvas>
-					</div> <!-- /widget-content -->
-				
-				</div> <!-- /widget -->
-									
-		      </div> <!-- /span6 -->
+	      
 	      	
 	      </div> <!-- /row -->
 	      

@@ -54,7 +54,7 @@ function doconfirm()
 								<th>Nama</th>
 								<th>Jabatan</th>
 								<th>Status</th>
-								<?php if($this->session->userdata('bpm',TRUE)) { ?>
+								<?php if($this->session->userdata('admin',TRUE)) { ?>
 								<th>Action</th>
 								<?php }?>
 							</tr>
@@ -70,7 +70,7 @@ function doconfirm()
 								<td><?php if($row['status']==1) {echo "Active" ;
 								} else { echo "Inactive" ;
 								}?></td>
-								<?php if($this->session->userdata('bpm',TRUE)) { ?>
+								<?php if($this->session->userdata('admin',TRUE)) { ?>
 								<td><a href="<?php echo site_url ('user/delete_karyawan/'.$row['nik']) ?> " onClick="return doconfirm();" ><button class="btn btn-danger">Delete</button> </a>
 									<a href="<?php echo site_url ('user/edit_karyawan/'.$row['nik']) ?> " ><button class="btn">Edit</button> </a>
 								</td>

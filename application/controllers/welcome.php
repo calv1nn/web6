@@ -72,6 +72,9 @@ class Welcome extends CI_Controller {
 			elseif($jabatan == 'Project Manager'){
 			$this->session->set_userdata('pm', TRUE);
 			}
+			elseif($jabatan == 'Project Manager'){
+			$this->session->set_userdata('admin', TRUE);
+			}
 			else{
 			echo "<script> alert('Username & Password do not match');
 					document.location='welcome/login';

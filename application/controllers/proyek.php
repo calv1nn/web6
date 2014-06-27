@@ -73,6 +73,7 @@ class Proyek extends CI_Controller {
 		$this->load->model('model_proyek');
 		$data['proyek']=$this->model_proyek->view_proyek();
 		$data['edit_proyek']=$this->model_proyek->get_proyek($kode_proyek);
+		//print_r($data);die;
 		$this->load->view('edit_proyek',$data);
 	}
 
@@ -91,10 +92,18 @@ class Proyek extends CI_Controller {
 		redirect("proyek/index");
 	}
 	
-	public function gantt_proyek()
+	public function chart()
+	{
+		$this->load->model('model_proyek');
+		$data['chart'] = $this->model_proyek->view_proyek();
+		$this->gantt_proyek($data['chart']);
+	}
+	
+	public function gantt_proyek($data_chart)
 	{
 		require_once APPPATH.'../assets/jpgraph/src/jpgraph.php';
 		require_once APPPATH.'../assets/jpgraph/src/jpgraph_gantt.php';
+		
 		$graph = new GanttGraph();
 		 
 		$graph->title->Set("Only month & year scale");
@@ -107,8 +116,43 @@ class Proyek extends CI_Controller {
 		 
 		// Explicitely set the date range 
 		// (Autoscaling will of course also work)
-		$graph->SetDateRange('2001-10-06','2002-4-10');
-		 
+		$i = 0;
+		foreach($data_chart as $row) {
+			$graph->SetDateRange($row['start_date'],$row['end_date']);
+			
+			$end = explode('-', $row['end_date']);
+			$end_date = $end[2];
+			$end_date1= $end[1];
+			$end_date2= $end[0];
+
+			
+			$start = explode('-',  $row['start_date']);
+			$start_date = $start[2];
+			$start_date1= $start[1];
+			$start_date2= $start[0];
+
+			$jd1 = GregorianToJD($end_date1, $end_date, $end_date2);
+			$jd2 = GregorianToJD($start_date1, $start_date, $start_date2);
+
+			$date_sel = $jd1 - $jd2 + 1;
+				
+			//$data = array();
+			$data1 = array($i, array($row['nama_proyek'], strval($date_sel), date('d-m-Y',strtotime($row['start_date'])), date('d-m-Y',strtotime($row['end_date']))), 
+			$row['start_date'], date('Y-m-d'),FF_ARIAL,FS_NORMAL,8);
+			$i++;
+			$data[] = $data1;
+		}
+		/* print_r($data_chart);die;
+		// Data for our example activities
+		$data = array(
+					Array(0,Array("Infrastruktur","111","03-06-2014","21-10-2014" )
+					,"2014-06-03","2014-06-27",FF_ARIAL,FS_NORMAL,8)
+				); */
+		/* 	$data = array(
+				array(0,array("Infrastruktur Babi","102","03-06-2014","21-10-2014")
+					  , "2014-06-03","2014-06-27",FF_ARIAL,FS_NORMAL,8)
+);
+		print_r($data); */ 
 		// Display month and year scale with the gridlines
 		$graph->ShowHeaders(GANTT_HMONTH | GANTT_HYEAR);
 		$graph->scale->month->grid->SetColor('gray');
@@ -121,24 +165,16 @@ class Proyek extends CI_Controller {
 		 
 		// For the titles we also add a minimum width of 100 pixels for the Task name column
 		$graph->scale->actinfo->SetColTitles(
-			array('Name','Duration','Start','Finish'),array(100));
+			array('Projek','Duration','Start','Finish'),array(100));
 		$graph->scale->actinfo->SetBackgroundColor('green:0.5@0.5');
 		$graph->scale->actinfo->SetFont(FF_ARIAL,FS_NORMAL,10);
 		$graph->scale->actinfo->vgrid->SetStyle('solid');
 		$graph->scale->actinfo->vgrid->SetColor('gray');
 		 
 		// Data for our example activities
-		$data = array(
-			array(0,array("Pre-aa","102 days","23 Nov '01","1 Mar '02")
-				  , "2001-11-23","2002-01-1",FF_ARIAL,FS_NORMAL,8),
-			array(1,array("Prototype","21 days","26 Oct '01","16 Nov '01"),
-				  "2001-10-26","2001-11-16",FF_ARIAL,FS_NORMAL,8),
-			array(2,array("Report","12 days","1 Mar '02","13 Mar '02"),
-				  "2002-03-01","2002-03-13",FF_ARIAL,FS_NORMAL,8)
-		);
-			
-		// Create the bars and add them to the gantt chart
 		
+		// Create the bars and add them to the gantt chart
+		 //print_r($data);die;
 		for($i=0; $i<count($data); ++$i) {
 			$bar = new GanttBar($data[$i][0],$data[$i][1],$data[$i][2],$data[$i][3],"[20%]",10);
 			if( count($data[$i])>4 )

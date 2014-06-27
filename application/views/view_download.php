@@ -61,7 +61,7 @@
 				<td><a href="<?php echo site_url('detail_proyek/download/'.$row['id_laporan']); ?>">
 				<input type="button" value="Download" class="btn-info2"/> </a>
 				</td>
-				<?php if($this->session->userdata('pm',TRUE)) { ?>
+				<?php if($this->session->userdata('pm',TRUE) or $this->session->userdata('admin',TRUE)) { ?>
 				<td><?php
 				echo form_submit('mysubmit', 'Approve','class="btn btn-success"');
 				echo form_close();?> <?php echo form_close();?>	</td>
@@ -73,7 +73,7 @@
 				<td style="display:none"><?php echo $row['id_laporan']?></td>
                 <td style="display:none"><?php echo $row['nama_file']?></td>
                 <td style="display:none"><?php echo $row['status_laporan']?> </td>
-			<?php if($this->session->userdata('pm',TRUE)) { ?>
+			<?php if($this->session->userdata('pm',TRUE) or $this->session->userdata('admin',TRUE)) { ?>
 			<td>
 				<?php
 				echo form_submit('mysubmit', 'Reject','class="btn btn-danger"');

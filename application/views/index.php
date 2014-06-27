@@ -12,12 +12,7 @@
             <div class="widget-content">
               <div class="widget big-stats-container">
                 <div class="widget-content">
-                 
-                  <?php
-							foreach ($proyek as $row)
-								{
-								//print_r($row['kode_proyek']);die;
-						?>
+                  
 				  <?php
 
 				foreach($proyek as $cek) {
@@ -25,7 +20,7 @@
 				$end_date = $end[2];
 				$end_date1= $end[1];
 				$end_date2= $end[0];
-				
+
 				date('Y-m-d');
 				$start = explode('-',date('Y-m-d'));
 				$start_date = $start[2];
@@ -34,122 +29,29 @@
 				//print_r(date('Y-m-d'));die;
 				$jd1 = GregorianToJD($end_date1, $end_date, $end_date2);
 				$jd2 = GregorianToJD($start_date1, $start_date, $start_date2);
-				
-				$date_sel = $jd1 - $jd2;
-				//print_r($date_sel);die;
 
-			}
-				?>
+				$date_sel = $jd1 - $jd2;
+				
+				if ($date_sel <= 3 and $cek['progress']<=80){
+			?>	
+				<li class="alert"><a href="#">
+					<?php 
+						echo "Proyek " .(" "). $cek['nama_proyek']. (" "). "berakhir dalam" . (" ").$date_sel. (" "). "hari";
+					?>
+				</a><button class="close" data-dismiss="alert" type="button">×</button>
+				   </li>
+			<?php }	
+			}?>
 				
 				
-				<?php if (($date_sel <= 3) and ($row['progress']<=80)){ ?>
-                <div class="alert">  
-				<a href="#">
-					 <h6 class=""><?php 
-					echo "Warning Proyek " .(" "). $row['nama_proyek']. (" "). "berakhir dalam 3 hari";
-					}
-				?><button class="close" data-dismiss="alert" type="button">×</button></h6>
-				
-				   </a>
-                  </div>
-				  <?php 
-								}
-						?>
                 </div>
                 <!-- /widget-content --> 
-                
-              </div>
-            </div>
+                </div>
+        
           </div>
-          <!-- /widget -->
-          <div class="widget widget-nopad">
-            <div class="widget-header"> <i class="icon-list-alt"></i>
-              <h3> Recent News</h3>
-            </div>
-            <!-- /widget-header -->
-            <div class="widget-content">
-              <div id='calendar'>
-              </div>
-            </div>
-            <!-- /widget-content --> 
           </div>
-          <!-- /widget -->
-          <div class="widget">
-            <div class="widget-header"> <i class="icon-file"></i>
-              <h3> Content</h3>
-            </div>
-            <!-- /widget-header -->
-            <div class="widget-content">
-              <ul class="messages_layout">
-                <li class="from_user left"> <a href="#" class="avatar"><img src="<?php echo base_url(); ?>assets/img/message_avatar1.png"/></a>
-                  <div class="message_wrap"> <span class="arrow"></span>
-                    <div class="info"> <a class="name">John Smith</a> <span class="time">1 hour ago</span>
-                      <div class="options_arrow">
-                        <div class="dropdown pull-right"> <a class="dropdown-toggle " id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#"> <i class=" icon-caret-down"></i> </a>
-                          <ul class="dropdown-menu " role="menu" aria-labelledby="dLabel">
-                            <li><a href="#"><i class=" icon-share-alt icon-large"></i> Reply</a></li>
-                            <li><a href="#"><i class=" icon-trash icon-large"></i> Delete</a></li>
-                            <li><a href="#"><i class=" icon-share icon-large"></i> Share</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="text"> As an interesting side note, as a head without a body, I envy the dead. There's one way and only one way to determine if an animal is intelligent. Dissect its brain! Man, I'm sore all over. I feel like I just went ten rounds with mighty Thor. </div>
-                  </div>
-                </li>
-                <li class="by_myself right"> <a href="#" class="avatar"><img src="<?php echo base_url(); ?>assets/img/message_avatar2.png"/></a>
-                  <div class="message_wrap"> <span class="arrow"></span>
-                    <div class="info"> <a class="name">Bender (myself) </a> <span class="time">4 hours ago</span>
-                      <div class="options_arrow">
-                        <div class="dropdown pull-right"> <a class="dropdown-toggle " id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#"> <i class=" icon-caret-down"></i> </a>
-                          <ul class="dropdown-menu " role="menu" aria-labelledby="dLabel">
-                            <li><a href="#"><i class=" icon-share-alt icon-large"></i> Reply</a></li>
-                            <li><a href="#"><i class=" icon-trash icon-large"></i> Delete</a></li>
-                            <li><a href="#"><i class=" icon-share icon-large"></i> Share</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="text"> All I want is to be a monkey of moderate intelligence who wears a suit… that's why I'm transferring to business school! I had more, but you go ahead. Man, I'm sore all over. I feel like I just went ten rounds with mighty Thor. File not found. </div>
-                  </div>
-                </li>
-                <li class="from_user left"> <a href="#" class="avatar"><img src="<?php echo base_url(); ?>assets/img/message_avatar1.png"/></a>
-                  <div class="message_wrap"> <span class="arrow"></span>
-                    <div class="info"> <a class="name">Celeste Holm </a> <span class="time">1 Day ago</span>
-                      <div class="options_arrow">
-                        <div class="dropdown pull-right"> <a class="dropdown-toggle " id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#"> <i class=" icon-caret-down"></i> </a>
-                          <ul class="dropdown-menu " role="menu" aria-labelledby="dLabel">
-                            <li><a href="#"><i class=" icon-share-alt icon-large"></i> Reply</a></li>
-                            <li><a href="#"><i class=" icon-trash icon-large"></i> Delete</a></li>
-                            <li><a href="#"><i class=" icon-share icon-large"></i> Share</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="text"> And I'd do it again! And perhaps a third time! But that would be it. Are you crazy? I can't swallow that. And I'm his friend Jesus. No, I'm Santa Claus! And from now on you're all named Bender Jr. </div>
-                  </div>
-                </li>
-                <li class="from_user left"> <a href="#" class="avatar"><img src="<?php echo base_url(); ?>assets/img/message_avatar2.png"/></a>
-                  <div class="message_wrap"> <span class="arrow"></span>
-                    <div class="info"> <a class="name">Mark Jobs </a> <span class="time">2 Days ago</span>
-                      <div class="options_arrow">
-                        <div class="dropdown pull-right"> <a class="dropdown-toggle " id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#"> <i class=" icon-caret-down"></i> </a>
-                          <ul class="dropdown-menu " role="menu" aria-labelledby="dLabel">
-                            <li><a href="#"><i class=" icon-share-alt icon-large"></i> Reply</a></li>
-                            <li><a href="#"><i class=" icon-trash icon-large"></i> Delete</a></li>
-                            <li><a href="#"><i class=" icon-share icon-large"></i> Share</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="text"> That's the ONLY thing about being a slave. Now, now. Perfectly symmetrical violence never solved anything. Uh, is the puppy mechanical in any way? As an interesting side note, as a head without a body, I envy the dead. </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <!-- /widget-content --> 
-          </div>
-          <!-- /widget --> 
+         
+          
         </div>
         <!-- /span6 -->
         <div class="span6">
@@ -207,53 +109,7 @@
             <!-- /widget-content --> 
           </div>
           <!-- /widget -->
-          <div class="widget widget-table action-table">
-            <div class="widget-header"> <i class="icon-th-list"></i>
-              <h3>A Table Example</h3>
-            </div>
-            <!-- /widget-header -->
-            <div class="widget-content">
-              <table class="table table-striped table-bordered">
-                <thead>
-                  <tr>
-                    <th> Free Resource </th>
-                    <th> Download</th>
-                    <th class="td-actions"> </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td> Fresh Web Development Resources </td>
-                    <td> http://www.egrappler.com/ </td>
-                    <td class="td-actions"><a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
-                  </tr>
-                  <tr>
-                    <td> Fresh Web Development Resources </td>
-                    <td> http://www.egrappler.com/ </td>
-                    <td class="td-actions"><a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
-                  </tr>
-                  <tr>
-                    <td> Fresh Web Development Resources </td>
-                    <td> http://www.egrappler.com/ </td>
-                    <td class="td-actions"><a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
-                  </tr>
-                  <tr>
-                    <td> Fresh Web Development Resources </td>
-                    <td> http://www.egrappler.com/ </td>
-                    <td class="td-actions"><a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
-                  </tr>
-                  <tr>
-                    <td> Fresh Web Development Resources </td>
-                    <td> http://www.egrappler.com/ </td>
-                    <td class="td-actions"><a href="javascript:;" class="btn btn-small btn-success"><i class="btn-icon-only icon-ok"> </i></a><a href="javascript:;" class="btn btn-danger btn-small"><i class="btn-icon-only icon-remove"> </i></a></td>
-                  </tr>
-                
-                </tbody>
-              </table>
-            </div>
-            <!-- /widget-content --> 
-          </div>
-          <!-- /widget --> 
+          
           
             <!-- /widget-content --> 
           </div>

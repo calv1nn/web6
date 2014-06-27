@@ -96,6 +96,21 @@ class Model_detail_proyek extends CI_Model {
 		return $return;
 	}
 	
+	function get_nik3($kode_proyek)
+	{
+		$this->db->from('load_pekerjaan');
+		$this->db->join('karyawan','load_pekerjaan.nik=karyawan.nik');
+		$this->db->where("kode_proyek",$kode_proyek);
+		$result = $this->db->get();
+		$return = array();
+		if($result->num_rows() > 0) {
+			foreach($result->result_array() as $row) {
+				$return[$row['nik']] = $row['nama_karyawan'];
+			}
+		}
+		return $return;
+	}
+	
 	function get_nik2($nik,$id_pekerjaan)
 	{
 		$this->db->select('*');

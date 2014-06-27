@@ -19,14 +19,13 @@
                             <div class="widget-header">
                                 <i class="shortcut-icon icon-user"></i>
 								<h3>
-                                    Edit User</h3>
+                                    Edit Proyek</h3>
                             </div>
                             <!-- /widget-header -->
                             <div class="widget-content">
                    
 						<div class="login-fields">
 				
-				<p>Edit account:</p>
 				
 					<?php echo form_open("proyek/update_proyek"); ?>
 				<div class="field">
@@ -42,7 +41,7 @@
 				<div class="field">
 					<label for="start_date">Start Date:</label>
 					<?php echo form_error('start_date'); ?>
-					<a href="javascript:NewCssCal('start_date','yyyymmdd')"><input type="text" name="start_date" class="tgl1" id="start_date" size="20" value="<?php $edit_proyek[0]['start_date'];?>" /> 
+					<a href="javascript:NewCssCal('start_date','yyyymmdd')"><input type="text" name="start_date" class="tgl1" id="start_date" size="20" value="<?php echo $edit_proyek[0]['start_date'];?>" /> 
 					<img src="<?php echo base_url(); ?>assets/datepicker/images/cal.gif" width="16" height="16" alt="Pilih tanggal" />
 					</a>
 				</div> <!-- /field -->
@@ -50,7 +49,7 @@
 				<div class="field">
 					<label for="end_date">End Date:</label>
 					<?php echo form_error('end_date'); ?>
-					<a href="javascript:NewCssCal('end_date','yyyymmdd')"><input type="text" name="end_date" class="tgl1" id="end_date" size="20" /> 
+					<a href="javascript:NewCssCal('end_date','yyyymmdd')"><input type="text" name="end_date" class="tgl1" id="end_date" size="20" value="<?php echo $edit_proyek[0]['end_date'];?>" /> 
 					<img src="<?php echo base_url(); ?>assets/datepicker/images/cal.gif" width="16" height="16" alt="Pilih tanggal" />
 					</a>
 				</div> 

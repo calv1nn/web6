@@ -32,7 +32,7 @@ background-color: grey;
                             <div class="widget-header">
                                 <i class="shortcut-icon icon-user"></i>
                                 <h3>
-                                    List Proyek</h3> <?php if($this->session->userdata('pm',TRUE)) { ?> <button class="thumbnail" onclick="location.href='<?php echo base_url();?>proyek/add_proyek'">Add</button> <?php }?>
+                                    List Proyek</h3> <?php if($this->session->userdata('pm',TRUE) or $this->session->userdata('admin',TRUE)) { ?> <button class="thumbnail" onclick="location.href='<?php echo base_url();?>proyek/add_proyek'">Add</button> <?php }?>
 				
                             </div>
                             <!-- /widget-header -->
@@ -62,9 +62,9 @@ background-color: grey;
                                         </div> <?php echo $row['progress']?> %
 								</td>
 								<td>
-								<?php if($this->session->userdata('pm',TRUE)) { ?>
+								<?php if($this->session->userdata('pm',TRUE) or $this->session->userdata('admin',TRUE)) { ?>
 								<?php echo anchor(
-														"proyek/edit_proyek/".$row['kode_proyek'], 'Edit', 'title="Edit a User"');  ?> | <?php }?> <?php echo anchor(
+														"proyek/edit_proyek/".$row['kode_proyek'], 'Edit', 'title="Edit Proyek"');  ?> | <?php }?> <?php echo anchor(
 								"load_pekerjaan/view_load_pekerjaan/".$row['kode_proyek'], 'View Pekerja', 'title="View Pekerja"'); ?></td>
 							</tr>			
 						<?php 
@@ -84,7 +84,8 @@ background-color: grey;
                             </div>
                             <!-- /widget-header -->
                             <div class="widget-content">
-                                <img src="<?php echo base_url();?>proyek/gantt_proyek"/>
+                                <!--<img src="<?php echo base_url();?>proyek/gantt_proyek"/>-->
+								<?php include('chart.php'); ?>
                                 <!-- /pie-chart -->
                             </div>
                             <!-- /widget-content -->
@@ -95,20 +96,7 @@ background-color: grey;
                   
                         </div>
                         <!-- /widget -->
-                        <div class="widget">
-                            <div class="widget-header">
-                                <i class="icon-bar-chart"></i>
-                                <h3>
-                                    A Chart</h3>
-                            </div>
-                            <!-- /widget-header -->
-                            <div class="widget-content">
-                                <canvas id="line-chart" class="chart-holder" width="538" height="250">
-                                </canvas>
-                                <!-- /-chart -->
-                            </div>
-                            <!-- /widget-content -->
-                        </div>
+                       
                         <!-- /widget -->
                     </div>
                     <!-- /span6 -->
