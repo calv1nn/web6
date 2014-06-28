@@ -42,7 +42,7 @@ function doconfirm()
                             <div class="widget-header">
                                 <i class="shortcut-icon icon-user"></i>
                                 <h3>
-                                    List Karyawan</h3> <?php if($this->session->userdata('bpm',TRUE)) { ?> <button class="thumbnail" onclick="location.href='<?php echo base_url();?>user/add_karyawan'">Add</button> <?php } ?>
+                                    List Karyawan</h3> <?php if($this->session->userdata('admin',TRUE)) { ?> <button class="thumbnail" onclick="location.href='<?php echo base_url();?>user/add_karyawan'">Add</button> <?php } ?>
 					
                             </div>
                             <!-- /widget-header -->
@@ -85,40 +85,14 @@ function doconfirm()
                             <!-- /widget-content -->
                         </div>
                         <!-- /widget -->
-                        <div class="widget">
-                            <div class="widget-header">
-                                <i class="icon-bar-chart"></i>
-                                <h3>
-                                    Pie Chart</h3>
-                            </div>
-                            <!-- /widget-header -->
-                            <div class="widget-content">
-                                <canvas id="pie-chart" class="chart-holder" width="538" height="250">
-                                </canvas>
-                                <!-- /pie-chart -->
-                            </div>
-                            <!-- /widget-content -->
-                        </div>
+                        
                         <!-- /widget -->
                     </div>
                     <!-- /span6 -->
                   
                         </div>
                         <!-- /widget -->
-                        <div class="widget">
-                            <div class="widget-header">
-                                <i class="icon-bar-chart"></i>
-                                <h3>
-                                    A Chart</h3>
-                            </div>
-                            <!-- /widget-header -->
-                            <div class="widget-content">
-                                <canvas id="line-chart" class="chart-holder" width="538" height="250">
-                                </canvas>
-                                <!-- /-chart -->
-                            </div>
-                            <!-- /widget-content -->
-                        </div>
+                        
                         <!-- /widget -->
                     </div>
                     <!-- /span6 -->

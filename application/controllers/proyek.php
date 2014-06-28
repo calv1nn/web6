@@ -65,7 +65,6 @@ class Proyek extends CI_Controller {
 		$this->model_proyek->insert_proyek($kode_proyek,$nama_proyek,$start_date,$end_date,$client,$progress);
 		redirect("proyek");
 	   }
-	   
 	}
 	
 	public function edit_proyek($kode_proyek)
@@ -106,7 +105,7 @@ class Proyek extends CI_Controller {
 		
 		$graph = new GanttGraph();
 		 
-		$graph->title->Set("Only month & year scale");
+		$graph->title->Set("Gantt Chart");
 		// Setup some "very" nonstandard colors
 		$graph->SetMarginColor('lightgreen@0.8');
 		$graph->SetBox(true,'yellow:0.6',2);
@@ -142,17 +141,7 @@ class Proyek extends CI_Controller {
 			$i++;
 			$data[] = $data1;
 		}
-		/* print_r($data_chart);die;
-		// Data for our example activities
-		$data = array(
-					Array(0,Array("Infrastruktur","111","03-06-2014","21-10-2014" )
-					,"2014-06-03","2014-06-27",FF_ARIAL,FS_NORMAL,8)
-				); */
-		/* 	$data = array(
-				array(0,array("Infrastruktur Babi","102","03-06-2014","21-10-2014")
-					  , "2014-06-03","2014-06-27",FF_ARIAL,FS_NORMAL,8)
-);
-		print_r($data); */ 
+		
 		// Display month and year scale with the gridlines
 		$graph->ShowHeaders(GANTT_HMONTH | GANTT_HYEAR);
 		$graph->scale->month->grid->SetColor('gray');

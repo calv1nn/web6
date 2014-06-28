@@ -84,9 +84,8 @@ background-color: grey;
                             </div>
                             <!-- /widget-header -->
                             <div class="widget-content">
-                                <!--<img src="<?php echo base_url();?>proyek/gantt_proyek"/>-->
-								<?php include('chart.php'); ?>
-                                <!-- /pie-chart -->
+                                <img src="<?php echo base_url();?>proyek/chart"/>
+								<!-- /pie-chart -->
                             </div>
                             <!-- /widget-content -->
                         </div>

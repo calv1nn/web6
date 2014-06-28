@@ -81,7 +81,6 @@ class User extends CI_Controller {
 		$this->model_karyawan->insert_karyawan($nik,$email,$password,$nama_karyawan,$jabatan,$status);
 		redirect("user/karyawan");
 	   }
-		
 	}
 
 	public function edit_karyawan($nik)

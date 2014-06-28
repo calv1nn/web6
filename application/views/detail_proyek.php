@@ -111,7 +111,7 @@ background-color: grey;
                             </div>
                             <!-- /widget-header -->
                             <div class="widget-content">
-                                <img src="<?php echo base_url();?>proyek/gantt_proyek"/>
+                                <img src="<?php echo base_url();?>proyek/chart"/>
                                 <!-- /pie-chart -->
                             </div>
                             <!-- /widget-content -->
@@ -122,22 +122,7 @@ background-color: grey;
                   
                         </div>
                         <!-- /widget -->
-                        <div class="widget">
-                            <div class="widget-header">
-                                <i class="icon-bar-chart"></i>
-                                <h3>
-                                    A Chart</h3>
-                                  
-                            </div>
-                            <!-- /widget-header -->
-                            <div class="widget-content">
-                                <canvas id="line-chart" class="chart-holder" width="538" height="250">
-                                </canvas>
-                                <!-- /-chart -->
-                            </div>
-                            <!-- /widget-content -->
-                        </div>
-                        <!-- /widget -->
+                        
                     </div>
                     <!-- /span6 -->
                 </div>

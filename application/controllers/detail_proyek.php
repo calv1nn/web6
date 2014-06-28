@@ -96,17 +96,14 @@ class Detail_proyek extends CI_Controller {
 		foreach ($data['nik'] as $row) {
 			$nik12=$row['nik'];
 		}
-		
 		if($nik == $nik12){
 			$this->load->view('form_upload',$data); //menampilkan halaman upload
-	
-			}
+							}
 		else{
 			echo "<script> alert('You do not have an access to upload');
 					document.location='http://localhost/web6/proyek/index';
 					</script>";
 		}
-		
 	}
 	
 	public function do_upload()
@@ -130,8 +127,8 @@ class Detail_proyek extends CI_Controller {
 			//redirect('upload_file/view');
 			redirect (detail_proyek/upload/$row['id_pekerjaan']);
 		}
-		
 	}
+	
  public function view()
  {
  $data['laporan'] = $this->crud->show('laporan');
@@ -192,6 +189,92 @@ class Detail_proyek extends CI_Controller {
 		force_download($nama,$data);
 	}
 
+	public function chart($id_pekerjaan)
+	{
+		$this->load->model('model_detail_proyek');
+		$data['chart'] = $this->model_detail_proyek->view_detail_proyek();
+		$this->gantt_proyek($data['chart']);
+	}
 	
+	public function gantt_proyek($data_chart)
+	{
+		require_once APPPATH.'../assets/jpgraph/src/jpgraph.php';
+		require_once APPPATH.'../assets/jpgraph/src/jpgraph_gantt.php';
+		
+		$graph = new GanttGraph();
+		 
+		$graph->title->Set("Gantt Chart");
+		// Setup some "very" nonstandard colors
+		$graph->SetMarginColor('lightgreen@0.8');
+		$graph->SetBox(true,'yellow:0.6',2);
+		$graph->SetFrame(true,'darkgreen',4);
+		$graph->scale->divider->SetColor('yellow:0.6');
+		$graph->scale->dividerh->SetColor('yellow:0.6');
+		 
+		// Explicitely set the date range 
+		// (Autoscaling will of course also work)
+		$i = 0;
+		foreach($data_chart as $row) {
+			$graph->SetDateRange($row['start_date'],$row['end_date']);
+			
+			$end = explode('-', $row['end_date']);
+			$end_date = $end[2];
+			$end_date1= $end[1];
+			$end_date2= $end[0];
+
+			
+			$start = explode('-',  $row['start_date']);
+			$start_date = $start[2];
+			$start_date1= $start[1];
+			$start_date2= $start[0];
+
+			$jd1 = GregorianToJD($end_date1, $end_date, $end_date2);
+			$jd2 = GregorianToJD($start_date1, $start_date, $start_date2);
+
+			$date_sel = $jd1 - $jd2 + 1;
+				
+			//$data = array();
+			$data1 = array($i, array($row['nama_pekerjaan'], strval($date_sel), date('d-m-Y',strtotime($row['start_date'])), date('d-m-Y',strtotime($row['end_date']))), 
+			$row['start_date'], date('Y-m-d'),FF_ARIAL,FS_NORMAL,8);
+			$i++;
+			$data[] = $data1;
+		}
+		
+		// Display month and year scale with the gridlines
+		$graph->ShowHeaders(GANTT_HMONTH | GANTT_HYEAR);
+		$graph->scale->month->grid->SetColor('gray');
+		$graph->scale->month->grid->Show(true);
+		$graph->scale->year->grid->SetColor('gray');
+		$graph->scale->year->grid->Show(true);
+		 
+		 
+		// Setup activity info
+		 
+		// For the titles we also add a minimum width of 100 pixels for the Task name column
+		$graph->scale->actinfo->SetColTitles(
+			array('Projek','Duration','Start','Finish'),array(100));
+		$graph->scale->actinfo->SetBackgroundColor('green:0.5@0.5');
+		$graph->scale->actinfo->SetFont(FF_ARIAL,FS_NORMAL,10);
+		$graph->scale->actinfo->vgrid->SetStyle('solid');
+		$graph->scale->actinfo->vgrid->SetColor('gray');
+		 
+		// Data for our example activities
+		
+		// Create the bars and add them to the gantt chart
+		 //print_r($data);die;
+		for($i=0; $i<count($data); ++$i) {
+			$bar = new GanttBar($data[$i][0],$data[$i][1],$data[$i][2],$data[$i][3],"[20%]",10);
+			if( count($data[$i])>4 )
+				$bar->title->SetFont($data[$i][4],$data[$i][5],$data[$i][6]);
+			$bar->SetPattern(BAND_RDIAG,"yellow");
+			$bar->SetFillColor("gray");
+			$bar->progress->Set(0.2);
+			$bar->progress->SetPattern(GANTT_SOLID,"darkgreen");
+			$graph->Add($bar);
+		}
+ 
+		// Display the graph
+		$graph->Stroke();
+	}
 	
 }
