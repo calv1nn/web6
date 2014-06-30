@@ -32,7 +32,7 @@ background-color: grey;
                             <div class="widget-header">
                                 <i class="shortcut-icon icon-user"></i>
                                 <h3>
-                                    List Proyek</h3> <?php if($this->session->userdata('pm',TRUE) or $this->session->userdata('admin',TRUE)) { ?> <button class="thumbnail" onclick="location.href='<?php echo base_url();?>proyek/add_proyek'">Add</button> <?php }?>
+                                    List Proyek</h3> <?php if($this->session->userdata('pm',TRUE)) { ?> <button class="thumbnail" onclick="location.href='<?php echo base_url();?>proyek/add_proyek'">Add</button> <?php }?>
 				
                             </div>
                             <!-- /widget-header -->
@@ -62,7 +62,7 @@ background-color: grey;
                                         </div> <?php echo $row['progress']?> %
 								</td>
 								<td>
-								<?php if($this->session->userdata('pm',TRUE) or $this->session->userdata('admin',TRUE)) { ?>
+								<?php if($this->session->userdata('pm',TRUE)) { ?>
 								<?php echo anchor(
 														"proyek/edit_proyek/".$row['kode_proyek'], 'Edit', 'title="Edit Proyek"');  ?> | <?php }?> <?php echo anchor(
 								"load_pekerjaan/view_load_pekerjaan/".$row['kode_proyek'], 'View Pekerja', 'title="View Pekerja"'); ?></td>
@@ -80,7 +80,7 @@ background-color: grey;
                             <div class="widget-header">
                                 <i class="icon-bar-chart"></i>
                                 <h3>
-                                    Pie Chart</h3>
+                                    Chart</h3>
                             </div>
                             <!-- /widget-header -->
                             <div class="widget-content">

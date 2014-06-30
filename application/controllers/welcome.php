@@ -163,6 +163,51 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('change_password');
 	}
+	
+		public function upload()
+	{
+		$this->load->view('form_upload_template', array('error' => ' ' )); //menampilkan halaman upload
+	}
+	
+		public function do_upload()
+	{
+		//$this->load->library('upload');
+		$config['upload_path'] = APPPATH .'../assets/upload/'; //lokasi folder yang akan digunakan untuk menyimpan file
+		$config['allowed_types'] = 'xlsx';
+		$config['overwrite'] = TRUE;
+		//$config['client_name'] = 'format_laporan.xlsx';
+		//$config['file_name'] = url_title($this->input->post('file_upload'));
+		
+		$config['file_name'] = 'format_laporan.xlsx';
+		//$config['overwrite'] = false;
+
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+		
+
+		if( !$this->upload->do_upload('file_upload'))
+		{
+			$error = array('error' => $this->upload->display_errors());
+
+			$this->load->view('form_upload_template', $error);
+		}
+		else
+		{
+			$data = array('upload_data' => $this->upload->data());
+
+			redirect('welcome/index');
+		}
+	}
+
+	public function download()
+	{
+		$this->load->helper('download'); //jika sudah diaktifkan di autoload, maka tidak perlu di tulis kembali
+		$name='format_laporan.xlsx';
+		$data = file_get_contents(base_url()."assets/upload/format_laporan.xlsx"); // letak file pada aplikasi kita
+		//print_r($nama); die();
+		force_download($name,$data);
+	}
+	
 }
 
 /* End of file welcome.php */

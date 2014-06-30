@@ -43,20 +43,17 @@ background-color: grey;
 					
 					</div>
 					</div> <!-- /widget-content -->
-					<div class="widget-header">
 					<?php foreach($view_balasan->result() as $row1): ?>
+					
+					<div class="widget-header">
 					<h3>Reply From <?php echo $row1->penulis; ?> | <?php echo date ('d-M-Y',strtotime($row1->tanggal_balasan)); ?> </h3>
 					</div>
 					<div class="widget-content">
 					
 					
-					<?php print_r($row1->isi);?>
-					
-					<div><font size=4> 
-					</font></div>
-					
-					<?php endforeach; ?>
+					<?php echo($row1->isi);?>
 					</div>
+					<?php endforeach; ?>
 				</div> <!-- /widget -->					
 				
 		    </div> <!-- /span12 -->     	

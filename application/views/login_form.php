@@ -105,7 +105,7 @@
 
 
 <div class="login-extra">
-	<a href="#">Reset Password</a>
+<!-- 	<a href="#">Reset Password</a> -->
 </div> <!-- /login-extra -->
 
 

@@ -36,7 +36,7 @@ background-color: grey;
 									$nama_proyek = $row2['nama_proyek'];
 								}?>
 								List Proyek <?php echo $row2['nama_proyek'];?> </h3> 
-								<?php if($this->session->userdata('pm',TRUE) or $this->session->userdata('admin',TRUE)) { ?>
+								<?php if($this->session->userdata('pm',TRUE)) { ?>
 								<button class="thumbnail" onclick="location.href='<?php echo base_url();?>detail_proyek/add_detail_proyek/<?php echo $row2['kode_proyek'];?>'">Add</button>
 								<?php }?>
 							</div>
@@ -84,10 +84,10 @@ background-color: grey;
 -->
 								<td><?php echo $row['kategori']?></td>
 								<td>
-								<?php if($this->session->userdata('email',TRUE) or $this->session->userdata('admin',TRUE)) { ?>
+								<?php if($this->session->userdata('email',TRUE)) { ?>
 								<?php echo anchor(
 								"detail_proyek/upload/".$row['id_pekerjaan'], 'Upload', 'title="Upload Laporan"'); ?> |<?php }?> <?php echo anchor(
-								"detail_proyek/view_download/".$row['id_pekerjaan'], 'Laporan', 'title="Upload Laporan"'); ?>
+								"detail_proyek/view_download/".$row['id_pekerjaan'], 'View Laporan', 'title="Upload Laporan"'); ?>
 								</td>
 							</tr>			
 						<?php 
@@ -111,7 +111,7 @@ background-color: grey;
                             </div>
                             <!-- /widget-header -->
                             <div class="widget-content">
-                                <img src="<?php echo base_url();?>proyek/chart"/>
+                                <img src="<?php echo base_url();?>detail_proyek/chart"/>
                                 <!-- /pie-chart -->
                             </div>
                             <!-- /widget-content -->

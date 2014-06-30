@@ -35,6 +35,8 @@ class Detail_proyek extends CI_Controller {
 		$data['nama_proyek']=$this->model_detail_proyek->get_nama_proyek($id_pekerjaan);
 		//print_r($data['laporan']);die;
 		$data['edit_detail_proyek']="";
+		$this->session->set_userdata('id_pekerjaan',$id_pekerjaan);
+		//$this->chart();
 		$this->load->view('detail_proyek',$data);
 		}
 		else
@@ -42,22 +44,6 @@ class Detail_proyek extends CI_Controller {
 			redirect("welcome/login");
 		}
 	}
-	
-	/* public function view_detail_proyek2($id_pekerjaan)
-	{
-		if ($this->session->userdata('login_valid')){
-		
-		$this->load->model('model_detail_proyek');
-		$data['status']=$this->model_detail_proyek->get_progress($id_pekerjaan);
-		//print_r($data['detail_proyek']);die;
-		$data['edit_detail_proyek']="";
-		$this->load->view('detail_proyek',$data);
-		}
-		else
-		{
-			redirect("welcome/login");
-		}
-	} */
 	
 	public function add_detail_proyek($kode_proyek)
 	{
@@ -109,7 +95,7 @@ class Detail_proyek extends CI_Controller {
 	public function do_upload()
 	{
 		$config['upload_path'] = APPPATH .'../assets/upload/'; //lokasi folder yang akan digunakan untuk menyimpan file
-		$config['allowed_types'] = 'gif|jpg|png|JPEG|pdf'; //extension yang diperbolehkan untuk diupload
+		$config['allowed_types'] = 'jpg|png|JPEG|pdf|docx|xlsx|odt'; //extension yang diperbolehkan untuk diupload
 		$config['file_name'] = url_title($this->input->post('file_upload'));
 		
 		$this->upload->initialize($config); //meng set config yang sudah di atur
@@ -189,10 +175,12 @@ class Detail_proyek extends CI_Controller {
 		force_download($nama,$data);
 	}
 
-	public function chart($id_pekerjaan)
+	public function chart()
 	{
+		$id_pekerjaan = $this->session->userdata('id_pekerjaan');
+		//print_r($id_pekerjaan);die;
 		$this->load->model('model_detail_proyek');
-		$data['chart'] = $this->model_detail_proyek->view_detail_proyek();
+		$data['chart'] = $this->model_detail_proyek->view_detail_proyek($id_pekerjaan);
 		$this->gantt_proyek($data['chart']);
 	}
 	

@@ -47,6 +47,17 @@
                 </div>
           </div>
           </div>
+		  <div class="widget-header"> <i class="icon-file "></i>
+		  <h3>Download Template Laporan</h3>
+        </div>
+		<div class="widget-content">
+		<button class="btn btn-success" onclick="window.location.href='<?php echo site_url('welcome/download')?>'">Download</button>
+		<?php if($this->session->userdata('pm',TRUE)) {  ?>
+		<button class="btn btn-info" onclick="window.location.href='<?php echo site_url('welcome/upload')?>'">Upload</button>
+       <?php 
+			}
+		?>
+		</div>
         </div>
         <!-- /span6 -->
         <div class="span6">
