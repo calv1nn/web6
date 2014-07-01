@@ -22,7 +22,7 @@ class Load_pekerjaan extends CI_Controller {
 
 	public function add_load_pekerjaan($kode_proyek)
 	{
-		
+		//print_r($kode_proyek);die;
 		if ($this->input->post() != TRUE)
 		{
 			$this->load->model('model_load_pekerjaan');
@@ -38,12 +38,13 @@ class Load_pekerjaan extends CI_Controller {
 				$this->load->model('model_load_pekerjaan');
 				$kode_proyek=$this->input->post("kode_proyek");
 				$nik=$this->input->post("nik");
-				
+				//print_r($this->input->post());die;
 				foreach ($nik as $cek){
 					$data = array (
 						'kode_proyek' => $kode_proyek,
 						'nik' => $cek,
 					);
+				//	print_r($data);die;
 					$this->model_load_pekerjaan->insert_load_pekerjaan($data);
 				}
 				redirect("proyek");

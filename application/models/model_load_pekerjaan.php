@@ -42,6 +42,24 @@ class Model_load_pekerjaan extends CI_Model {
 	public function insert_load_pekerjaan($data)
 	{
 		$this->db->insert('load_pekerjaan', $data);
+		
+		$this->db->select('count(load_pekerjaan.nik) as row4');
+		$this->db->from('load_pekerjaan');
+		$this->db->join('proyek','proyek.kode_proyek=load_pekerjaan.kode_proyek');
+		$this->db->where('load_pekerjaan.nik',$data['nik']);
+		$query = $this->db->get();
+		
+		
+		foreach ($query->result_array() as $row){
+			$jumlah_pekerjaan = $row['row4'];
+		} 
+		
+		$data1 = array (
+				'jumlah_pekerjaan' => $jumlah_pekerjaan
+              );
+              $this->db->where('nik',$data['nik']);
+              $this->db->update('karyawan',$data1);
+		
 	}
 	
 	public function get_load($kode_proyek)

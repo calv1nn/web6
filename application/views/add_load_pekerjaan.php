@@ -3,14 +3,20 @@
 <link href="<?php echo base_url(); ?>assets/datepicker/rfnet.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/datepicker/datetimepicker_css.js"></script>
 
+
+
 <script>
 function doconfirm()
 {
-    job=confirm("Are you sure to delete permanently?");
-    if(job!=true)
-    {
-        return false;
-    }
+	table, td
+{
+border:1px solid green;
+}
+td
+{
+background-color:red;
+color:white;
+}
 }
 </script>
 
@@ -42,16 +48,30 @@ function doconfirm()
 						<th></th>
 						<th>Nama Karyawan</th>
 						<th>Proyek yang Ditangani</th>
-						<?php foreach ($checkbox as $row2){  $i = 0; ?>
+						<?php foreach ($checkbox as $row2){  ?>
 						<tr>
-							<td><?php echo form_checkbox('nik[]',$row2['nik']);  ?></td> 
-							<td><?php echo $row2['nama_karyawan']; ?></td> 
-							<?php foreach ($getload as $row){ ?>
-								<?php if ($row['nik'] == $row2['nik']) { $i++; }?>
-									
-									
-							<?php } ?>
-							<td><?php echo $i; ?></td>
+						
+							<?php if ($row2['jumlah_pekerjaan'] == 4 ){ ?>
+							
+							<td bgcolor="#FF0000">
+							<!--<?php echo form_checkbox('nik[]',$row2['nik'], array(), 'onclick="doconfirm()"');  ?>-->
+							<?php echo "Max Load Reached"; ?>
+							</td>
+							<td bgcolor="#FF0000"><?php echo $row2['nama_karyawan']; ?></td> 
+							<td bgcolor="#FF0000"><?php echo $row2['jumlah_pekerjaan']; ?></td>
+							<?php  }
+								else { 
+							?>
+							<td>
+							<?php echo form_checkbox('nik[]',$row2['nik']);  ?>
+							<td color="grey"><?php echo $row2['nama_karyawan']; ?></td> 
+							<td><?php echo $row2['jumlah_pekerjaan']; ?></td>
+							<?php }?>
+							</td> 
+							
+							
+							
+							
 						</tr>
 						<?php }?>
 					<tr>	<?php
