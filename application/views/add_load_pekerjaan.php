@@ -3,6 +3,17 @@
 <link href="<?php echo base_url(); ?>assets/datepicker/rfnet.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/datepicker/datetimepicker_css.js"></script>
 
+<script>
+function doconfirm()
+{
+    job=confirm("Are you sure to delete permanently?");
+    if(job!=true)
+    {
+        return false;
+    }
+}
+</script>
+
 <div class="main">
 	
 	<div class="main-inner">
@@ -22,13 +33,15 @@
 					
 					<div class="widget-content">
 				
-					<table border="5" style="width:100px">
+					<table border="5" style="width:700px">
 						<?php echo form_open("load_pekerjaan/add_load_pekerjaan"); ?>
 									
 						<div class="field">
 							<?php echo form_hidden("kode_proyek", $kode_proyek,'readonly'); ?>
 						</div> <!-- /field -->
-						
+						<th></th>
+						<th>Nama Karyawan</th>
+						<th>Proyek yang Ditangani</th>
 						<?php foreach ($checkbox as $row2){  $i = 0; ?>
 						<tr>
 							<td><?php echo form_checkbox('nik[]',$row2['nik']);  ?></td> 

@@ -25,6 +25,7 @@ class Model_load_pekerjaan extends CI_Model {
 		$this->db->from('karyawan');
 		$this->db->order_by('nik');
 		$this->db->where('status',1);
+		$this->db->where('jabatan','Tim Teknis');
 		$result = $this->db->get();
 		
 		return $result->result_array();
