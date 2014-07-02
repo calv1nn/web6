@@ -7,33 +7,31 @@
 		
 		<form action="#" method="post">
 		
-			<h1>Change Your Password</h1>			
+			<h1>Reset Password</h1>			
 			
 			<div class="login-fields">
 				
-				
-				<?php
-
-					echo form_open('welcome/changepwd');
-					echo validation_errors();
-
-					?>
+					
+					<?php echo form_open("user/update_password"); ?>
 					<table class="table table-bordered">
 					<tbody>
+					
+					<div class="field">
+					<label for="firstname">NIK:</label>
+					<?php echo form_input("nik",$edit_password[0]['nik'],'readonly');?>
+					</div> <!-- /field -->
+					
 					<tr>
-					<td><small><?php echo "Old Password:";?></small></td>
-					<td><?php echo form_password('opassword');?></td>
+					<div class="field">
+					<label for="password">Password:</label>
+					<?php echo form_input(array('name' => 'password','type' => 'password', 'value' => '')); ?>
+					</div> <!-- /field -->
 
 					</tr>
-					<tr>
-					<td><small><?php echo "New Password:";?></small></td>
-					<td><?php echo form_password('npassword');?></td>
-
-					</tr>
-					<tr>
-					<td><small><?php echo "Confirm Password:";?></small></td>
-					<td><?php echo form_password('cpassword');?></td>
-
+					<div class="field">
+					<label for="passconf">Confirm Password:</label>
+					<?php echo form_input(array('name' => 'passconf','type' => 'password', 'value' => '')); ?>
+					</div> 
 					</tr>
 					</tbody>
 					</table>

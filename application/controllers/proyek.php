@@ -16,6 +16,20 @@ class Proyek extends CI_Controller {
 		}
 	}
 	
+	public function index2()
+	{
+		if ($this->session->userdata('email')){
+		$this->load->model('model_proyek');
+		$data['proyek']=$this->model_proyek->view_proyek2();
+		$data['edit_proyek']="";
+		$this->load->view('proyek',$data);
+		}
+		else
+		{
+			redirect("welcome/login");
+		}
+	}
+	
 	public function add_proyek()
 	{
 		$this->load->helper(array('form', 'url'));

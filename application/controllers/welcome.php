@@ -54,7 +54,8 @@ class Welcome extends CI_Controller {
 		$jabatan=$this->input->post("jabatan");
 		//print_r($jabatan);die;
 		$status=$this->input->post("status");
-		
+		if($this->model_karyawan->check_login($email,$password))
+		{
 		$data['array']=$this->model_karyawan->check_login($email,$password);
 		
 		//print_r($data['array']);die;
@@ -75,17 +76,16 @@ class Welcome extends CI_Controller {
 			elseif($jabatan == 'Admin'){
 			$this->session->set_userdata('admin', TRUE);
 			}
+			
+			$this->session->set_userdata('email',$email);
+			$this->session->set_userdata('nik',$nik);
+			redirect("welcome/index");
+			}
 			else{
 			echo "<script> alert('Username & Password do not match');
 					document.location='welcome/login';
 					</script>";
 			}
-			$this->session->set_userdata('email',$email);
-			$this->session->set_userdata('nik',$nik);
-			redirect("welcome/index");
-		
-		
-		
 	}
 	
 	

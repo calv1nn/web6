@@ -42,7 +42,21 @@
 				   </li>
 			<?php }	
 			}?>
-                </div>
+			
+			<?php foreach($karyawan as $cek2) { 
+				if ($cek2['jumlah_pekerjaan'] == 4) {
+			?>
+			<li class="alert"><a href="#">
+					<?php 
+						echo $cek2['nik'].(" "). "Nama : ".(" ").$cek2['nama_karyawan']. " ;  ". (" "). "Overload Pekerjaan"
+					?>
+				</a><button class="close" data-dismiss="alert" type="button">×</button>
+			</li>
+			<?php }
+			}
+			?>
+
+			</div>
                 <!-- /widget-content --> 
                 </div>
           </div>

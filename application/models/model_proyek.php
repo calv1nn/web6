@@ -5,7 +5,15 @@ class Model_proyek extends CI_Model {
 	public function view_proyek()
 	{
 		//$this->load->database();
-		$this->db->order_by("kode_proyek", "asc");
+		$this->db->order_by("progress", "asc");
+		$query = $this->db->get('proyek');
+		return $query->result_array();
+	}
+	
+	public function view_proyek2()
+	{
+		//$this->load->database();
+		$this->db->where("end_date", less_than(date('Y-m-d')));
 		$query = $this->db->get('proyek');
 		return $query->result_array();
 	}
