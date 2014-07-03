@@ -35,13 +35,10 @@
 					</tr>
 					</tbody>
 					</table>
-					<button type="submit" class="btn btn-primary" ><i class=" icon-ok-sign icon-white"></i>&nbsp;Submit</button>
-
-					<?php
-
-					echo form_close();
-
-					?> <!-- .actions -->
+						<?php
+			echo form_submit('mysubmit', 'Submit');			
+			echo form_close();
+			?>
 			
 		</form>
 		

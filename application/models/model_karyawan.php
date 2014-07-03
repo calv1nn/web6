@@ -56,4 +56,13 @@ class Model_karyawan extends CI_Model {
 		$this->db->where('nik',$nik);
 		$this->db->update('karyawan',$data);
 	}
+	
+	public function update_password($nik,$password)
+	{
+		$data = array (
+		'password' => MD5($password),
+		);
+		$this->db->where('nik',$nik);
+		$this->db->update('karyawan',$data);
+	}
 }

@@ -106,6 +106,28 @@ class User extends CI_Controller {
 		redirect("user/karyawan");
 	}
 	
+	
+	public function edit_password($nik)
+	{
+		$this->load->model('model_karyawan');
+		$data['karyawan']=$this->model_karyawan->view_karyawan();
+		$data['edit_password']=$this->model_karyawan->get_karyawan($nik);
+		$this->load->view('reset_password',$data);
+	}
+		
+	public function update_password()
+	{
+	
+		$this->load->model('model_karyawan');
+		$data['edit_password']=$this->model_karyawan->get_karyawan($nik);
+		$this->load->view('edit_password',$data);
+		$nik=$this->input->post("nik");
+		$password=$this->input->post("password");
+		$this->model_karyawan->update_password($nik,$password);
+		redirect("user/karyawan");
+	}
+	
+	
 }
 
 /* End of file user.php */
