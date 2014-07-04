@@ -19,7 +19,10 @@ background-color: grey;
 	<div class="main-inner">
 
 	    <div class="container">
-	
+			<form action="<?php echo site_url('diskusi/search_keyword');?>" method = "post">
+				<input type="text" name = "keyword" placeholder="find a discussion"/>
+				<input type="submit" value = "Search" />
+			</form>
 	      <div class="row">
 	      	
 	      	<div class="span12">
@@ -35,7 +38,7 @@ background-color: grey;
 					<?php
 						foreach ($hasil->result() as $row) :
 						$isi = $row->isi;
-						$isi = substr($isi, 0, 10000);
+						$isi = substr($isi, 0, 500);
 					?>
 					<table>
 					<tr>

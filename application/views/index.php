@@ -34,7 +34,7 @@
 				
 				if ($date_sel <= 3 and $cek['progress']<=80){
 			?>	
-				<li class="alert"><a href="#">
+				<li class="alert"><a href='<?php echo base_url();?>proyek/'>
 					<?php 
 						echo "Proyek " .(" "). $cek['nama_proyek']. (" "). "berakhir dalam" . (" ").$date_sel. (" "). "hari";
 					?>

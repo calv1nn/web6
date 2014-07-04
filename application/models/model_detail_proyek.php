@@ -206,6 +206,7 @@ class Model_detail_proyek extends CI_Model {
 		$this->db->join('proyek_detail','laporan.id_pekerjaan=proyek_detail.id_pekerjaan');
 		$this->db->where('proyek_detail.id_pekerjaan',$id_laporan);
 		$query = $this->db->get();
+		//print_r($query->result_array());die;
 		//return $query;
 		return $query->result_array();
 	}
@@ -226,7 +227,8 @@ class Model_detail_proyek extends CI_Model {
 			$this->db->where('proyek_detail.id_pekerjaan',$data['id_pekerjaan']);
 			$this->db->where('laporan.status_laporan',1);
 			$query = $this->db->get();
-			if($query->num_rows() > 0){
+			//print_r($query);die;
+		if($query->num_rows() > 0){
 				$i = 0;
 			foreach($query->result() as $cek) {
 				$end = explode('-', $cek->end_date);
@@ -243,7 +245,7 @@ class Model_detail_proyek extends CI_Model {
 				$jd2 = GregorianToJD($start_date1, $start_date, $start_date2);
 				
 				$date_sel = $jd1 - $jd2 + 1;
-				
+				$kd_proyek = $cek->kode_proyek;
 				$i++;
 			}
 			
@@ -255,6 +257,7 @@ class Model_detail_proyek extends CI_Model {
               );
               $this->db->where('id_pekerjaan',$data['id_pekerjaan']);
               $this->db->update('proyek_detail',$data1);
+			
 		} else {
 			$progres = 0 / 0 * 100;
 			
@@ -264,6 +267,41 @@ class Model_detail_proyek extends CI_Model {
             );
             $this->db->where('id_pekerjaan',$data['id_pekerjaan']);
             $this->db->update('proyek_detail',$data1);
+			 //PRoyek
+						
+			$this->db->select('*');
+			$this->db->from('proyek_detail');
+			$this->db->where('id_pekerjaan',$data['id_pekerjaan']);
+			$query = $this->db->get();
+			
+			if($query->num_rows() > 0){
+				foreach($query->result() as $cek) {
+					$kode_proyek = $cek->kode_proyek;
+				}
+				
+				$this->db->select('*, sum(progress) as total, count(progress) as jumlah');
+				$this->db->from('proyek_detail');
+				$this->db->where('kode_proyek',$kode_proyek);
+				$query1 = $this->db->get();
+				
+				if($query1->num_rows() > 0){
+					foreach($query1->result() as $row) {		
+						if($row->jumlah > 0 ) {
+							$progres_p = $row->total / $row->jumlah;
+						} else {
+							$progres_p = 0;
+						}
+					}
+					
+					$data3 = array (
+							'progress' => $progres_p
+						);
+					  //print_r($data3);die();
+					  //print_r($cek->kode_proyek);die;
+						$this->db->where('kode_proyek',$cek->kode_proyek);
+						$this->db->update('proyek',$data3);
+				}
+			}
 		}
 			
       }

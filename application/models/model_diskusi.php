@@ -77,6 +77,13 @@ class Model_diskusi extends CI_Model {
 		$this->db->update('diskusi',$data);
 	}
 	
+	 public function search($keyword)
+    {
+        $this->db->like('judul',$keyword);
+        $query  =   $this->db->get('diskusi');
+        return $query->result();
+    }
+	
 	/* ------------------- komentar ----------------------------------*/
 	
 	public function view_balasan($id)

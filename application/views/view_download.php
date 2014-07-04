@@ -23,30 +23,71 @@
                         <!-- /widget -->
                         <div class="widget">
                             <div class="widget-header">
-                                <i class="shortcut-icon icon-user"></i>
+                                <i class="shortcut-icon icon-tasks"></i>
                                 <h3>
 								
 								List Laporan </div>
                             <!-- /widget-header -->
                             <div class="widget-content">
+							
+							 <?php
+									foreach($detail_proyek as $cek) {
+									$end = explode('-', $cek['end_date']);
+									$end_date = $end[2];
+									$end_date1= $end[1];
+									$end_date2= $end[0];
+
+									$start = explode('-',$cek['start_date']);
+									$start_date = $start[2];
+									$start_date1= $start[1];
+									$start_date2= $start[0];
+									//print_r(date('Y-m-d'));die;
+									$jd1 = GregorianToJD($end_date1, $end_date, $end_date2);
+									$jd2 = GregorianToJD($start_date1, $start_date, $start_date2);
+
+									$date_sel = $jd1 - $jd2;
+									//print_r($date_sel);die;
+									}
+							?>
+				<?php
+					
+				
+				
+					foreach ($detail_proyek as $row)
+								{
+								//print_r(count($detail_proyek));die;
+								$a=(count($detail_proyek));
+								//print_r($a);die;
+								
+								$lap=$date_sel-$a;
+								
+								if($date_sel > $a){
+							?>	
+							<p class="alert">Laporan Anda Kurang <?php echo $lap; ?> Silahkan dilengkapi !!<button class="close" data-dismiss="alert" type="button">x</button>
+				   </p>
                                 <table class="table table-striped table-bordered">
 						
 							<tr>
+								<th>Hari</th>
 								<th>Nama File</th>
 								<th>Tanggal Upload</th>
 								<th>Status</th>
 								<th colspan="3">Action</th>
 								
 							</tr>
+							
+							<?php $i = 1; ?>
+							
 						<?php
-							foreach ($detail_proyek as $row)
-								{
+							
+								
 						?>
-			<?php echo  form_open('detail_proyek/update_status_laporan'); ?>
-			<?php echo form_hidden('id_laporan', $row['id_laporan']); ?>
-			<?php echo form_hidden('id_pekerjaan', $row['id_pekerjaan']); ?>
+							<?php echo  form_open('detail_proyek/update_status_laporan'); ?>
+							<?php echo form_hidden('id_laporan', $row['id_laporan']); ?>
+							<?php echo form_hidden('id_pekerjaan', $row['id_pekerjaan']); ?>
 			<tr>
 				<td style="display:none"><?php echo $row['id_laporan']?></td>
+                <td><?php echo $i++ ?></td>
                 <td><?php echo $row['nama_file']?></td>
                 <td><?php echo $row['tanggal_upload']?></td>
                 <td><?php if ( $row['status_laporan']== 0) { echo "On Going"; }
@@ -61,7 +102,7 @@
 				<td><a href="<?php echo site_url('detail_proyek/download/'.$row['id_laporan']); ?>">
 				<input type="button" value="Download" class="btn-info2"/> </a>
 				</td>
-				<?php if($this->session->userdata('pm',TRUE) or $this->session->userdata('admin',TRUE)) { ?>
+				<?php if($this->session->userdata('pm',TRUE)) { ?>
 				<td><?php
 				echo form_submit('mysubmit', 'Approve','class="btn btn-success"');
 				echo form_close();?> <?php echo form_close();?>	</td>
@@ -83,7 +124,70 @@
 					
 						<?php 
 								}
+						else { ?>
+							  <table class="table table-striped table-bordered">
+						
+							<tr>
+								<th>Hari</th>
+								<th>Nama File</th>
+								<th>Tanggal Upload</th>
+								<th>Status</th>
+								<th colspan="3">Action</th>
+								
+							</tr>
+							
+							<?php $i = 1; ?>
+							
+						<?php
+							
+								
 						?>
+							<?php echo  form_open('detail_proyek/update_status_laporan'); ?>
+							<?php echo form_hidden('id_laporan', $row['id_laporan']); ?>
+							<?php echo form_hidden('id_pekerjaan', $row['id_pekerjaan']); ?>
+			<tr>
+				<td style="display:none"><?php echo $row['id_laporan']?></td>
+                <td><?php echo $i++ ?></td>
+                <td><?php echo $row['nama_file']?></td>
+                <td><?php echo $row['tanggal_upload']?></td>
+                <td><?php if ( $row['status_laporan']== 0) { echo "On Going"; }
+								elseif  
+									( $row['status_laporan']== 1) { echo "Approved"; }
+								else
+								{
+										echo "Rejected" ;
+								}
+									
+                ?> </td>
+				<td><a href="<?php echo site_url('detail_proyek/download/'.$row['id_laporan']); ?>">
+				<input type="button" value="Download" class="btn-info2"/> </a>
+				</td>
+				<?php if($this->session->userdata('pm',TRUE)) { ?>
+				<td><?php
+				echo form_submit('mysubmit', 'Approve','class="btn btn-success"');
+				echo form_close();?> <?php echo form_close();?>	</td>
+				<?php }?>
+			<?php echo form_open('detail_proyek/update_status_laporan2'); ?>
+			<?php echo form_hidden('id_laporan', $row['id_laporan']); ?>
+			<?php echo form_hidden('id_pekerjaan', $row['id_pekerjaan']); ?>
+			
+				<td style="display:none"><?php echo $row['id_laporan']?></td>
+                <td style="display:none"><?php echo $row['nama_file']?></td>
+                <td style="display:none"><?php echo $row['status_laporan']?> </td>
+			<?php if($this->session->userdata('pm',TRUE) or $this->session->userdata('admin',TRUE)) { ?>
+			<td>
+				<?php
+				echo form_submit('mysubmit', 'Reject','class="btn btn-danger"');
+				echo form_close();?> <?php echo form_close();?>	
+			</td>
+			<?php }?>
+						
+					<?php	}
+						
+						
+						}		
+						?>
+						
 						
 						
 								</table>

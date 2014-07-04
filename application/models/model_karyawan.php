@@ -11,7 +11,28 @@ class Model_karyawan extends CI_Model {
 		return $query->result_array();
 	}
 	
-	public function view_karyawan()
+	public function daftar($limit,$offset)
+	{
+		$this->db->select('*');
+		$this->db->order_by("nik", "asc");
+		$this->db->from('karyawan');
+		$this->db->limit($limit,$offset);
+		$query = $this->db->get();
+		//print_r($query);die;
+		return $query;
+		
+	}
+	
+	public function view_karyawan($num, $offset)
+	{
+		//$this->load->database();
+		$this->db->order_by("nik", "asc");
+		$this->db->limit($num, $offset);
+		$query = $this->db->get('karyawan');
+		return $query->result_array();
+	}
+	
+	public function view_karyawan2()
 	{
 		//$this->load->database();
 		$this->db->order_by("nik", "asc");

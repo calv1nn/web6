@@ -5,7 +5,6 @@
 	
 	<div class="content clearfix">
 		
-		<form action="#" method="post">
 		
 			<h1>Reset Password</h1>			
 			
@@ -39,8 +38,7 @@
 			echo form_submit('mysubmit', 'Submit');			
 			echo form_close();
 			?>
-			
-		</form>
+		
 		
 	</div> <!-- /content -->
 	

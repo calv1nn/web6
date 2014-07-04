@@ -31,7 +31,7 @@ class Welcome extends CI_Controller {
 		$this->load->model('model_proyek');
 		
 		$data['hasil'] = $this->model_diskusi->daftar(5,0);
-		$data['karyawan']=$this->model_karyawan->view_karyawan();
+		$data['karyawan']=$this->model_karyawan->view_karyawan2();
 		$data['proyek']=$this->model_proyek->view_proyek();
 		$this->load->view('index',$data);
 		}

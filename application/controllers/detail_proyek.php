@@ -154,8 +154,8 @@ class Detail_proyek extends CI_Controller {
 		if ($this->input->post() == TRUE) { 
 		$this->load->model('model_detail_proyek');
 		$data['id_pekerjaan'] = $this->input->post('id_pekerjaan');
-		
-		$this->model_detail_proyek->update_status_laporan2($this->input->post(id_laporan),$data);
+		//print_r($data);die;
+		$this->model_detail_proyek->update_status_laporan2($this->input->post('id_laporan'),$data);
 		//$this->model_detail_proyek->update_progress();
 		redirect("proyek");
 		}	
@@ -203,8 +203,8 @@ class Detail_proyek extends CI_Controller {
 		// (Autoscaling will of course also work)
 		$i = 0;
 		foreach($data_chart as $row) {
-			$graph->SetDateRange($row['start_date'],$row['end_date']);
-			
+			//$graph->SetDateRange(date('Y-m-d',strtotime($row['start_date'])),date('Y-m-d',strtotime($row['end_date'])));
+			$graph->SetDateRange('2014-06-06','2014-09-10');
 			$end = explode('-', $row['end_date']);
 			$end_date = $end[2];
 			$end_date1= $end[1];
@@ -223,7 +223,7 @@ class Detail_proyek extends CI_Controller {
 				
 			//$data = array();
 			$data1 = array($i, array($row['nama_pekerjaan'], strval($date_sel), date('d-m-Y',strtotime($row['start_date'])), date('d-m-Y',strtotime($row['end_date']))), 
-			$row['start_date'], date('Y-m-d'),FF_ARIAL,FS_NORMAL,8);
+			$row['start_date'], $row['end_date'],FF_ARIAL,FS_NORMAL,8);
 			$i++;
 			$data[] = $data1;
 		}
@@ -250,13 +250,20 @@ class Detail_proyek extends CI_Controller {
 		
 		// Create the bars and add them to the gantt chart
 		 //print_r($data);die;
+		foreach($data_chart as $row2) {
+		 
+		$ab = $row2['progress'] / 100 ;
+		$aaa[] = $ab;
+		
+		}
 		for($i=0; $i<count($data); ++$i) {
-			$bar = new GanttBar($data[$i][0],$data[$i][1],$data[$i][2],$data[$i][3],"[20%]",10);
+		
+			$bar = new GanttBar($data[$i][0],$data[$i][1],$data[$i][2],$data[$i][3],"[80%]",10);
 			if( count($data[$i])>4 )
 				$bar->title->SetFont($data[$i][4],$data[$i][5],$data[$i][6]);
 			$bar->SetPattern(BAND_RDIAG,"yellow");
 			$bar->SetFillColor("gray");
-			$bar->progress->Set(0.2);
+			$bar->progress->Set($aaa[$i]);
 			$bar->progress->SetPattern(GANTT_SOLID,"darkgreen");
 			$graph->Add($bar);
 		}

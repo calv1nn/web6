@@ -131,7 +131,8 @@ class Proyek extends CI_Controller {
 		// (Autoscaling will of course also work)
 		$i = 0;
 		foreach($data_chart as $row) {
-			$graph->SetDateRange(date('Y-m-d',strtotime($row['start_date'])),date('Y-m-d',strtotime($row['end_date'])));
+			//$graph->SetDateRange(date('Y-m-d',strtotime($row['start_date'])),date('Y-m-d',strtotime($row['end_date'])));
+			$graph->SetDateRange('2014-06-06','2015-06-10');
 			
 			$end = explode('-', $row['end_date']);
 			$end_date = $end[2];
@@ -178,17 +179,24 @@ class Proyek extends CI_Controller {
 		
 		// Create the bars and add them to the gantt chart
 		 //print_r($data);die;
+		 foreach($data_chart as $row2) {
+		 
+		$ab = $row2['progress'] / 100 ;
+		$aaa[] = $ab;
+		
+		}
 		for($i=0; $i<count($data); ++$i) {
+		
 			$bar = new GanttBar($data[$i][0],$data[$i][1],$data[$i][2],$data[$i][3],"[80%]",10);
 			if( count($data[$i])>4 )
 				$bar->title->SetFont($data[$i][4],$data[$i][5],$data[$i][6]);
 			$bar->SetPattern(BAND_RDIAG,"yellow");
 			$bar->SetFillColor("gray");
-			$bar->progress->Set(0.9);
+			$bar->progress->Set($aaa[$i]);
 			$bar->progress->SetPattern(GANTT_SOLID,"darkgreen");
 			$graph->Add($bar);
 		}
- 
+	
 		// Display the graph
 		$graph->Stroke();
 	}

@@ -29,7 +29,7 @@ background-color: grey;
                         <!-- /widget -->
                         <div class="widget">
                             <div class="widget-header">
-                                <i class="shortcut-icon icon-user"></i>
+                                <i class="shortcut-icon icon-tasks"></i>
                                 <h3>
 								<?php foreach ($nama_proyek as $row2)
 								{

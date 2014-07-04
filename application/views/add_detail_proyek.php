@@ -27,7 +27,8 @@
               ''  => 'Choose option...',
               'Perakitan'  => 'Perakitan',
               'Instalasi'    => 'Instalasi',
-              'Konfigurasi' => 'Konfigurasi'
+              'Konfigurasi' => 'Konfigurasi',
+              'Quality Control' => 'Quality Control'
             );
             ?>
 				<?php echo form_open("detail_proyek/add_detail_proyek"); ?>

@@ -1,18 +1,39 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class User extends CI_Controller {
-	 
+	 public function __construct()
+ {
+ parent::__construct();
+ }
 	
 	public function index()
 	{
 		$this->load->view('index');
 	}
 	
-	public function karyawan()
+	public function karyawan($nik=NULL)
 	{
 		if ($this->session->userdata('email')){
+			
 		$this->load->model('model_karyawan');
-		$data['karyawan']=$this->model_karyawan->view_karyawan();
+		
+		$this->load->library('pagination');
+		
+		$config['base_url'] = base_url().'user/karyawan/';
+		$jml = $this->db->get('karyawan');
+		$config['total_rows'] = $jml->num_rows();
+		$config['per_page'] = 8;
+		$config['num_link']=10;
+		
+		//inisialisasi config
+		$this->pagination->initialize($config);
+		
+		//buat pagination
+		$data['halaman'] = $this->pagination->create_links();
+		
+		//tamplikan data
+		$data['query'] = $this->model_karyawan->view_karyawan($config['per_page'], $nik);
+		//$data['karyawan']=$this->model_karyawan->view_karyawan(6,0);
 		$data['edit_karyawan']="";
 		$this->load->view('karyawan',$data);
 		}
@@ -120,7 +141,7 @@ class User extends CI_Controller {
 	
 		$this->load->model('model_karyawan');
 		$data['edit_password']=$this->model_karyawan->get_karyawan($nik);
-		$this->load->view('edit_password',$data);
+		$this->load->view('reset_password',$data);
 		$nik=$this->input->post("nik");
 		$password=$this->input->post("password");
 		$this->model_karyawan->update_password($nik,$password);

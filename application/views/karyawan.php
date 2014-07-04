@@ -21,6 +21,32 @@ background-color: grey;
 }
 </style>
 
+<style type="text/css">
+table.imagetable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #999999;
+	border-collapse: collapse;
+	
+}
+table.imagetable th {
+	background:#b5cfd2 url('cell-blue.jpg');
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #999999;
+}
+table.imagetable td {
+	background:#dcddc0 url('cell-grey.jpg');
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #999999;
+}
+</style>
+
 <script>
 function doconfirm()
 {
@@ -46,8 +72,8 @@ function doconfirm()
 					
                             </div>
                             <!-- /widget-header -->
-                            <div class="widget-content">
-                                <table border="10" style="width:10000px">
+                            <div class="widget-content" >
+                                <table class="imagetable" style="width:10000px" >
 							<tr>
 								<th>NIK</th>
 								<th>Email</th>
@@ -58,8 +84,10 @@ function doconfirm()
 								<th>Action</th>
 								<?php }?>
 							</tr>
+							
+							
 						<?php
-							foreach ($karyawan as $row)
+							foreach ($query as $row)
 								{
 						?>
 							<tr>
@@ -71,15 +99,17 @@ function doconfirm()
 								} else { echo "Inactive" ;
 								}?></td>
 								<?php if($this->session->userdata('admin',TRUE)) { ?>
-								<td><a href="<?php echo site_url ('user/delete_karyawan/'.$row['nik']) ?> " onClick="return doconfirm();" ><button class="btn btn-danger">Delete</button> </a>
-									<a href="<?php echo site_url ('user/edit_karyawan/'.$row['nik']) ?> " ><button class="btn">Edit</button> </a>
-								</td>
+								<td><a href="<?php echo site_url ('user/edit_karyawan/'.$row['nik']) ?> " ><button class="btn">Edit</button> </a>
+								<a href="<?php echo site_url ('user/delete_karyawan/'.$row['nik']) ?> " onClick="return doconfirm();" ><button class="btn btn-danger">Delete</button> </a>
+								<a href="<?php echo site_url ('user/edit_password/'.$row['nik']) ?> " ><button class="btn btn-warning">Reset Password</button> </a>
+									</td>
 								<?php }?>
 							</tr>			
 						<?php 
 								}
 						?>
 								</table>
+								<div class="halaman">Halaman : <?php echo $halaman;?></div>
                                 <!-- /line-chart -->
                             </div>
                             <!-- /widget-content -->
