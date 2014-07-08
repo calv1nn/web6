@@ -86,4 +86,38 @@ class Model_karyawan extends CI_Model {
 		$this->db->where('nik',$nik);
 		$this->db->update('karyawan',$data);
 	}
+	
+	public function tambahuser($dataarray)
+    {
+        for($i=0;$i<count($dataarray);$i++){
+            $data = array(
+                'nik'=>$dataarray[$i]['nik'],
+                'nama'=>$dataarray[$i]['nama'],
+                'no_ktp'=>$dataarray[$i]['no_ktp'],
+                'tempat_lahir'=>$dataarray[$i]['tempat_lahir'],
+                'tanggal_lahir'=>$dataarray[$i]['tanggal_lahir'],
+                'jk'=>$dataarray[$i]['jk'],
+                'agama'=>$dataarray[$i]['agama'],
+                'alamat'=>$dataarray[$i]['alamat'],
+                'status'=>$dataarray[$i]['status'],
+                'gol_darah'=>$dataarray[$i]['gol_darah'],
+                'no_telp'=>$dataarray[$i]['no_telp'],
+                'pend_terakhir'=>$dataarray[$i]['pend_terakhir'],
+                'jabatan'=>$dataarray[$i]['jabatan'],
+                'departemen'=>$dataarray[$i]['departemen'],
+                'golongan'=>$dataarray[$i]['golongan'],
+                'tgl_masuk'=>$dataarray[$i]['tgl_masuk'],
+                'npwp'=>$dataarray[$i]['npwp'],
+                'remark'=>$dataarray[$i]['remark']
+            );
+            $this->db->insert('karyawan_all', $data);
+        }
+    }
+
+    public function getuser()
+    {
+        $query = $this->db->get('karyawan_all');
+        return $query->result();
+    }
+    
 }
