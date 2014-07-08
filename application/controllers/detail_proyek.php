@@ -115,11 +115,11 @@ class Detail_proyek extends CI_Controller {
 		}
 	}
 	
- public function view()
- {
- $data['laporan'] = $this->crud->show('laporan');
- $this->load->view('view_upload',$data);
- }
+	 public function view()
+	 {
+	 $data['laporan'] = $this->crud->show('laporan');
+	 $this->load->view('view_upload',$data);
+	 }
  
 	public function view_download($id_laporan)
 	{
