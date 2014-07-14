@@ -8,7 +8,7 @@
 	     <div class="row">
 	      	
 	      	<div class="span12">
-	      
+	     
                         <div class="widget">
                             <div class="widget-header">
                                 <i class="shortcut-icon icon-user"></i>
@@ -18,67 +18,12 @@
                             <!-- /widget-header -->
                             <div class="widget-content">
                    
-						<div class="login-fields">
-				
-				<p>Add account:</p>
-				
-			<?php	
-				$jabatan = array(
-              ''  => 'Choose option...',
-              'Bussiness Project Manager'  => 'Bussiness Project Manager',
-              'Project Manager'    => 'Project Manager',
-              'Tim Teknis' => 'Tim Teknis'
-            );
-			?>
-				<?php echo validation_errors(); ?>
-				<?php echo form_open("user/add_karyawan"); ?>
-							
-				<div class="field">
-					<label for="firstname">NIK:</label>
-					<?php echo form_input(array('name' => 'nik', 'value' => '', 'maxlength' => '4'));?>
-				</div> <!-- /field -->
-				
-				<div class="field">
-					<label for="email">EMAIL:</label>	
-					<?php echo form_input("email",""); ?>
-				</div> <!-- /field -->
-				
-				<div class="field">
-					<label for="password">Password:</label>
-					<?php echo form_input(array('name' => 'password','type' => 'password', 'value' => '')); ?>
-				</div> <!-- /field -->
-				
-				<div class="field">
-					<label for="passconf">Confirm Password:</label>
-					<?php echo form_input(array('name' => 'passconf','type' => 'password', 'value' => '')); ?>
-				</div> 
-				
-				<div class="field">
-					<label for="nama">NAMA KARYAWAN:</label>
-					<?php echo form_input("nama_karyawan",""); ?>
-				</div> <!-- /field -->
-				
-				<div class="field">
-					<label for="nama">JABATAN:</label>
-					<?php echo form_dropdown('jabatan',  $jabatan); ?>
-				</div> <!-- /field -->
-				
-				<div class="field">
-					<label for="nama">STATUS:</label>
-					<?php echo form_radio('status', '1', TRUE); ?><?php echo form_label('Aktif', 'status');?> 
-					<?php echo form_radio('status', '0', FALSE); ?><?php echo form_label('Tidak Aktif', 'status');?>
-				</div> <!-- /field -->
-				
-			</div> <!-- /login-fields -->
-			
-			<div class="login-actions">
-			<?php
-			echo form_submit('mysubmit', 'ADD');
-			echo form_close();	
-			?>
-			</div> <!-- .actions -->
-				 
-             </div>
+				    <form action="<?php echo site_url('user/search_nik');?>" method = "post">
+				<input type="text" name = "keyword" placeholder="enter NIK"/>
+				<input type="submit" value = "Next" />
+			</form>
+				   
+				   </div>
                
                
          </div>

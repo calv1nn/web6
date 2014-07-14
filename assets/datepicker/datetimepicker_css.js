@@ -31,8 +31,9 @@ var ypos=0; // mouse y position
 var calHeight=0; // calendar height
 var CalWidth=208;// calendar width
 var CellWidth=30;// width of day cell.
-var TimeMode=24;// TimeMode value. 12 or 24
-var StartYear =2008; //First Year in drop down year selection
+var TimeMode=24;// TimeMode value. 12 or 
+var dt = new Date();
+var StartYear =dt.getFullYear(); //First Year in drop down year selection
 var EndYear = 5; //End Year offset. i.e. Current Year + 5
 
 
