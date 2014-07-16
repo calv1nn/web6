@@ -184,10 +184,13 @@ class Proyek extends CI_Controller {
 		$ab = $row2['progress'] / 100 ;
 		$aaa[] = $ab;
 		
+		$bb = $row2['progress'];
+		$abc[] = $bb;
+		
 		}
 		for($i=0; $i<count($data); ++$i) {
 		
-			$bar = new GanttBar($data[$i][0],$data[$i][1],$data[$i][2],$data[$i][3],"[80%]",10);
+			$bar = new GanttBar($data[$i][0],$data[$i][1],$data[$i][2],$data[$i][3],$abc[$i],10);
 			if( count($data[$i])>4 )
 				$bar->title->SetFont($data[$i][4],$data[$i][5],$data[$i][6]);
 			$bar->SetPattern(BAND_RDIAG,"yellow");

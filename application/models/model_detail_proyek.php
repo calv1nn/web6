@@ -64,6 +64,14 @@ class Model_detail_proyek extends CI_Model {
 		return $query->result_array();
 	}
 	
+		public function get_proyek($kode_proyek)
+	{
+		$this->db->select('*');
+		$this->db->where("kode_proyek",$kode_proyek);
+		$query=$this->db->get('proyek');
+		return $query->result_array();
+	}
+	
 	/* public function get_kode_proyek($kode_proyek)
 	{	
 		$this->db->select('kode_proyek');

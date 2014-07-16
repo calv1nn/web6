@@ -52,6 +52,7 @@ class Detail_proyek extends CI_Controller {
 			$this->load->model('model_detail_proyek');
 			$nik['kode_proyek'] = $kode_proyek;
 			$nik['dropdown'] = $this->model_detail_proyek->get_nik3($kode_proyek);
+			$nik['proyek']=$this->model_detail_proyek->get_proyek($kode_proyek);
 			$this->load->view('add_detail_proyek',$nik);
 		}
 		else

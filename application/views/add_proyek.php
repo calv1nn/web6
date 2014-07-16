@@ -1,7 +1,8 @@
 <?php include('header.php'); ?>
- 
-<link href="<?php echo base_url(); ?>assets/datepicker/rfnet.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/datepicker/datetimepicker_css.js"></script>
+
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery-1.7.2.min.js"></script>
+<link href="<?php echo base_url(); ?>assets/zebra-datepicker/public/css/default.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/zebra-datepicker/public/javascript/zebra_datepicker.js"></script>
 
 <div class="main">
 	
@@ -38,17 +39,13 @@
 				<div class="field">
 					<label for="start_date">Start Date:</label>
 					<?php echo form_error('start_date'); ?>
-					<a href="javascript:NewCssCal('start_date','yyyymmdd')"><input type="text" name="start_date" class="tgl1" id="start_date" size="20" /> 
-					<img src="<?php echo base_url(); ?>assets/datepicker/images/cal.gif" width="16" height="16" alt="Pilih tanggal" />
-					</a>
+					<?php echo form_input("start_date","","class='datepicker-start'"); ?>
 				</div> <!-- /field -->
 				
 				<div class="field">
 					<label for="end_date">End Date:</label>
 					<?php echo form_error('end_date'); ?>
-					<a href="javascript:NewCssCal('end_date','yyyymmdd')"><input type="text" name="end_date" class="tgl1" id="end_date" size="20" /> 
-					<img src="<?php echo base_url(); ?>assets/datepicker/images/cal.gif" width="16" height="16" alt="Pilih tanggal" />
-					</a>
+					<?php echo form_input("end_date","","class='datepicker-end'"); ?>
 				</div> 
 				
 				<div class="field">
@@ -91,5 +88,15 @@
 	</div> <!-- /main-inner -->
     
 </div> <!-- /main -->
+<script>
+$('.datepicker-start').Zebra_DatePicker({
+  direction: true,
+  pair: $('.datepicker-end')
+});
 
-<?php include('footer.php');?>
+$('.datepicker-end').Zebra_DatePicker({
+  direction: 1
+});
+</script>
+
+<?php include('footer.php'); ?>
