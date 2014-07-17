@@ -87,7 +87,8 @@ background-color: grey;
 								<?php if($this->session->userdata('email',TRUE)) { ?>
 								<?php echo anchor(
 								"detail_proyek/upload/".$row['id_pekerjaan'], 'Upload', 'title="Upload Laporan"'); ?> |<?php }?> <?php echo anchor(
-								"detail_proyek/view_download/".$row['id_pekerjaan'], 'View Laporan', 'title="Upload Laporan"'); ?>
+								"detail_proyek/view_download/".$row['id_pekerjaan'], 'View Laporan', 'title="View Laporan"'); ?> <?php if($this->session->userdata('pm',TRUE)) { ?> | <?php echo anchor(
+								"detail_proyek/edit_detail_proyek/".$row['kode_proyek'].("/").$row['id_pekerjaan'], 'Edit', 'title="Edit"'); ?> <?php }?>
 								</td>
 							</tr>			
 						<?php 

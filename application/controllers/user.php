@@ -125,7 +125,7 @@ class User extends CI_Controller {
             array(
                 'field' => 'email',
                 'label' => 'E-Mail',
-                'rules' => 'required'
+                'rules' => 'email', 'Email', 'trim|required|valid_email', 'is_unique[karyawan.email]'
             ),
      
             array(

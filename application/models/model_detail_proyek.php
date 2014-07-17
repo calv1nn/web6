@@ -24,6 +24,15 @@ class Model_detail_proyek extends CI_Model {
 		return $query->result_array();
 	}
 	
+	public function view_detail_proyek2()
+	{
+		$this->db->select('*');
+		$this->db->from('proyek_detail');
+		$query = $this->db->get();
+		//return $query;
+		return $query->result_array();
+	}
+	
 	/*public function view_detail_proyek2($id_pekerjaan)
 	{
 		//$this->load->database();
@@ -56,6 +65,18 @@ class Model_detail_proyek extends CI_Model {
 		$this->db->insert('proyek_detail', $data);
 	}
 	
+	public function update_detail_proyek($id_pekerjaan,$nama_pekerjaan,$nik,$start_date,$end_date,$kategori)
+	{
+		$data = array (
+		'nama_pekerjaan' => $nama_pekerjaan,
+		'start_date' => $start_date,
+		'end_date' => $end_date,
+		'kategori' => $kategori
+		);
+		$this->db->where('id_pekerjaan',$id_pekerjaan);
+		$this->db->update('proyek_detail',$data);
+	}
+	
 	public function get_nama_proyek($id_pekerjaan)
 	{
 		$this->db->select('nama_proyek,kode_proyek');
@@ -69,6 +90,13 @@ class Model_detail_proyek extends CI_Model {
 		$this->db->select('*');
 		$this->db->where("kode_proyek",$kode_proyek);
 		$query=$this->db->get('proyek');
+		return $query->result_array();
+	}
+	
+	public function get_detail_proyek($id_pekerjaan)
+	{
+		$this->db->where("id_pekerjaan",$id_pekerjaan);
+		$query=$this->db->get('proyek_detail');
 		return $query->result_array();
 	}
 	

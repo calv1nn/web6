@@ -8,11 +8,11 @@ class Detail_proyek extends CI_Controller {
 		$this->load->model('model_detail_proyek','crud'); //load model dari crud model dan diberi alias dengan nama crud
 		$this->load->library('upload'); //load library upload bisa dilakukan disni atau disimpan di autoload
 	}
-	 
+
 	public function index($id_pekerjaan)
 	{
 		if ($this->session->userdata('login_valid')){
-		
+
 		$this->load->model('model_detail_proyek');
 		$data['detail_proyek']=$this->model_detail_proyek->view_detail_proyek($id_pekerjaan);
 		print_r($id_pekerjaan); die;
@@ -24,11 +24,11 @@ class Detail_proyek extends CI_Controller {
 			redirect("welcome/login");
 		}
 	}
-	
+
 	public function view_detail_proyek($id_pekerjaan)
 	{
 		if ($this->session->userdata('email')){
-		
+
 		$this->load->model('model_detail_proyek');
 		$data['detail_proyek']=$this->model_detail_proyek->view_detail_proyek($id_pekerjaan);
 	//	$data['laporan']=$this->model_detail_proyek->view_detail_proyek2($id_pekerjaan);
@@ -44,7 +44,7 @@ class Detail_proyek extends CI_Controller {
 			redirect("welcome/login");
 		}
 	}
-	
+
 	public function add_detail_proyek($kode_proyek)
 	{
 		if ($this->input->post() != TRUE)
@@ -66,12 +66,36 @@ class Detail_proyek extends CI_Controller {
 				$end_date=$this->input->post("end_date");
 				$progress=$this->input->post("progress");
 				$kategori=$this->input->post("kategori");
-				
+
 				$this->model_detail_proyek->insert_detail_proyek($id_pekerjaan,$kode_proyek,$nik,$nama_pekerjaan,$start_date,$end_date,$progress,$kategori);
 				redirect("proyek");
 		}
 	}
 	
+	public function edit_detail_proyek($kode_proyek,$id_pekerjaan)
+	{
+		$this->load->model('model_detail_proyek');
+		$data['detail_proyek']=$this->model_detail_proyek->view_detail_proyek2();
+		$data['dropdown'] = $this->model_detail_proyek->get_nik3($kode_proyek);
+		$data['edit_detail_proyek']=$this->model_detail_proyek->get_detail_proyek($id_pekerjaan);
+		//print_r($data);die;
+		$this->load->view('edit_detail_proyek',$data);
+	}
+	
+	public function update_detail_proyek()
+	{
+	
+		$this->load->model('model_detail_proyek');
+		$id_pekerjaan=$this->input->post("id_pekerjaan");
+		$nama_pekerjaan=$this->input->post("nama_pekerjaan");
+		$nik=$this->input->post("nik");
+		$start_date=$this->input->post("start_date");
+		$end_date=$this->input->post("end_date");
+		$kategori=$this->input->post("kategori");
+		$this->model_detail_proyek->update_detail_proyek($id_pekerjaan,$nama_pekerjaan,$nik,$start_date,$end_date,$kategori);
+		redirect("proyek/index");
+	}
+
 	public function upload($id_pekerjaan)
 	{
 		$this->load->model('model_detail_proyek');
@@ -79,7 +103,7 @@ class Detail_proyek extends CI_Controller {
 	//	$this->model_detail_proyek->get_nik2($nik,$id_pekerjaan);
 		$data['nik'] = $this->model_detail_proyek->get_nik2($nik,$id_pekerjaan);
 		$data['id_pekerjaan'] = $id_pekerjaan;
-		
+
 		foreach ($data['nik'] as $row) {
 			$nik12=$row['nik'];
 		}
@@ -92,13 +116,13 @@ class Detail_proyek extends CI_Controller {
 					</script>";
 		}
 	}
-	
+
 	public function do_upload()
 	{
 		$config['upload_path'] = APPPATH .'../assets/upload/'; //lokasi folder yang akan digunakan untuk menyimpan file
 		$config['allowed_types'] = 'jpg|png|JPEG|pdf|docx|xlsx|odt'; //extension yang diperbolehkan untuk diupload
 		$config['file_name'] = url_title($this->input->post('file_upload'));
-		
+
 		$this->upload->initialize($config); //meng set config yang sudah di atur
 		if( !$this->upload->do_upload('file_upload'))
 		{ 
@@ -115,7 +139,7 @@ class Detail_proyek extends CI_Controller {
 			redirect (detail_proyek/upload/$row['id_pekerjaan']);
 		}
 	}
-	
+
 	 public function view()
 	 {
 	 $data['laporan'] = $this->crud->show('laporan');
@@ -125,7 +149,7 @@ class Detail_proyek extends CI_Controller {
 	public function view_download($id_laporan)
 	{
 		if ($this->session->userdata('email')){
-		
+
 		$this->load->model('model_detail_proyek');
 		$data['detail_proyek']=$this->model_detail_proyek->view_download($id_laporan);
 		//print_r($data['detail_proyek']);die;
@@ -137,7 +161,7 @@ class Detail_proyek extends CI_Controller {
 			redirect("welcome/login");
 		}
 	}
-	
+
 	public function update_status_laporan()
 	{
 		if ($this->input->post() == TRUE) { 
@@ -149,7 +173,7 @@ class Detail_proyek extends CI_Controller {
 		}	
 
 	}
-	
+
 	public function update_status_laporan2()
 	{
 		if ($this->input->post() == TRUE) { 
@@ -162,7 +186,7 @@ class Detail_proyek extends CI_Controller {
 		}	
 
 	}
-	
+
 	public function download($id_laporan)
 	{
 		$this->load->helper('download'); //jika sudah diaktifkan di autoload, maka tidak perlu di tulis kembali
@@ -184,14 +208,14 @@ class Detail_proyek extends CI_Controller {
 		$data['chart'] = $this->model_detail_proyek->view_detail_proyek($id_pekerjaan);
 		$this->gantt_proyek($data['chart']);
 	}
-	
+
 	public function gantt_proyek($data_chart)
 	{
 		require_once APPPATH.'../assets/jpgraph/src/jpgraph.php';
 		require_once APPPATH.'../assets/jpgraph/src/jpgraph_gantt.php';
-		
+
 		$graph = new GanttGraph();
-		 
+
 		$graph->title->Set("Gantt Chart");
 		// Setup some "very" nonstandard colors
 		$graph->SetMarginColor('lightgreen@0.8');
@@ -199,7 +223,7 @@ class Detail_proyek extends CI_Controller {
 		$graph->SetFrame(true,'darkgreen',4);
 		$graph->scale->divider->SetColor('yellow:0.6');
 		$graph->scale->dividerh->SetColor('yellow:0.6');
-		 
+
 		// Explicitely set the date range 
 		// (Autoscaling will of course also work)
 		$i = 0;
@@ -211,7 +235,7 @@ class Detail_proyek extends CI_Controller {
 			$end_date1= $end[1];
 			$end_date2= $end[0];
 
-			
+
 			$start = explode('-',  $row['start_date']);
 			$start_date = $start[2];
 			$start_date1= $start[1];
@@ -221,24 +245,24 @@ class Detail_proyek extends CI_Controller {
 			$jd2 = GregorianToJD($start_date1, $start_date, $start_date2);
 
 			$date_sel = $jd1 - $jd2 + 1;
-				
+
 			//$data = array();
 			$data1 = array($i, array($row['nama_pekerjaan'], strval($date_sel), date('d-m-Y',strtotime($row['start_date'])), date('d-m-Y',strtotime($row['end_date']))), 
 			$row['start_date'], $row['end_date'],FF_ARIAL,FS_NORMAL,8);
 			$i++;
 			$data[] = $data1;
 		}
-		
+
 		// Display month and year scale with the gridlines
 		$graph->ShowHeaders(GANTT_HMONTH | GANTT_HYEAR);
 		$graph->scale->month->grid->SetColor('gray');
 		$graph->scale->month->grid->Show(true);
 		$graph->scale->year->grid->SetColor('gray');
 		$graph->scale->year->grid->Show(true);
-		 
-		 
+
+
 		// Setup activity info
-		 
+
 		// For the titles we also add a minimum width of 100 pixels for the Task name column
 		$graph->scale->actinfo->SetColTitles(
 			array('Projek','Duration','Start','Finish'),array(100));
@@ -246,19 +270,19 @@ class Detail_proyek extends CI_Controller {
 		$graph->scale->actinfo->SetFont(FF_ARIAL,FS_NORMAL,10);
 		$graph->scale->actinfo->vgrid->SetStyle('solid');
 		$graph->scale->actinfo->vgrid->SetColor('gray');
-		 
+
 		// Data for our example activities
-		
+
 		// Create the bars and add them to the gantt chart
 		 //print_r($data);die;
 		foreach($data_chart as $row2) {
-		 
+
 		$ab = $row2['progress'] / 100 ;
 		$aaa[] = $ab;
-		
+
 		}
 		for($i=0; $i<count($data); ++$i) {
-		
+
 			$bar = new GanttBar($data[$i][0],$data[$i][1],$data[$i][2],$data[$i][3],"[80%]",10);
 			if( count($data[$i])>4 )
 				$bar->title->SetFont($data[$i][4],$data[$i][5],$data[$i][6]);
@@ -272,5 +296,5 @@ class Detail_proyek extends CI_Controller {
 		// Display the graph
 		$graph->Stroke();
 	}
-	
+
 }
