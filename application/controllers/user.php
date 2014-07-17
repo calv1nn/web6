@@ -166,7 +166,7 @@ class User extends CI_Controller {
 	public function edit_karyawan($nik)
 	{
 		$this->load->model('model_karyawan');
-		$data['karyawan']=$this->model_karyawan->view_karyawan();
+		$data['karyawan']=$this->model_karyawan->view_karyawan2();
 		$data['edit_karyawan']=$this->model_karyawan->get_karyawan($nik);
 		$this->load->view('edit_karyawan',$data);
 	}
