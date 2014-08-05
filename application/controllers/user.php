@@ -104,64 +104,6 @@ class User extends CI_Controller {
 		redirect("user/karyawan");
 	   }
 	}
-
-	public function add_karyawan1()
-	{
-		$this->load->helper(array('form', 'url'));
-		$this->load->library('form_validation');
-		$rules = array(
-            array(
-                'field' => 'nik',
-                'label' => 'NIK',
-                'rules' => 'trim|required|min_length[3]|is_unique[karyawan.nik]'
-            ),
-			
-			array(
-                'field' => 'nama_karyawan',
-                'label' => 'Nama Karyawan',
-                'rules' => 'required'
-            ),
-           
-            array(
-                'field' => 'email',
-                'label' => 'E-Mail',
-                'rules' => 'email', 'Email', 'trim|required|valid_email', 'is_unique[karyawan.email]'
-            ),
-     
-            array(
-                'field' => 'password',
-                'label' => 'Password',
-                'rules' => 'required|min_length[6]|matches[passconf]'
-            ),
-            array(
-                'field' => 'passconf',
-                'label' => 'Conf Password',
-                'rules' => 'required'
-            ),
-        );
-        $this->form_validation->set_rules($rules);
-		
-        if ($this->form_validation->run() == FALSE)
-        {
-            $this->load->model('model_karyawan');
-		$keyword    =   $this->input->post('nik');
-        $data['results']    =   $this->model_karyawan->search_karyawan($keyword);
-        $this->load->view('search_nik',$data);
-        }
-        else
-        {
-        $this->load->model('model_karyawan');
-		$nik=$this->input->post("nik");
-		$email=$this->input->post("email");
-		$password=$this->input->post("password");
-		$nama_karyawan=$this->input->post("nama_karyawan");
-		$jabatan=$this->input->post("jabatan");
-		$status=$this->input->post("status");
-		
-		$this->model_karyawan->insert_karyawan($nik,$email,$password,$nama_karyawan,$jabatan,$status);
-		redirect("user/karyawan");
-	   }
-	}
 	
 	public function edit_karyawan($nik)
 	{
