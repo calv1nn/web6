@@ -59,8 +59,8 @@
 				</div> <!-- /field -->
 				
 				<div class="field">
-					<label for="nama">JABATAN:</label>
-					<?php echo form_dropdown('jabatan',  $jabatan); ?>
+					<label for="nama">Peran:</label>
+					<?php echo form_dropdown('peran',  $jabatan); ?>
 				</div> <!-- /field -->
 				
 				<div class="field">

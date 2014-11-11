@@ -54,6 +54,7 @@ background-color: grey;
 							<tr>
 								<th>Nama Proyek</th>
 								<th>Nama Client</th>
+								<th>Proyek Manager</th>
 								<th>Start Date</th>
 								<th>End Date</th>
 								<th>Progress</th>
@@ -62,11 +63,13 @@ background-color: grey;
 						<?php
 							foreach ($proyek as $row)
 								{
-								if (($row['end_date'] <= date('Y-m-d')) && ($row['progress']==100)){
+								// if (($row['end_date'] <= date('Y-m-d')) ||($row['progress']==100)){
+								if (($row['progress']==100)){
 						?>
 							<tr>
 								<td><a href='<?php echo base_url();?>detail_proyek/view_detail_proyek/<?php echo $row['kode_proyek'];?>';><?php echo $row['nama_proyek'];?></a></td>
 								<td><?php echo $row['client']?></td>
+								<td><?php echo $row['nama_karyawan']?></td>
 								<td><?php echo date('d-M-Y',strtotime("$row[start_date]"));?></td>
 								<td><?php echo date('d-M-Y',strtotime("$row[end_date]"));?></td>
 								<td>
@@ -95,6 +98,7 @@ background-color: grey;
 							<tr>
 								<th>Nama Proyek</th>
 								<th>Nama Client</th>
+								<th>Proyek Manager</th>
 								<th>Start Date</th>
 								<th>End Date</th>
 								<th>Progress</th>
@@ -104,11 +108,13 @@ background-color: grey;
 							foreach ($proyek as $row)
 								{
 								//print_r($row['kode_proyek']);die;
-								if ($row['end_date'] >= date('Y-m-d')){
+								// if ($row['end_date'] >= date('Y-m-d')&&($row['progress']!=100)){
+								if (($row['progress']!=100)){
 						?>
 							<tr>
 								<td><a href='<?php echo base_url();?>detail_proyek/view_detail_proyek/<?php echo $row['kode_proyek'];?>';><?php echo $row['nama_proyek'];?></a></td>
 								<td><?php echo $row['client']?></td>
+								<td><?php echo $row['nama_karyawan']?></td>
 								<td><?php echo date('d-M-Y',strtotime("$row[start_date]"));?></td>
 								<td><?php echo date('d-M-Y',strtotime("$row[end_date]"));?></td>
 								<td>

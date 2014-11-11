@@ -60,7 +60,7 @@ class Welcome extends CI_Controller {
 		
 		//print_r($data['array']);die;
 		foreach ($data['array'] as $row) {
-			$jabatan=$row['jabatan'];
+			$jabatan=$row['peran'];
 			$nik=$row['nik'];
 		}
 		

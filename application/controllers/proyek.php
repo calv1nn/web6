@@ -5,6 +5,7 @@ class Proyek extends CI_Controller {
 	public function index()
 	{
 		if ($this->session->userdata('email')){
+		// var_dump($this->session->userdata);
 		$this->load->model('model_proyek');
 		$data['proyek']=$this->model_proyek->view_proyek();
 		$data['edit_proyek']="";
@@ -75,8 +76,9 @@ class Proyek extends CI_Controller {
 		$end_date=$this->input->post("end_date");
 		$client=$this->input->post("client");
 		$progress=$this->input->post("progress");
+		$nik=$this->session->userdata('nik');
 		
-		$this->model_proyek->insert_proyek($kode_proyek,$nama_proyek,$start_date,$end_date,$client,$progress);
+		$this->model_proyek->insert_proyek($nik,$kode_proyek,$nama_proyek,$start_date,$end_date,$client,$progress);
 		redirect("proyek");
 	   }
 	}
@@ -108,7 +110,7 @@ class Proyek extends CI_Controller {
 	public function chart()
 	{
 		$this->load->model('model_proyek');
-		$data['chart'] = $this->model_proyek->view_proyek();
+		$data['chart'] = $this->model_proyek->view_proyek_chart();
 		$this->gantt_proyek($data['chart']);
 	}
 	

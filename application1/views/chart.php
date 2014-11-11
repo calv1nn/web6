@@ -1,0 +1,1 @@
+ <img src="<?php echo base_url();?>proyek/gantt_proyek"/>

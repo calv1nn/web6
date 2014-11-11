@@ -24,15 +24,28 @@
                     <div class="widget-content">
                     
                 <?php    
-                $kategori = array(
-              ''  => 'Choose option...',
-              'Perakitan'  => 'Perakitan',
-              'Instalasi'    => 'Instalasi',
-              'Konfigurasi' => 'Konfigurasi',
-              'Quality Control' => 'Quality Control'
+                // $kategori = array(
+              // ''  => 'Choose option...',
+              // 'Perakitan'  => 'Perakitan',
+              // 'Instalasi'    => 'Instalasi',
+              // 'Konfigurasi' => 'Konfigurasi',
+              // 'Quality Control' => 'Quality Control'
+            // );
+			
+			$jam = array(
+              ''  => ' ',
+              '1'  => '1 Jam',
+              '2'  => '2 Jam',
+              '3'  => '3 Jam',
+              '4'  => '4 Jam',
+              '5'  => '5 Jam',
+              '6'  => '6 Jam',
+              '7'  => '7 Jam',
+              '8'  => '8 Jam',
             );
+			
             ?>
-                <?php echo form_open("detail_proyek/add_detail_proyek"); ?>
+                <?php echo form_open("detail_proyek/add_detail_proyek/".$kode_proyek); ?>
                             
                 <div class="field">
                     <?php echo form_input(array('name' => 'id_pekerjaan', 'value' => '', 'type' => 'hidden' ));?>
@@ -45,19 +58,75 @@
                 <div class="field">
                     <label for="kode_proyek">Nama_proyek:</label>
                     <?php echo form_input("", $row['nama_proyek'], 'readonly'); ?>
-                    <?php echo form_hidden("kode_proyek", $kode_proyek,'readonly'); ?>
+                    <?php echo form_hidden("kode_proyek123", $kode_proyek,'readonly'); ?>
                 </div> <!-- /field -->
                 
                 <div class="field">
-                    <label for="nama_pekerjaan">Nama Pekerjaan:</label>    
-                    <?php echo form_error('nama_pekerjaan'); ?>
-                    <?php echo form_input("nama_pekerjaan",""); ?>
+                    <label for="jenis_pekerjaan">Nama Pekerjaan:</label>    
+                <?php echo form_dropdown('jenis_pekerjaan', $jenis_pekerjaan);?> 
+                
                 </div> <!-- /field -->
                 
                 <div class="field">
                     <label for="nik">Penanggung Jawab:</label>    
-                <?php echo form_dropdown('nik', $dropdown);?> 
+                <?php echo form_dropdown('nik123', $dropdown);?> 
                 
+                </div> <!-- /field -->
+				
+				Team :
+				<table border="5" style="width:400px">
+						 <?php //echo form_open("load_pekerjaan/add_load_pekerjaan"); ?>
+									
+						<div class="field">
+							<?php echo form_hidden("kode_proyek", $kode_proyek,'readonly'); ?>
+						</div> <!-- /field -->
+						<th></th>
+						<th>Nama Karyawan</th>
+						<th>Jam Available</th>
+						<?php foreach ($getload as $row2){  ?>
+						<tr>
+						
+							
+							<?php 
+							if ($row2['jam_sisa'] < 1 ){ 
+							// if (1 != 1 ){ 
+							// var_dump($row2['jam_sisa'] );exit;
+							?>
+							
+							<td bgcolor="#FF0000">
+							<!--<?php echo form_checkbox('nik[]',$row2['nik'], array(), 'onclick="doconfirm()"');  ?>-->
+							<?php echo "Max Load Reached"; ?>
+							</td>
+							<td bgcolor="#FF0000"><?php echo $row2['nama_karyawan']; ?></td> 
+							<td bgcolor="#FF0000"><?php echo $row2['jam_sisa']; ?> Jam</td>
+							<?php  }
+								else {
+							?>
+							<td>
+							<?php echo form_checkbox('nik[]',$row2['nik']);  ?>
+							<td color="grey"><?php echo $row2['nama_karyawan']; ?></td> 
+							<td><?php echo $row2['jam_sisa']; ?> Jam</td>
+							<?php }?>
+							</td> 
+							
+							
+							
+							
+						</tr>
+						<?php }?>
+					<tr>	<?php
+					// echo form_submit('mysubmit', 'ADD');
+					echo form_close();	
+					?>
+					</tr>
+					</div> <!-- /login-fields -->
+					</table>
+				<br>
+				
+				
+				 <div class="field">
+                    <label for="jam">Jam/Hari:</label>
+                    <?php echo form_dropdown('jam', $jam); ?>
                 </div> <!-- /field -->
                 
                 <div class="field">
@@ -72,19 +141,33 @@
                     <?php echo form_error('end_date'); ?>
                     <?php echo form_input("end_date","","class='datepicker-end'"); ?>
                 </div> 
-                
-                <div class="field">
-                    <label for="nama">Kategori:</label>
-                    <?php echo form_dropdown('kategori', $kategori); ?>
+				
+				<div class="field">
+                    <label for="keterangan">Keterangan:</label>    
+                    <?php echo form_error('keterangan'); ?>
+                    <?php echo form_textarea("keterangan",""); ?>
                 </div> <!-- /field -->
                 
-                
-                    <input type="hidden" id="pstart_date"  value="<?php echo $row['start_date']?>" >
-                    <input type="hidden" id="pend_date"  value="<?php echo $row['end_date']?>">
-					
+                <!--<div class="field">
+                    <label for="nama">Kategori:</label>
+                    <?php //echo form_dropdown('kategori', $kategori); ?>
+                </div> <!-- /field -->
+
                 <?php 
                 }
                 ?>
+				
+				<?php foreach ($date as $row)
+                {
+                ?>
+				
+				  <input type="hidden" id="pstart_date"  value="<?php echo $row['start_date']?>" >
+                    <input type="hidden" id="pend_date"  value="<?php echo $row['end_date']?>">
+					
+					<?php 
+                }
+                ?>
+					
                 <?php
             echo form_submit('mysubmit', 'ADD');
             echo form_close();    
@@ -106,6 +189,12 @@
     
 </div> <!-- /main -->
 <script>
+
+$( ".target" ).change(function() {
+alert( "Handler for .change() called." );
+});
+
+
 var pstart_date = document.getElementById('pstart_date');
 var pend_date = document.getElementById('pend_date');
 

@@ -41,7 +41,7 @@ class Model_karyawan extends CI_Model {
 		'email' => $email,
 		'password' => MD5($password),
 		'nama_karyawan' => $nama_karyawan,
-		'jabatan' => $jabatan,
+		'peran' => $peran,
 		'status' => $status
 		);
 		$this->db->insert('karyawan', $data);
@@ -54,12 +54,12 @@ class Model_karyawan extends CI_Model {
 		return $query->result_array();
 	}
 	
-	public function update_karyawan($nik,$email,$nama_karyawan,$jabatan,$status)
+	public function update_karyawan($nik,$email,$nama_karyawan,$peran,$status)
 	{
 		$data = array (
 		'email' => $email,
 		'nama_karyawan' => $nama_karyawan,
-		'jabatan' => $jabatan,
+		'peran' => $peran,
 		'status' => $status
 		);
 		$this->db->where('nik',$nik);

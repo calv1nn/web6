@@ -1,0 +1,46 @@
+<?php include('header.php'); ?>
+    
+<div class="main">
+	
+	<div class="main-inner">
+
+	    <div class="container">
+	
+	      <div class="row">
+	      	
+	      	<div class="span12">
+	      		
+	      		<div class="widget">
+						
+					<div class="widget-header">
+						<i class="icon-th-large"></i>
+						<h3>DISKUSI</h3>
+					</div> <!-- /widget-header -->
+					
+					<div class="widget-content">
+						
+					<?php foreach($daftarartikel->result()as $row): ?>
+					<div>
+					<a href="cartikel/isi_artikel/<?php echo $row->id;?> 
+					<?php echo $row->judul; ?> </a>
+				
+					<?php endforeach; ?>
+					</div>
+					</div> <!-- /widget-content -->
+						
+				</div> <!-- /widget -->					
+				
+		    </div> <!-- /span12 -->     	
+	      	
+	      	
+	      </div> <!-- /row -->
+	
+	    </div> <!-- /container -->
+	    
+	</div> <!-- /main-inner -->
+    
+</div> <!-- /main -->
+    
+
+
+<?php include('footer.php'); ?>

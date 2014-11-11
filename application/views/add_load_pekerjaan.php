@@ -47,25 +47,25 @@ color:white;
 						</div> <!-- /field -->
 						<th></th>
 						<th>Nama Karyawan</th>
-						<th>Proyek yang Ditangani</th>
-						<?php foreach ($checkbox as $row2){  ?>
+						<th>Jam Available</th>
+						<?php foreach ($getload as $row2){  ?>
 						<tr>
 						
-							<?php if ($row2['jumlah_pekerjaan'] == 4 ){ ?>
+							<?php if ($row2['jam_sisa'] < 1 ){ ?>
 							
 							<td bgcolor="#FF0000">
 							<!--<?php echo form_checkbox('nik[]',$row2['nik'], array(), 'onclick="doconfirm()"');  ?>-->
 							<?php echo "Max Load Reached"; ?>
 							</td>
 							<td bgcolor="#FF0000"><?php echo $row2['nama_karyawan']; ?></td> 
-							<td bgcolor="#FF0000"><?php echo $row2['jumlah_pekerjaan']; ?></td>
+							<td bgcolor="#FF0000"><?php echo $row2['jam_sisa']; ?> Jam</td>
 							<?php  }
-								else { 
+								else {
 							?>
 							<td>
 							<?php echo form_checkbox('nik[]',$row2['nik']);  ?>
 							<td color="grey"><?php echo $row2['nama_karyawan']; ?></td> 
-							<td><?php echo $row2['jumlah_pekerjaan']; ?></td>
+							<td><?php echo $row2['jam_sisa']; ?> Jam</td>
 							<?php }?>
 							</td> 
 							

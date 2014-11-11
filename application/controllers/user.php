@@ -97,10 +97,10 @@ class User extends CI_Controller {
 		$email=$this->input->post("email");
 		$password=$this->input->post("password");
 		$nama_karyawan=$this->input->post("nama_karyawan");
-		$jabatan=$this->input->post("jabatan");
+		$jabatan=$this->input->post("peran");
 		$status=$this->input->post("status");
 		
-		$this->model_karyawan->insert_karyawan($nik,$email,$password,$nama_karyawan,$jabatan,$status);
+		$this->model_karyawan->insert_karyawan($nik,$email,$password,$nama_karyawan,$peran,$status);
 		redirect("user/karyawan");
 	   }
 	}
@@ -122,9 +122,9 @@ class User extends CI_Controller {
 		$nik=$this->input->post("nik");
 		$email=$this->input->post("email");
 		$nama_karyawan=$this->input->post("nama_karyawan");
-		$jabatan=$this->input->post("jabatan");
+		$jabatan=$this->input->post("peran");
 		$status=$this->input->post("status");
-		$this->model_karyawan->update_karyawan($nik,$email,$nama_karyawan,$jabatan,$status);
+		$this->model_karyawan->update_karyawan($nik,$email,$nama_karyawan,$peran,$status);
 		redirect("user/karyawan");
 	}
 	

@@ -94,7 +94,7 @@ function doconfirm()
 								<td><?php echo $row['nik']?></td>
 								<td><?php echo $row['email']?></td>
 								<td><?php echo $row['nama_karyawan']?></td>
-								<td><?php echo $row['jabatan']?></td>
+								<td><?php echo $row['peran']?></td>
 								<td><?php if($row['status']==1) {echo "Active" ;
 								} else { echo "Inactive" ;
 								}?></td>

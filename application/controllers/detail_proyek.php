@@ -45,6 +45,72 @@ class Detail_proyek extends CI_Controller {
 		}
 	}
 
+	
+	public function view_team($id_pekerjaan)
+	{
+		if ($this->session->userdata('email')){
+		
+		$this->load->model('model_detail_proyek');
+		$data['team']=$this->model_detail_proyek->view_team($id_pekerjaan);
+		$data['team_name']=$this->model_detail_proyek->view_team_name($id_pekerjaan);
+		$this->load->view('view_team',$data);
+		}
+		else
+		{
+			redirect("welcome/login");
+		}
+	}
+	
+	public function progress($id_pekerjaan)
+	{
+		if ($this->session->userdata('email')){
+		
+		$this->load->model('model_detail_proyek');
+		$nik=$this->session->userdata('nik');
+		$data['nik'] = $this->model_detail_proyek->get_nik2($nik,$id_pekerjaan);
+		foreach ($data['nik'] as $row) 
+		{
+			$nik12=$row['nik_proyek_manager'];
+		}
+		if($nik == $nik12)
+		{
+			$this->load->model('model_detail_proyek');
+			$data['id_pekerjaan'] = $id_pekerjaan;
+			$data['prog']=$this->model_detail_proyek->progress($id_pekerjaan);
+			$this->load->view('edit_progress',$data);
+		}
+		else
+		{
+			echo "<script> alert('You do not have an access to upload');
+				document.location='http://localhost/web6/proyek/index';
+				</script>";
+		}
+		
+		
+		}
+		else
+		{
+			redirect("welcome/login");
+		}
+	}
+	
+	public function edit_progress()
+	{
+		if ($this->session->userdata('email')){
+		$this->load->model('model_detail_proyek');
+		$progress_pek=$this->input->post("progress_pek");
+		$id_pekerjaan=$this->input->post("id_pekerjaan");
+		// var_dump($id_pekerjaan);exit;
+		$result = $this->model_detail_proyek->edit_progress($progress_pek,$id_pekerjaan);
+		// var_dump($result['kode_proyek']); exit;
+		redirect("detail_proyek/view_detail_proyek/".$result);
+		}
+		else
+		{
+			redirect("welcome/login");
+		}
+	}
+	
 	public function add_detail_proyek($kode_proyek)
 	{
 		if ($this->input->post() != TRUE)
@@ -52,34 +118,168 @@ class Detail_proyek extends CI_Controller {
 			$this->load->model('model_detail_proyek');
 			$nik['kode_proyek'] = $kode_proyek;
 			$nik['dropdown'] = $this->model_detail_proyek->get_nik3($kode_proyek);
+			$nik['jenis_pekerjaan'] = $this->model_detail_proyek->get_jenis_pekerjaan();
 			$nik['proyek']=$this->model_detail_proyek->get_proyek($kode_proyek);
+			$nik['date']=$this->model_detail_proyek->get_date($kode_proyek);
+			$nik['checkbox'] = $this->model_detail_proyek->get_nik_();
+			$nik['getload'] = $this->model_detail_proyek->get_load_add($kode_proyek);
+			// var_dump($nik['getload']);exit;
 			$this->load->view('add_detail_proyek',$nik);
 		}
 		else
 		{
 				$this->load->model('model_detail_proyek');
 				$id_pekerjaan=$this->input->post("id_pekerjaan");
-				$kode_proyek=$this->input->post("kode_proyek");
-				$nik=$this->input->post("nik");
-				$nama_pekerjaan=$this->input->post("nama_pekerjaan");
+				$kode_proyek=$this->input->post("kode_proyek123");
+				$nik=$this->input->post("nik123");
+				// $nama_pekerjaan=$this->input->post("nama_pekerjaan");
 				$start_date=$this->input->post("start_date");
 				$end_date=$this->input->post("end_date");
 				$progress=$this->input->post("progress");
-				$kategori=$this->input->post("kategori");
+				// $kategori=$this->input->post("kategori");
+				$jam=$this->input->post("jam");
+				$nama_pekerjaan=$this->input->post("jenis_pekerjaan");
+				$keterangan=$this->input->post("keterangan");
+				$niks=$this->input->post("nik");
+				// var_dump($jenis_pekerjaan);exit;
+				$i = 0;
+				$z = 0;
+				foreach ($niks as $niks1){
+						$aa[$i] = $niks1;
+						$sql1 = 'select sum(jam) as jam from load_pekerjaan_detail where nik ='.$aa[$i];
+						$ab = $this->db->query($sql1);						
+							foreach($ab->result() as $v){
+								$jam_a = $v->jam;
+								$jam_total = $jam_a + $jam;							
+								if($jam_total > 8){
+								$z++;
+								}								
+							}
+				$i++;
+				}
+				// var_dump($z);exit;
+				if($z == 0){
 
-				$this->model_detail_proyek->insert_detail_proyek($id_pekerjaan,$kode_proyek,$nik,$nama_pekerjaan,$start_date,$end_date,$progress,$kategori);
-				redirect("proyek");
+				$result = $this->model_detail_proyek->insert_detail_proyek($keterangan,$jam,$id_pekerjaan,$kode_proyek,$nik,$nama_pekerjaan,$start_date,$end_date,$progress);
+				$result_all = $this->model_detail_proyek->get_load_all($kode_proyek);
+				// var_dump($result_all);exit;				
+				foreach ($result_all as $nikz){
+						$data = array (
+						'jam' => 0,
+						'id_pekerjaan' => $result,
+						'nik' => $nikz
+						);
+						$this->db->insert('load_pekerjaan_detail',$data);
+				}
+				
+				foreach ($niks as $cek){
+						$data = array (
+						'jam' => $jam,
+						);
+						$this->db->where('id_pekerjaan',$result);
+						$this->db->where('nik',$cek);
+						$this->db->update('load_pekerjaan_detail',$data);
+				}
+				
+				redirect("detail_proyek/view_detail_proyek/".$kode_proyek);
+				}else{
+					echo "<script> alert('Ada karyawan yang overload pekerjaan');
+					document.location='http://localhost/web6/proyek/index';
+					</script>";
+					// echo "gagal overload";
+				}
 		}
 	}
 	
 	public function edit_detail_proyek($kode_proyek,$id_pekerjaan)
 	{
+	// var_dump($id_pekerjaan);exit;
+	if ($this->input->post() != TRUE)
+		{
+		
 		$this->load->model('model_detail_proyek');
-		$data['detail_proyek']=$this->model_detail_proyek->view_detail_proyek2();
+		$data['kode_proyek'] = $kode_proyek;
+		$data['id_pekerjaan'] = $id_pekerjaan;
 		$data['dropdown'] = $this->model_detail_proyek->get_nik3($kode_proyek);
+		$data['jenis_pekerjaan'] = $this->model_detail_proyek->get_jenis_pekerjaan();
+		$data['getload'] = $this->model_detail_proyek->get_load_($kode_proyek,$id_pekerjaan);
+		$data['date']=$this->model_detail_proyek->get_date2($kode_proyek);
+		// $data['detail_proyek']=$this->model_detail_proyek->view_detail_proyek2();
+		// $data['dropdown'] = $this->model_detail_proyek->get_nik3($kode_proyek);
 		$data['edit_detail_proyek']=$this->model_detail_proyek->get_detail_proyek($id_pekerjaan);
 		//print_r($data);die;
 		$this->load->view('edit_detail_proyek',$data);
+		
+		}
+	else
+		{
+		// var_dump($id_pekerjaan);exit;
+		$this->load->model('model_detail_proyek');
+				// $id_pekerjaan=$this->input->post("id_pekerjaan");
+				$kode_proyek=$this->input->post("kode_proyek123");
+				$nik=$this->input->post("nik123");
+				// $nama_pekerjaan=$this->input->post("nama_pekerjaan");
+				$start_date=$this->input->post("start_date");
+				$end_date=$this->input->post("end_date");
+				$progress=$this->input->post("progress");
+				// $kategori=$this->input->post("kategori");
+				$jam=$this->input->post("jam");
+				$nama_pekerjaan=$this->input->post("jenis_pekerjaan");
+				$keterangan=$this->input->post("keterangan");
+				$niks=$this->input->post("nik");
+				// var_dump($jenis_pekerjaan);exit;								
+				
+				$i = 0;
+				$z = 0;
+				foreach ($niks as $niks1){
+						$aa[$i] = $niks1;
+						$sql1 = 'select sum(jam) as jam from load_pekerjaan_detail where nik ='.$aa[$i];
+						$ab = $this->db->query($sql1);						
+							foreach($ab->result() as $v){
+								$jam_a = $v->jam;
+								$jam_total = $jam_a + $jam;							
+								if($jam_total > 8){
+								$z++;
+								}								
+							}
+				$i++;
+				}
+				// var_dump($z);exit;
+				if($z == 0){
+				
+				$sql12 = 'delete from load_pekerjaan_detail where id_pekerjaan = '.$id_pekerjaan;
+				$ab2 = $this->db->query($sql12);
+				
+				$result = $this->model_detail_proyek->edit_detail_proyek($keterangan,$jam,$id_pekerjaan,$kode_proyek,$nik,$nama_pekerjaan,$start_date,$end_date,$progress);
+				$result_all = $this->model_detail_proyek->get_load_all($kode_proyek);
+				// var_dump($result_all);exit;				
+				foreach ($result_all as $nikz){
+						$data = array (
+						'jam' => 0,
+						'id_pekerjaan' => $result,
+						'nik' => $nikz
+						);
+						$this->db->insert('load_pekerjaan_detail',$data);
+				}
+				
+				foreach ($niks as $cek){
+						$data = array (
+						'jam' => $jam,
+						);
+						$this->db->where('id_pekerjaan',$result);
+						$this->db->where('nik',$cek);
+						$this->db->update('load_pekerjaan_detail',$data);
+				}
+				
+				redirect("detail_proyek/view_detail_proyek/".$kode_proyek);
+				}else{
+					echo "<script> alert('Ada karyawan yang overload pekerjaan');
+					document.location='http://localhost/web6/proyek/index';
+					</script>";
+					// echo "gagal overload";
+				}
+		
+		}
 	}
 	
 	public function update_detail_proyek()
@@ -229,7 +429,7 @@ class Detail_proyek extends CI_Controller {
 		$i = 0;
 		foreach($data_chart as $row) {
 			//$graph->SetDateRange(date('Y-m-d',strtotime($row['start_date'])),date('Y-m-d',strtotime($row['end_date'])));
-			$graph->SetDateRange('2014-06-06','2014-09-10');
+			$graph->SetDateRange('2014-06-06','2014-12-10');
 			$end = explode('-', $row['end_date']);
 			$end_date = $end[2];
 			$end_date1= $end[1];
@@ -280,10 +480,13 @@ class Detail_proyek extends CI_Controller {
 		$ab = $row2['progress'] / 100 ;
 		$aaa[] = $ab;
 
+		$bb = $row2['progress'];
+		$abc[] = $bb;
+		
 		}
 		for($i=0; $i<count($data); ++$i) {
 
-			$bar = new GanttBar($data[$i][0],$data[$i][1],$data[$i][2],$data[$i][3],"[80%]",10);
+			$bar = new GanttBar($data[$i][0],$data[$i][1],$data[$i][2],$data[$i][3],$abc[$i],10);
 			if( count($data[$i])>4 )
 				$bar->title->SetFont($data[$i][4],$data[$i][5],$data[$i][6]);
 			$bar->SetPattern(BAND_RDIAG,"yellow");

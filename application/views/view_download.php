@@ -38,15 +38,24 @@
 									$end_date2= $end[0];
 
 									$start = explode('-',$cek['start_date']);
+									// var_dump($cek['start_date']);exit;
 									$start_date = $start[2];
 									$start_date1= $start[1];
 									$start_date2= $start[0];
+									
+									$sysdatea = explode('-',$cek['sysdate']);
+									// var_dump($cek['sysdate']);exit;
+									$sysdatea0 = $sysdatea[2];
+									$sysdatea1= $sysdatea[1];
+									$sysdatea2= $sysdatea[0];
 									//print_r(date('Y-m-d'));die;
 									$jd1 = GregorianToJD($end_date1, $end_date, $end_date2);
 									$jd2 = GregorianToJD($start_date1, $start_date, $start_date2);
+									$sysdate2 = GregorianToJD($sysdatea1, $sysdatea0, $sysdatea2);
 
 									$date_sel = $jd1 - $jd2;
-									//print_r($date_sel);die;
+									// var_dump($date_sel);exit;
+									// print_r($date_sel);die;
 									}
 							?>
 				<?php
@@ -55,15 +64,30 @@
 				
 					foreach ($detail_proyek as $row)
 								{
-								//print_r(count($detail_proyek));die;
+								// print_r(count($detail_proyek));die;
+								$date_sel = $date_sel+1;
+								$tnggl = date("Y-m-d");
+								$tngglend = $cek['end_date'];
+								$tngglstart = $cek['start_date'];
+								if(strtotime($tnggl)> strtotime($tngglstart)){
+									if(strtotime($tnggl)< strtotime($tngglend)){								
+									$sisatgl = $jd1 - $sysdate2;
+									// var_dump($sisatgl);exit;
+									}
+								}
+								else{
+								$sisatgl = 0;
+								}
+								// $diff = abs(strtotime($date2) - strtotime($date1));
+								// var_dump($detail_proyek);exit;
 								$a=(count($detail_proyek));
-								//print_r($a);die;
-								
+								// print_r($a);die;
+																
 								$lap=$date_sel-$a;
 								
 								if($date_sel > $a){
 							?>	
-							<p class="alert">Laporan Anda Kurang <?php echo $lap; ?> Silahkan dilengkapi !!<button class="close" data-dismiss="alert" type="button">x</button>
+							<p class="alert">Laporan Anda Kurang  Silahkan dilengkapi !!<button class="close" data-dismiss="alert" type="button">x</button>
 				   </p>
                                 <table class="table table-striped table-bordered">
 						
